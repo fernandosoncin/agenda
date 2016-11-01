@@ -8,6 +8,7 @@ public class PrincipalView extends javax.swing.JFrame {
     public PrincipalView() {
         initComponents();
         this.setVisible(true);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
   
@@ -30,7 +31,7 @@ public class PrincipalView extends javax.swing.JFrame {
         pnlPrincipal = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         mmuCadastrar = new javax.swing.JMenu();
-        mmiContato = new javax.swing.JMenuItem();
+        mmiFuncionario = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
@@ -68,13 +69,13 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mmuCadastrar.setText("Arquivos");
 
-        mmiContato.setText("Funcionários");
-        mmiContato.addActionListener(new java.awt.event.ActionListener() {
+        mmiFuncionario.setText("Funcionários");
+        mmiFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mmiContatoActionPerformed(evt);
+                mmiFuncionarioActionPerformed(evt);
             }
         });
-        mmuCadastrar.add(mmiContato);
+        mmuCadastrar.add(mmiFuncionario);
 
         jMenuItem2.setText("Setor");
         mmuCadastrar.add(jMenuItem2);
@@ -103,13 +104,12 @@ public class PrincipalView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mmiContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmiContatoActionPerformed
+    private void mmiFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmiFuncionarioActionPerformed
     FuncionarioView contato = new FuncionarioView();
-    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     pnlPrincipal.removeAll();
     pnlPrincipal.add(contato);
     pnlPrincipal.updateUI();
-    }//GEN-LAST:event_mmiContatoActionPerformed
+    }//GEN-LAST:event_mmiFuncionarioActionPerformed
 
 
 
@@ -131,7 +131,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private java.awt.Menu menu4;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
-    private javax.swing.JMenuItem mmiContato;
+    private javax.swing.JMenuItem mmiFuncionario;
     private javax.swing.JMenu mmuCadastrar;
     private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables
