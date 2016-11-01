@@ -16,6 +16,7 @@ public class DepartamentoView extends javax.swing.JInternalFrame {
      */
     public DepartamentoView() {
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -35,6 +36,8 @@ public class DepartamentoView extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+
+        setClosable(true);
 
         jLabel1.setText("Departamento");
 

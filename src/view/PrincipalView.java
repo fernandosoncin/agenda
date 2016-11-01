@@ -28,13 +28,13 @@ public class PrincipalView extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
+        jMenu2 = new javax.swing.JMenu();
         pnlPrincipal = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         mmuCadastrar = new javax.swing.JMenu();
         mmiFuncionario = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        mniDepartamento = new javax.swing.JMenuItem();
+        mnuConsulta = new javax.swing.JMenu();
 
         jMenu5.setText("jMenu5");
 
@@ -51,6 +51,8 @@ public class PrincipalView extends javax.swing.JFrame {
 
         menu4.setLabel("Edit");
         menuBar2.add(menu4);
+
+        jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,16 +79,28 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         mmuCadastrar.add(mmiFuncionario);
 
-        jMenuItem2.setText("Setor");
-        mmuCadastrar.add(jMenuItem2);
+        mniDepartamento.setText("Departamento");
+        mniDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDepartamentoActionPerformed(evt);
+            }
+        });
+        mmuCadastrar.add(mniDepartamento);
 
         jMenuBar2.add(mmuCadastrar);
 
-        jMenu4.setText("Consulta");
-        jMenuBar2.add(jMenu4);
-
-        jMenu1.setText("Sobre");
-        jMenuBar2.add(jMenu1);
+        mnuConsulta.setText("Consulta");
+        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuConsultaMouseClicked(evt);
+            }
+        });
+        mnuConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuConsultaActionPerformed(evt);
+            }
+        });
+        jMenuBar2.add(mnuConsulta);
 
         setJMenuBar(jMenuBar2);
 
@@ -111,6 +125,24 @@ public class PrincipalView extends javax.swing.JFrame {
     pnlPrincipal.updateUI();
     }//GEN-LAST:event_mmiFuncionarioActionPerformed
 
+    private void mniDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDepartamentoActionPerformed
+    DepartamentoView departamento = new DepartamentoView();
+    pnlPrincipal.removeAll();
+    pnlPrincipal.add(departamento);
+    pnlPrincipal.updateUI();
+    }//GEN-LAST:event_mniDepartamentoActionPerformed
+
+    private void mnuConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaActionPerformed
+
+    }//GEN-LAST:event_mnuConsultaActionPerformed
+
+    private void mnuConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuConsultaMouseClicked
+    PesquisaView pesquisa = new PesquisaView();
+    pnlPrincipal.removeAll();
+    pnlPrincipal.add(pesquisa);
+    pnlPrincipal.updateUI();
+    }//GEN-LAST:event_mnuConsultaMouseClicked
+
 
 
 
@@ -119,12 +151,10 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.Menu menu3;
@@ -133,6 +163,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar2;
     private javax.swing.JMenuItem mmiFuncionario;
     private javax.swing.JMenu mmuCadastrar;
+    private javax.swing.JMenuItem mniDepartamento;
+    private javax.swing.JMenu mnuConsulta;
     private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables
 }
