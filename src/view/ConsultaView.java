@@ -1,9 +1,9 @@
 package view;
 
-public class PesquisaView extends javax.swing.JInternalFrame {
+public class ConsultaView extends javax.swing.JInternalFrame {
 
 
-    public PesquisaView() {
+    public ConsultaView() {
         initComponents();
         this.setVisible(true);
     }

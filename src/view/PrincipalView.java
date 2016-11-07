@@ -126,7 +126,7 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mmiFuncionarioActionPerformed
 
     private void mniDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDepartamentoActionPerformed
-    DepartamentoView departamento = new DepartamentoView();
+    SetorView departamento = new SetorView();
     pnlPrincipal.removeAll();
     pnlPrincipal.add(departamento);
     pnlPrincipal.updateUI();
@@ -137,7 +137,7 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuConsultaActionPerformed
 
     private void mnuConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuConsultaMouseClicked
-    PesquisaView pesquisa = new PesquisaView();
+    ConsultaView pesquisa = new ConsultaView();
     pnlPrincipal.removeAll();
     pnlPrincipal.add(pesquisa);
     pnlPrincipal.updateUI();
