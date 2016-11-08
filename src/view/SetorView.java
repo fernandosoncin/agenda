@@ -1,5 +1,6 @@
 package view;
 
+import dao.SetorDAO;
 import model.SetorM;
 
 
@@ -9,6 +10,7 @@ public class SetorView extends javax.swing.JInternalFrame {
     public SetorView() {
         initComponents();
         this.setVisible(true);
+    
     }
 
 
