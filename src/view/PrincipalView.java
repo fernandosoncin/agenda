@@ -69,8 +69,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar2.setPreferredSize(new java.awt.Dimension(56, 48));
 
-        mmuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/ícones/arquivo2.png"))); // NOI18N
+        mmuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/arquivo.png"))); // NOI18N
         mmuCadastrar.setText("Arquivos");
+        mmuCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mmuCadastrar.setHideActionText(true);
 
         mmiFuncionario.setText("Funcionários");
         mmiFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -90,8 +92,9 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar2.add(mmuCadastrar);
 
-        mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/ícones/pesqisa.png"))); // NOI18N
+        mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/pesquisa.png"))); // NOI18N
         mnuConsulta.setText("Consulta");
+        mnuConsulta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuConsultaMouseClicked(evt);
