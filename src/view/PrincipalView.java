@@ -64,11 +64,12 @@ public class PrincipalView extends javax.swing.JFrame {
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
+            .addGap(0, 570, Short.MAX_VALUE)
         );
 
-        jMenuBar2.setPreferredSize(new java.awt.Dimension(56, 35));
+        jMenuBar2.setPreferredSize(new java.awt.Dimension(56, 48));
 
+        mmuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/ícones/arquivo2.png"))); // NOI18N
         mmuCadastrar.setText("Arquivos");
 
         mmiFuncionario.setText("Funcionários");
@@ -89,6 +90,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar2.add(mmuCadastrar);
 
+        mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/ícones/pesqisa.png"))); // NOI18N
         mnuConsulta.setText("Consulta");
         mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -112,7 +114,7 @@ public class PrincipalView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
