@@ -11,11 +11,15 @@ public class FuncionarioM {
     private String celular2;
     private String celular3;
     private String email;
+    private String setor;
+    private String dia;
+    private String horario;
     private String observacao;
     private int docente;
     private int inativo;
+    private int id_setor;
 
-    public FuncionarioM(String nome, String endereco, String cidadeestado, String residencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String observacao, int docente, int inativo) {
+    public FuncionarioM(String nome, String endereco, String cidadeestado, String residencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String setor, String dia, String horario, String observacao, int docente, int inativo, int id_setor) {
         this.nome = nome;
         this.endereco = endereco;
         this.cidadeestado = cidadeestado;
@@ -26,9 +30,13 @@ public class FuncionarioM {
         this.celular2 = celular2;
         this.celular3 = celular3;
         this.email = email;
+        this.setor = setor;
+        this.dia = dia;
+        this.horario = horario;
         this.observacao = observacao;
         this.docente = docente;
         this.inativo = inativo;
+        this.id_setor = id_setor;
     }
 
     public FuncionarioM() {
@@ -114,6 +122,30 @@ public class FuncionarioM {
         this.email = email;
     }
 
+    public String getSetor() {
+        return setor;
+    }
+
+    public void setSetor(String setor) {
+        this.setor = setor;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
     public String getObservacao() {
         return observacao;
     }
@@ -137,5 +169,15 @@ public class FuncionarioM {
     public void setInativo(int inativo) {
         this.inativo = inativo;
     }
+
+    public int getId_setor() {
+        return id_setor;
+    }
+
+    public void setId_setor(int id_setor) {
+        this.id_setor = id_setor;
+    }
+    
+
     
 }
