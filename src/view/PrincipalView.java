@@ -82,7 +82,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         mmuCadastrar.add(mmiFuncionario);
 
-        mniDepartamento.setText("Departamento");
+        mniDepartamento.setText("Setor");
         mniDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniDepartamentoActionPerformed(evt);
