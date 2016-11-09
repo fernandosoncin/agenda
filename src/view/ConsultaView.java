@@ -20,7 +20,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        tfdNome = new javax.swing.JTextField();
+        bundaéshow = new javax.swing.JTextField();
         tfdRamal = new javax.swing.JTextField();
         tfdEndereco = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -57,9 +57,9 @@ public class ConsultaView extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Ramal");
 
-        tfdNome.addActionListener(new java.awt.event.ActionListener() {
+        bundaéshow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdNomeActionPerformed(evt);
+                bundaéshowActionPerformed(evt);
             }
         });
 
@@ -121,7 +121,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel10)
-                    .addComponent(tfdNome, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(bundaéshow, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                     .addComponent(tfdEmail))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -175,7 +175,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bundaéshow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,9 +224,9 @@ public class ConsultaView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfdNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeActionPerformed
+    private void bundaéshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bundaéshowActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdNomeActionPerformed
+    }//GEN-LAST:event_bundaéshowActionPerformed
 
     private void tfdEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdEmailActionPerformed
         // TODO add your handling code here:
@@ -245,6 +245,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnProximo;
+    private javax.swing.JTextField bundaéshow;
     private javax.swing.JCheckBox cbxDocentes;
     private javax.swing.JCheckBox cbxInativos;
     private javax.swing.JLabel jLabel10;
@@ -262,7 +263,6 @@ public class ConsultaView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdEmail;
     private javax.swing.JTextField tfdEndereco;
     private javax.swing.JTextField tfdIrPara;
-    private javax.swing.JTextField tfdNome;
     private javax.swing.JTextField tfdRamal;
     private javax.swing.JTextField tfdSetor;
     private javax.swing.JTextField tfdTelefone;
