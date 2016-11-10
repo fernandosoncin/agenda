@@ -44,6 +44,7 @@ public class SetorView extends javax.swing.JInternalFrame {
         tfdSetor = new javax.swing.JTextField();
         tfdRamal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Setor");
@@ -110,15 +111,19 @@ public class SetorView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Ramal");
 
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,18 +132,23 @@ public class SetorView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(tfdSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfdRamal, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfdSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(tfdId, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(tfdRamal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,14 +165,15 @@ public class SetorView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfdRamal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
-                    .addComponent(btnAlterar))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnCancelar))
                 .addGap(21, 21, 21))
         );
 
@@ -174,27 +185,48 @@ public class SetorView extends javax.swing.JInternalFrame {
           JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
           tfdSetor.requestFocusInWindow();          
       }
-      else{
+           else if (tfdId.getText().isEmpty()){
           
           setor.setNome(tfdSetor.getText());
           setor.setRamal(Integer.parseInt(tfdRamal.getText()));
-      }
+      
       try{
           SetorDAO.salvar(setor);
           JOptionPane.showMessageDialog(null, "Gravado com sucesso!");   
-          limparCamposSetor();
+          
           tfdSetor.requestFocusInWindow();
          }
       catch (SQLException ex){
           JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
       }
       atualizarTabelaSetor();
+      prepararSalvareCancelar();
+      desativarCampos();
+      limparCamposSetor();
+      }
+      else{
+           setor.setId(Integer.parseInt(tfdId.getText()));
+           setor.setNome(tfdSetor.getText());
+           setor.setRamal(Integer.parseInt(tfdRamal.getText()));
+       }
+       try{
+           SetorDAO.alterar(setor);
+           JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+       }
+       catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+       atualizarTabelaSetor();
+       prepararSalvareCancelar();
+       desativarCampos();
+       
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void tblSetorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSetorMouseClicked
       tfdId.setText(tblSetor.getValueAt(tblSetor.getSelectedRow(), 0).toString());
       tfdSetor.setText(tblSetor.getValueAt(tblSetor.getSelectedRow(), 1).toString());
       tfdRamal.setText(tblSetor.getValueAt(tblSetor.getSelectedRow(), 2).toString());
+      prepararSelecaoTabela();
     }//GEN-LAST:event_tblSetorMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -214,32 +246,27 @@ public class SetorView extends javax.swing.JInternalFrame {
                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
                }
                atualizarTabelaSetor();
+               prepararExcluir();
            }
        }
     }//GEN-LAST:event_btnExcluirActionPerformed
     
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
      limparCamposSetor();
+     prepararNovo();
+     ativarCampos();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-       if (tfdId.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null, "Selecione um setor!");
-       }
-       else {
-           setor.setId(Integer.parseInt(tfdId.getText()));
-           setor.setNome(tfdSetor.getText());
-           setor.setRamal(Integer.parseInt(tfdRamal.getText()));
-       }
-       try{
-           SetorDAO.alterar(setor);
-       }
-       catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
-        }
-       atualizarTabelaSetor();
-       
+        prepararAlterar();
+        ativarCampos();
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    limparCamposSetor();
+    prepararSalvareCancelar();
+    desativarCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
    public void atualizarTabelaSetor(){
         
@@ -290,9 +317,55 @@ public class SetorView extends javax.swing.JInternalFrame {
        tfdSetor.setText("");
        tfdRamal.setText("");
    }
+   
+   public void ativarCampos(){
+       tfdSetor.setEnabled(true);
+       tfdRamal.setEnabled(true);
+   }
 
+   public void desativarCampos(){
+       tfdSetor.setEnabled(false);
+       tfdRamal.setEnabled(false);
+   }
+   
+   public void prepararNovo() {
+       btnNovo.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblSetor.setEnabled(false);
+       tblSetor.clearSelection();
+   }
+   
+   public void prepararSalvareCancelar() {
+       btnNovo.setEnabled(true);
+       btnSalvar.setEnabled(false);
+       btnCancelar.setEnabled(false);
+       tblSetor.setEnabled(true);
+   }
+   
+   public void prepararSelecaoTabela(){
+       btnNovo.setEnabled(true);
+       btnExcluir.setEnabled(true);
+       btnAlterar.setEnabled(true);
+   }
+   
+   public void prepararAlterar(){
+       btnNovo.setEnabled(false);
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblSetor.setEnabled(false);
+       tblSetor.clearSelection();
+   }
+   
+   public void prepararExcluir(){
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
