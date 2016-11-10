@@ -15,10 +15,15 @@ public class PrincipalView extends javax.swing.JFrame {
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.usuarioAtivo = usuario;
-        /*if(usuario.isAdmin() == false){
-             mnuCadastrar.setEnabled(false);
-             mniAdicionarUsuario.setEnabled(false);
-        }*/
+        if(usuario.isAdmin() == false){
+             mnuArquivos.setEnabled(false);
+             mnuConsulta.setEnabled(false);
+             ConsultaConvidadoView consulta = new ConsultaConvidadoView();
+             pnlPrincipal.removeAll();
+             pnlPrincipal.add(consulta);
+             pnlPrincipal.updateUI();
+             
+        }
         URL url = this.getClass().getResource("/view/icones/icon.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
@@ -44,7 +49,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         pnlPrincipal = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
-        mmuCadastrar = new javax.swing.JMenu();
+        mnuArquivos = new javax.swing.JMenu();
         mmiFuncionario = new javax.swing.JMenuItem();
         mniDepartamento = new javax.swing.JMenuItem();
         mnuConsulta = new javax.swing.JMenu();
@@ -82,10 +87,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar2.setPreferredSize(new java.awt.Dimension(56, 48));
 
-        mmuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/arquivo.png"))); // NOI18N
-        mmuCadastrar.setText("Arquivos");
-        mmuCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        mmuCadastrar.setHideActionText(true);
+        mnuArquivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/arquivo.png"))); // NOI18N
+        mnuArquivos.setText("Arquivos");
+        mnuArquivos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mnuArquivos.setHideActionText(true);
 
         mmiFuncionario.setText("Funcionários");
         mmiFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +98,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mmiFuncionarioActionPerformed(evt);
             }
         });
-        mmuCadastrar.add(mmiFuncionario);
+        mnuArquivos.add(mmiFuncionario);
 
         mniDepartamento.setText("Setor");
         mniDepartamento.addActionListener(new java.awt.event.ActionListener() {
@@ -101,9 +106,9 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniDepartamentoActionPerformed(evt);
             }
         });
-        mmuCadastrar.add(mniDepartamento);
+        mnuArquivos.add(mniDepartamento);
 
-        jMenuBar2.add(mmuCadastrar);
+        jMenuBar2.add(mnuArquivos);
 
         mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/pesquisa.png"))); // NOI18N
         mnuConsulta.setText("Consulta");
@@ -180,8 +185,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
     private javax.swing.JMenuItem mmiFuncionario;
-    private javax.swing.JMenu mmuCadastrar;
     private javax.swing.JMenuItem mniDepartamento;
+    private javax.swing.JMenu mnuArquivos;
     private javax.swing.JMenu mnuConsulta;
     private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables

@@ -5,9 +5,11 @@
  */
 package view;
 
+import dao.UsuarioDAO;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+import model.UsuarioM;
 
 /**
  *
@@ -47,6 +49,11 @@ public class InicialView extends javax.swing.JFrame {
         btnConvidado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConvidado.setText("Convidado");
         btnConvidado.setPreferredSize(new java.awt.Dimension(131, 25));
+        btnConvidado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConvidadoActionPerformed(evt);
+            }
+        });
 
         btnAdministrador.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAdministrador.setText("Administrador");
@@ -91,6 +98,16 @@ public class InicialView extends javax.swing.JFrame {
         LoginView login = new LoginView();
         this.dispose();
     }//GEN-LAST:event_btnAdministradorActionPerformed
+
+    private void btnConvidadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvidadoActionPerformed
+        UsuarioM usuarioM = new UsuarioM();
+        usuarioM = null;
+        String user = "convidado";
+        String senha = "convidado";
+       // usuarioM = UsuarioDAO.valida();
+        PrincipalView principal = new PrincipalView(usuarioM);
+
+    }//GEN-LAST:event_btnConvidadoActionPerformed
 
 
 

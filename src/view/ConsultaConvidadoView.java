@@ -46,7 +46,6 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
 
         jPasswordField1.setText("jPasswordField1");
 
-        setClosable(true);
         setTitle("Consulta convidados");
         setToolTipText("");
 

@@ -94,6 +94,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 insert into Usuario values(NULL,"usuário root","root","root",1);
 insert into Usuario values(NULL,"usuario a","a","a",1);
+insert into Usuario values(null,"convidado","convidado","convidado",0);
+
 insert into Setor values(NULL,"NUPSI",10100);
 insert into Setor values(NULL,"CPD",10101);
 
