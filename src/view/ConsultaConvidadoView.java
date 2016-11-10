@@ -27,6 +27,7 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -42,6 +43,8 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         tfdPaginas = new javax.swing.JTextField();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setClosable(true);
         setTitle("Consulta convidados");
@@ -164,6 +167,7 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
