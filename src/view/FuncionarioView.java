@@ -250,7 +250,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel17);
         jLabel17.setBounds(1270, 720, 37, 20);
         getContentPane().add(tfdPaginas);
-        tfdPaginas.setBounds(1310, 720, 53, 30);
+        tfdPaginas.setBounds(1310, 720, 53, 20);
 
         tfdbusca.setPreferredSize(new java.awt.Dimension(6, 23));
         getContentPane().add(tfdbusca);
