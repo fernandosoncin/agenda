@@ -177,6 +177,7 @@ public class FuncionarioM {
     public void setId_setor(int id_setor) {
         this.id_setor = id_setor;
     }
+
     
 
     

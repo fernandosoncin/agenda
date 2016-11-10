@@ -72,12 +72,21 @@ public class SetorDAO {
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
         SetorM set = null;
-        SetorM setor = new SetorM();
-
         while(rs.next()){
-           set = new SetorM(rs.getInt("id"), rs.getString("nome"),rs.getInt("ramal"));
+           set = new SetorM((rs.getInt("id")), rs.getString("nome"),rs.getInt("ramal"));
         }
         pst.close();
         return set;
+    }
+        public List<SetorM> listaTodos() throws SQLException{
+        List<SetorM> listasetor = new ArrayList<SetorM>();
+        sql = "select * from Grau_conservacao order by descricao";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           listasetor.add(new SetorM((rs.getInt("id")), rs.getString("nome"),rs.getInt("ramal")));
+        }
+        pst.close();
+        return listasetor;
     }
 }

@@ -1,17 +1,40 @@
 package view;
 
+import com.sun.istack.internal.logging.Logger;
+import java.util.List;
 import javax.swing.JFrame;
+import model.SetorM;
+import dao.SetorDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import sun.util.logging.PlatformLogger;
 
 
 public class FuncionarioView extends javax.swing.JInternalFrame {
-
-
+    
+    List<SetorM> listasetor;
     public FuncionarioView() {
         initComponents();
         this.setVisible(true);
         
     }
 
+    /*public void atualizaBoxSetor(){
+       
+        cbxSetor.removeAllItems();
+        cbxSetor.addItem("--Selecione");
+        try{
+            listasetor = SetorDAO.;    corrigir
+        }catch(SQLException ex){
+            
+            Logger.getLogger(FuncionarioView.class.getClass()).log(Level.SEVERE,null,ex);
+        }
+         String dados[][] = new String[listaSetor.size()][5];
+        int i = 0;
+        for (SetorM gra : listaSetor) {
+            cbxSetor.addItem(gra.getId());
+        }
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -37,7 +60,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         tfdEmail = new javax.swing.JTextField();
-        tfdSetor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         tfdRamal = new javax.swing.JTextField();
@@ -65,6 +87,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         taaObservacao = new javax.swing.JTextArea();
         cbxInativo = new javax.swing.JCheckBox();
+        cbxSetor = new javax.swing.JComboBox();
 
         setClosable(true);
         setMaximizable(true);
@@ -74,7 +97,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nome");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(19, 14, 27, 14);
+        jLabel1.setBounds(19, 14, 70, 14);
 
         tfdNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,11 +111,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Endereço");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(19, 60, 45, 14);
+        jLabel2.setBounds(19, 60, 100, 14);
 
         jLabel3.setText("Cidade/Estado");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(19, 106, 70, 14);
+        jLabel3.setBounds(19, 106, 110, 14);
 
         tfdCidadeEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,11 +129,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Tel Residêncial");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(19, 152, 70, 14);
+        jLabel4.setBounds(19, 152, 130, 14);
 
         jLabel5.setText("Tel Comercial (1)");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(19, 198, 80, 14);
+        jLabel5.setBounds(19, 198, 130, 14);
         getContentPane().add(tfdTelComercial1);
         tfdTelComercial1.setBounds(19, 218, 405, 20);
         getContentPane().add(tfdTelComercial2);
@@ -118,17 +141,17 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Tel Comercial (2)");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(19, 244, 80, 14);
+        jLabel6.setBounds(19, 244, 120, 14);
         getContentPane().add(tfdCelular1);
         tfdCelular1.setBounds(19, 310, 405, 20);
 
         jLabel7.setText("Celular (1)");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 290, 50, 14);
+        jLabel7.setBounds(19, 290, 100, 14);
 
         jLabel8.setText("Celular (2)");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(19, 336, 50, 14);
+        jLabel8.setBounds(19, 336, 100, 14);
         getContentPane().add(tfdCelular2);
         tfdCelular2.setBounds(19, 356, 405, 20);
         getContentPane().add(tfdCelular3);
@@ -136,11 +159,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Celular (3)");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(19, 382, 50, 14);
+        jLabel9.setBounds(19, 382, 100, 14);
 
         jLabel10.setText("Email");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(19, 428, 24, 14);
+        jLabel10.setBounds(19, 428, 90, 14);
 
         tfdEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,16 +172,14 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         });
         getContentPane().add(tfdEmail);
         tfdEmail.setBounds(19, 448, 405, 20);
-        getContentPane().add(tfdSetor);
-        tfdSetor.setBounds(19, 494, 405, 20);
 
         jLabel11.setText("Setor");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(19, 474, 26, 14);
+        jLabel11.setBounds(19, 474, 80, 14);
 
         jLabel12.setText("Ramal");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(19, 520, 29, 14);
+        jLabel12.setBounds(19, 520, 90, 14);
         getContentPane().add(tfdRamal);
         tfdRamal.setBounds(19, 540, 405, 20);
         getContentPane().add(tfdDia);
@@ -166,11 +187,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Dia");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(19, 566, 15, 14);
+        jLabel13.setBounds(19, 566, 70, 14);
 
         jLabel14.setText("Observação");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(19, 658, 58, 14);
+        jLabel14.setBounds(19, 658, 100, 14);
 
         jLabel15.setText("Filtro");
         getContentPane().add(jLabel15);
@@ -178,6 +199,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Endereço", "Cidade/Estado", "Departamento", " " }));
         cbxFiltro.setPreferredSize(new java.awt.Dimension(95, 23));
+        cbxFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFiltroActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbxFiltro);
         cbxFiltro.setBounds(484, 14, 265, 23);
 
@@ -260,7 +286,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel18.setText("Horário");
         getContentPane().add(jLabel18);
-        jLabel18.setBounds(19, 612, 35, 14);
+        jLabel18.setBounds(19, 612, 100, 14);
 
         taaObservacao.setColumns(20);
         taaObservacao.setRows(5);
@@ -271,7 +297,16 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         cbxInativo.setText("Inativo");
         getContentPane().add(cbxInativo);
-        cbxInativo.setBounds(100, 730, 59, 23);
+        cbxInativo.setBounds(100, 730, 90, 23);
+
+        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxSetorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbxSetor);
+        cbxSetor.setBounds(20, 490, 380, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -292,6 +327,14 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdEmailActionPerformed
 
+    private void cbxSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSetorActionPerformed
+     
+    }//GEN-LAST:event_cbxSetorActionPerformed
+
+    private void cbxFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxFiltroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -304,6 +347,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox cbxDocente;
     private javax.swing.JComboBox cbxFiltro;
     private javax.swing.JCheckBox cbxInativo;
+    private javax.swing.JComboBox cbxSetor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -337,7 +381,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdNome;
     private javax.swing.JTextField tfdPaginas;
     private javax.swing.JTextField tfdRamal;
-    private javax.swing.JTextField tfdSetor;
     private javax.swing.JTextField tfdTelComercial1;
     private javax.swing.JTextField tfdTelComercial2;
     private javax.swing.JTextField tfdTelResidencial;
