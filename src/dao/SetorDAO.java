@@ -67,17 +67,17 @@ public class SetorDAO {
         
     }
         public SetorM busca(int id) throws SQLException{
-        sql = "select * from Patrimonio where id = ?";
+        sql = "select * from setor where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
-        SetorM pat = null;
+        SetorM set = null;
         SetorM setor = new SetorM();
 
         while(rs.next()){
-           pat = new SetorM(rs.getInt("id"), rs.getString("nome"),rs.getInt("ramal"));
+           set = new SetorM(rs.getInt("id"), rs.getString("nome"),rs.getInt("ramal"));
         }
         pst.close();
-        return pat;
+        return set;
     }
 }
