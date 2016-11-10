@@ -20,7 +20,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        bundaéshow = new javax.swing.JTextField();
+        tfdNome = new javax.swing.JTextField();
         tfdRamal = new javax.swing.JTextField();
         tfdEndereco = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -57,9 +57,9 @@ public class ConsultaView extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Ramal");
 
-        bundaéshow.addActionListener(new java.awt.event.ActionListener() {
+        tfdNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bundaéshowActionPerformed(evt);
+                tfdNomeActionPerformed(evt);
             }
         });
 
@@ -68,6 +68,11 @@ public class ConsultaView extends javax.swing.JInternalFrame {
         jLabel13.setText("Cidade/Estado");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,7 +126,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel10)
-                    .addComponent(bundaéshow, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(tfdNome, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                     .addComponent(tfdEmail))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -175,7 +180,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bundaéshow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,9 +229,9 @@ public class ConsultaView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bundaéshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bundaéshowActionPerformed
+    private void tfdNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bundaéshowActionPerformed
+    }//GEN-LAST:event_tfdNomeActionPerformed
 
     private void tfdEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdEmailActionPerformed
         // TODO add your handling code here:
@@ -240,12 +245,17 @@ public class ConsultaView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       
+        
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnProximo;
-    private javax.swing.JTextField bundaéshow;
     private javax.swing.JCheckBox cbxDocentes;
     private javax.swing.JCheckBox cbxInativos;
     private javax.swing.JLabel jLabel10;
@@ -263,6 +273,7 @@ public class ConsultaView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdEmail;
     private javax.swing.JTextField tfdEndereco;
     private javax.swing.JTextField tfdIrPara;
+    private javax.swing.JTextField tfdNome;
     private javax.swing.JTextField tfdRamal;
     private javax.swing.JTextField tfdSetor;
     private javax.swing.JTextField tfdTelefone;

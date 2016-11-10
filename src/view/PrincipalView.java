@@ -1,14 +1,27 @@
 package view;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import javax.swing.JFrame;
+import model.UsuarioM;
 
 public class PrincipalView extends javax.swing.JFrame {
 
-
-    public PrincipalView() {
+    UsuarioM usuarioAtivo = new UsuarioM();
+    
+    public PrincipalView(UsuarioM usuario) {
         initComponents();
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.usuarioAtivo = usuario;
+        /*if(usuario.isAdmin() == false){
+             mnuCadastrar.setEnabled(false);
+             mniAdicionarUsuario.setEnabled(false);
+        }*/
+        URL url = this.getClass().getResource("/view/icones/icon.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo);
     }
 
   
