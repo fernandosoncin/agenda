@@ -23,7 +23,7 @@ public class FuncionarioDAO {
         pst.setString(2, funcionario.getNome());
         pst.setString(3, funcionario.getEndereco());
         pst.setString(4, funcionario.getCidadeestado()); //Cidadeestado -> CidadeEstado
-        pst.setString(5, funcionario.getResidencial()); // Residencial -> TelResidencial
+        pst.setString(5, funcionario.getTelresidencial()); // Residencial -> TelResidencial
         pst.setString(6, funcionario.getTelcomercial1());
         pst.setString(7, funcionario.getTelcomercial2());
         pst.setString(8, funcionario.getCelular1());
@@ -34,8 +34,8 @@ public class FuncionarioDAO {
         pst.setString(13, funcionario.getDia());
         pst.setString(14, funcionario.getHorario());
         pst.setString(15, funcionario.getObservacao());
-        pst.setInt(16, funcionario.getDocente());
-        pst.setInt(17, funcionario.getInativo());
+        pst.setBoolean(16, funcionario.getDocente());
+        pst.setBoolean(17, funcionario.getInativo());
         pst.setInt(18, funcionario.getId_setor()); 
         
         pst.execute();
@@ -118,7 +118,7 @@ public class FuncionarioDAO {
         pst.setString(1, funcionario.getNome());
         pst.setString(2, funcionario.getEndereco());
         pst.setString(3, funcionario.getCidadeestado());
-        pst.setString(4, funcionario.getResidencial());
+        pst.setString(4, funcionario.getTelresidencial());
         pst.setString(5, funcionario.getTelcomercial1());
         pst.setString(6, funcionario.getTelcomercial2());
         pst.setString(7, funcionario.getCelular1());
@@ -129,8 +129,8 @@ public class FuncionarioDAO {
         pst.setString(12, funcionario.getDia());
         pst.setString(13, funcionario.getHorario());
         pst.setString(14, funcionario.getObservacao());
-        pst.setInt(15, funcionario.getDocente());
-        pst.setInt(16, funcionario.getInativo());
+        pst.setBoolean(15, funcionario.getDocente());
+        pst.setBoolean(16, funcionario.getInativo());
         //pst.setInt(17, funcionario.getId_setor().getInt()); //falta get e set da chave estrangeira²
         pst.setInt(18,0);
         
