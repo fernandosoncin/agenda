@@ -81,6 +81,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Agenda`.`Usuario`(
  `id` INT NOT NULL AUTO_INCREMENT,
  `nome` VARCHAR(90) NOT NULL,
+ `contato` VARCHAR (64) NOT NULL,
  `usuario` VARCHAR(20) NOT NULL UNIQUE,
  `senha` VARCHAR(20) NOT NULL,
  `admin` boolean NOT NULL,
@@ -92,9 +93,12 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-insert into Usuario values(NULL,"usuário root","root","root",1);
-insert into Usuario values(NULL,"usuario a","a","a",1);
-insert into Usuario values(null,"convidado","convidado","convidado",0);
+insert into Usuario values(NULL,"usuário convidado","teste@teste.com","convidado","convidado",0);
+insert into Usuario values(NULL,"usuário root","teste@teste.com","root","root",1);
+insert into Usuario values(NULL,"usuario a","teste@teste.com","a","a",1);
+insert into Usuario values(NULL,"Secretária1","secretaria1.com","secretaria1","secretaria1",1);
+insert into Usuario values(NULL,"Secretária2","secretaria1.com","secretaria2","secretaria2",1);
+
 
 insert into Setor values(NULL,"NUPSI",10100);
 insert into Setor values(NULL,"CPD",10101);

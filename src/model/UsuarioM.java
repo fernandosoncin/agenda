@@ -12,27 +12,28 @@ package model;
 public class UsuarioM {
     int id;
     String nome;
+    String contato;
     String usuario;
     String senha;
     boolean admin;
 
-    public UsuarioM(int id, String nome, String usuario, String senha, boolean admin) {
+    public UsuarioM(int id, String nome, String contato, String usuario, String senha, boolean admin) {
         this.id = id;
         this.nome = nome;
+        this.contato = contato;
         this.usuario = usuario;
         this.senha = senha;
         this.admin = admin;
     }
-    
-    public UsuarioM(int id, String nome, String usuario, boolean admin) {
+
+    public UsuarioM(int id, String nome, String contato, String usuario) {
         this.id = id;
         this.nome = nome;
+        this.contato = contato;
         this.usuario = usuario;
-        this.admin = admin;
     }
 
-    public UsuarioM(){
-        
+    public UsuarioM() {
     }
 
     public int getId() {
@@ -49,6 +50,14 @@ public class UsuarioM {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 
     public String getUsuario() {
@@ -74,6 +83,9 @@ public class UsuarioM {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-    
+
+
+
+
     
 }

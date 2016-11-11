@@ -6,6 +6,8 @@
 package view;
 
 import dao.UsuarioDAO;
+import java.awt.Event;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -24,6 +26,8 @@ public class InicialView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        
+        
         
         URL url = this.getClass().getResource("/view/icones/icon.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
@@ -45,25 +49,31 @@ public class InicialView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Agenda");
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
-        btnConvidado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnConvidado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnConvidado.setText("Convidado");
-        btnConvidado.setPreferredSize(new java.awt.Dimension(131, 25));
+        btnConvidado.setPreferredSize(new java.awt.Dimension(136, 29));
         btnConvidado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConvidadoActionPerformed(evt);
             }
         });
 
-        btnAdministrador.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnAdministrador.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnAdministrador.setText("Administrador");
+        btnAdministrador.setPreferredSize(new java.awt.Dimension(136, 29));
         btnAdministrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdministradorActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Selecione o tipo do usuário:");
 
@@ -74,10 +84,10 @@ public class InicialView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnConvidado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAdministrador)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,8 +97,8 @@ public class InicialView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConvidado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdministrador))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(btnAdministrador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,12 +112,21 @@ public class InicialView extends javax.swing.JFrame {
     private void btnConvidadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvidadoActionPerformed
         UsuarioM usuarioM = new UsuarioM();
         usuarioM = null;
-        String user = "convidado";
-        String senha = "convidado";
-       // usuarioM = UsuarioDAO.valida();
+        String convidado = "convidado";
+        try{
+        usuarioM = UsuarioDAO.valida(convidado,convidado);
+        this.dispose();
+        }
+        catch(Exception ex){
+         ex.printStackTrace();
+        }
         PrincipalView principal = new PrincipalView(usuarioM);
 
     }//GEN-LAST:event_btnConvidadoActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        
+    }//GEN-LAST:event_formKeyPressed
 
 
 
