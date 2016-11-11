@@ -35,6 +35,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             cbxSetor.addItem(gra.getId());
         }
     }*/
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
