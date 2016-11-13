@@ -1,10 +1,11 @@
 package model;
 
 public class FuncionarioM {
+    private int id;
     private String nome;
     private String endereco;
     private String cidadeestado;
-    private String residencial;
+    private String telresidencial;
     private String telcomercial1;
     private String telcomercial2;
     private String celular1;
@@ -15,15 +16,16 @@ public class FuncionarioM {
     private String dia;
     private String horario;
     private String observacao;
-    private int docente;
-    private int inativo;
+    private Boolean docente;
+    private Boolean inativo;
     private int id_setor;
 
-    public FuncionarioM(String nome, String endereco, String cidadeestado, String residencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String setor, String dia, String horario, String observacao, int docente, int inativo, int id_setor) {
+    public FuncionarioM(int id, String nome, String endereco, String cidadeestado, String telresidencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String setor, String dia, String horario, String observacao, Boolean docente, Boolean inativo, int id_setor) {
+        this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.cidadeestado = cidadeestado;
-        this.residencial = residencial;
+        this.telresidencial = telresidencial;
         this.telcomercial1 = telcomercial1;
         this.telcomercial2 = telcomercial2;
         this.celular1 = celular1;
@@ -40,6 +42,14 @@ public class FuncionarioM {
     }
 
     public FuncionarioM() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -66,12 +76,12 @@ public class FuncionarioM {
         this.cidadeestado = cidadeestado;
     }
 
-    public String getResidencial() {
-        return residencial;
+    public String getTelresidencial() {
+        return telresidencial;
     }
 
-    public void setResidencial(String residencial) {
-        this.residencial = residencial;
+    public void setTelresidencial(String telresidencial) {
+        this.telresidencial = telresidencial;
     }
 
     public String getTelcomercial1() {
@@ -154,19 +164,19 @@ public class FuncionarioM {
         this.observacao = observacao;
     }
 
-    public int getDocente() {
+    public Boolean getDocente() {
         return docente;
     }
 
-    public void setDocente(int docente) {
+    public void setDocente(Boolean docente) {
         this.docente = docente;
     }
 
-    public int getInativo() {
+    public Boolean getInativo() {
         return inativo;
     }
 
-    public void setInativo(int inativo) {
+    public void setInativo(Boolean inativo) {
         this.inativo = inativo;
     }
 
@@ -177,7 +187,5 @@ public class FuncionarioM {
     public void setId_setor(int id_setor) {
         this.id_setor = id_setor;
     }
-    
-
     
 }

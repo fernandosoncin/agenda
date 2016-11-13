@@ -8,6 +8,7 @@ import java.util.List;
 import model.FuncionarioM;
 
 
+
 public class FuncionarioDAO {
     
     PreparedStatement pst;
@@ -22,7 +23,7 @@ public class FuncionarioDAO {
         pst.setString(2, funcionario.getNome());
         pst.setString(3, funcionario.getEndereco());
         pst.setString(4, funcionario.getCidadeestado()); //Cidadeestado -> CidadeEstado
-        pst.setString(5, funcionario.getResidencial()); // Residencial -> TelResidencial
+        pst.setString(5, funcionario.getTelresidencial()); // Residencial -> TelResidencial
         pst.setString(6, funcionario.getTelcomercial1());
         pst.setString(7, funcionario.getTelcomercial2());
         pst.setString(8, funcionario.getCelular1());
@@ -33,11 +34,9 @@ public class FuncionarioDAO {
         pst.setString(13, funcionario.getDia());
         pst.setString(14, funcionario.getHorario());
         pst.setString(15, funcionario.getObservacao());
-        pst.setInt(16, funcionario.getDocente());
-        pst.setInt(17, funcionario.getInativo());
-       // pst.setInt(18, funcionario.getIdSetor); // falta get e set da chave estrangeira, 
-        //coloca ela por último e padroniza
-        //na declaração no Model/Banco e aqui.
+        pst.setBoolean(16, funcionario.getDocente());
+        pst.setBoolean(17, funcionario.getInativo());
+        pst.setInt(18, funcionario.getId_setor()); 
         
         pst.execute();
         pst.close();
@@ -53,7 +52,7 @@ public class FuncionarioDAO {
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
-       /* while(rs.next()){
+        /*while(rs.next()){
            funcionario = new FuncionarioM(
                    rs.getInt("id"),
                    rs.getString("nome"),
@@ -70,10 +69,9 @@ public class FuncionarioDAO {
                    rs.getString("dia"),
                    rs.getString("horario"),
                    rs.getString("observacao"),
-                   rs.getString("docente"),
-                   rs.getString("inativo"),
-                   setor.buscar(rs.getInt("id_setor"))
-           );
+                   rs.getInt("docente"),
+                   rs.getInt("inativo"),
+                   setor.buscar(rs.getInt("id_setor")));
         }*/
         pst.close();
         
@@ -86,7 +84,7 @@ public class FuncionarioDAO {
         String sql;
         sql = "delete from Funcionario where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
-        //pst.setInt(1, funcionario.getId()); //falta o getID
+        pst.setInt(1, funcionario.getId_setor()); //falta o getID
         pst.execute();
         pst.close();
     }
@@ -120,7 +118,7 @@ public class FuncionarioDAO {
         pst.setString(1, funcionario.getNome());
         pst.setString(2, funcionario.getEndereco());
         pst.setString(3, funcionario.getCidadeestado());
-        pst.setString(4, funcionario.getResidencial());
+        pst.setString(4, funcionario.getTelresidencial());
         pst.setString(5, funcionario.getTelcomercial1());
         pst.setString(6, funcionario.getTelcomercial2());
         pst.setString(7, funcionario.getCelular1());
@@ -131,9 +129,9 @@ public class FuncionarioDAO {
         pst.setString(12, funcionario.getDia());
         pst.setString(13, funcionario.getHorario());
         pst.setString(14, funcionario.getObservacao());
-        pst.setInt(15, funcionario.getDocente());
-        pst.setInt(16, funcionario.getInativo());
-       // pst.setInt(17, funcionario.getIdSetor().getInt()); //falta get e set da chave estrangeira²
+        pst.setBoolean(15, funcionario.getDocente());
+        pst.setBoolean(16, funcionario.getInativo());
+        //pst.setInt(17, funcionario.getId_setor().getInt()); //falta get e set da chave estrangeira²
         pst.setInt(18,0);
         
          pst.execute();
