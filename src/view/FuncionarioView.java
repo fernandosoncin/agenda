@@ -90,10 +90,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         btnProximo = new javax.swing.JButton();
         tfdCidadeEstado = new javax.swing.JTextField();
         tfdEmail = new javax.swing.JTextField();
-        cbxSetor = new javax.swing.JComboBox();
         cbxFiltro = new javax.swing.JComboBox();
         jLabel19 = new javax.swing.JLabel();
         tfdId = new javax.swing.JTextField();
+        cbxSetor = new javax.swing.JComboBox();
 
         setClosable(true);
         setMaximizable(true);
@@ -196,12 +196,12 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         btnProximo.setText(">>");
 
-        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Endereço", "Cidade/Estado", "Departamento", " " }));
         cbxFiltro.setPreferredSize(new java.awt.Dimension(95, 23));
 
         jLabel19.setText("ID");
+
+        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,7 +242,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(tfdCidadeEstado)
                     .addComponent(tfdEmail)
-                    .addComponent(cbxSetor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,7 +253,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                                 .addGap(5, 5, 5))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel19)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(cbxSetor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -482,7 +482,24 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblFuncionarioMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+    if(tfdId.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Selecione um Funcionario");
+    }
+    else{
+        funcionario.setId(Integer.parseInt(tfdId.getText()));
+        int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tfdNome.getText());
+        if(confirma ==0){
+            try{
+                FuncionarioDAO.excluir(funcionario);
+                //limparCamposSetor();
+                tfdNome.requestFocusInWindow();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
+            //atualizarTabelaFuncionario();
+            //prepararExcluir();
+        }
+    }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
 
