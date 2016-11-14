@@ -12,15 +12,15 @@ public class FuncionarioM {
     private String celular2;
     private String celular3;
     private String email;
-    private String setor;
     private String dia;
     private String horario;
     private String observacao;
     private Boolean docente;
     private Boolean inativo;
-    private int id_setor;
+    private SetorM setor;
 
-    public FuncionarioM(int id, String nome, String endereco, String cidadeestado, String telresidencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String setor, String dia, String horario, String observacao, Boolean docente, Boolean inativo, int id_setor) {
+ 
+    public FuncionarioM(int id, String nome, String endereco, String cidadeestado, String telresidencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String dia, String horario, String observacao, Boolean docente, Boolean inativo, SetorM setor) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -32,16 +32,14 @@ public class FuncionarioM {
         this.celular2 = celular2;
         this.celular3 = celular3;
         this.email = email;
-        this.setor = setor;
         this.dia = dia;
         this.horario = horario;
         this.observacao = observacao;
         this.docente = docente;
         this.inativo = inativo;
-        this.id_setor = id_setor;
+        this.setor = setor;
     }
-
-    public FuncionarioM() {
+   public FuncionarioM() {
     }
 
     public int getId() {
@@ -132,14 +130,6 @@ public class FuncionarioM {
         this.email = email;
     }
 
-    public String getSetor() {
-        return setor;
-    }
-
-    public void setSetor(String setor) {
-        this.setor = setor;
-    }
-
     public String getDia() {
         return dia;
     }
@@ -180,12 +170,13 @@ public class FuncionarioM {
         this.inativo = inativo;
     }
 
-    public int getId_setor() {
-        return id_setor;
+    public SetorM getSetor() {
+        return setor;
     }
 
-    public void setId_setor(int id_setor) {
-        this.id_setor = id_setor;
+    public void setSetor(SetorM setor) {
+        this.setor = setor;
     }
+
     
 }

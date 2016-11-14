@@ -22,27 +22,26 @@ public class FuncionarioDAO {
         pst.setInt(1,0);
         pst.setString(2, funcionario.getNome());
         pst.setString(3, funcionario.getEndereco());
-        pst.setString(4, funcionario.getCidadeestado()); //Cidadeestado -> CidadeEstado
-        pst.setString(5, funcionario.getTelresidencial()); // Residencial -> TelResidencial
+        pst.setString(4, funcionario.getCidadeestado());
+        pst.setString(5, funcionario.getTelresidencial()); 
         pst.setString(6, funcionario.getTelcomercial1());
         pst.setString(7, funcionario.getTelcomercial2());
         pst.setString(8, funcionario.getCelular1());
         pst.setString(9, funcionario.getCelular2());
         pst.setString(10, funcionario.getCelular3());
         pst.setString(11, funcionario.getEmail());
-        pst.setString(12, funcionario.getSetor());
-        pst.setString(13, funcionario.getDia());
-        pst.setString(14, funcionario.getHorario());
-        pst.setString(15, funcionario.getObservacao());
-        pst.setBoolean(16, funcionario.getDocente());
-        pst.setBoolean(17, funcionario.getInativo());
-        pst.setInt(18, funcionario.getId_setor()); 
+        pst.setString(12, funcionario.getDia());
+        pst.setString(13, funcionario.getHorario());
+        pst.setString(14, funcionario.getObservacao());
+        pst.setBoolean(15, funcionario.getDocente());
+        pst.setBoolean(16, funcionario.getInativo());
+        pst.setInt(17, funcionario.getSetor().getId()); 
         
         pst.execute();
         pst.close();
     }
-                                //MÉTODO = AÇÕES, PORTANTO, busca -> buscaR *trocar no DAO do Setor.
-    static public FuncionarioM buscar(int id) throws SQLException{
+                               
+    static public FuncionarioM busca(int id) throws SQLException{
         PreparedStatement pst;
         String sql;
         FuncionarioM funcionario = null;
@@ -52,7 +51,7 @@ public class FuncionarioDAO {
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
-        /*while(rs.next()){
+        while(rs.next()){
            funcionario = new FuncionarioM(
                    rs.getInt("id"),
                    rs.getString("nome"),
@@ -65,26 +64,24 @@ public class FuncionarioDAO {
                    rs.getString("celular2"),
                    rs.getString("celular3"),
                    rs.getString("email"),
-                   rs.getString("setor"),
                    rs.getString("dia"),
                    rs.getString("horario"),
                    rs.getString("observacao"),
-                   rs.getInt("docente"),
-                   rs.getInt("inativo"),
-                   setor.buscar(rs.getInt("id_setor")));
-        }*/
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo"),
+                   setor.busca(rs.getInt("id_setor")));
+        }
         pst.close();
         
         return funcionario;
     }
     
     static public void excluir(FuncionarioM funcionario) throws SQLException{
-        //Vai usar esse método?
         PreparedStatement pst;
         String sql;
         sql = "delete from Funcionario where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setInt(1, funcionario.getId_setor()); //falta o getID
+        pst.setInt(1, funcionario.getId());
         pst.execute();
         pst.close();
     }
@@ -111,7 +108,7 @@ public class FuncionarioDAO {
                  + "observacao  = ?, "
                  + "docente  = ?, "
                  + "inativo  = ?, "
-                 + "id_setor = ?, " //id do setor é pego no combo box
+                 + "id_setor = ?, "
                  + "where id = ?";
          pst = Conexao.getInstance().prepareStatement(sql);
          
@@ -125,14 +122,13 @@ public class FuncionarioDAO {
         pst.setString(8, funcionario.getCelular2());
         pst.setString(9, funcionario.getCelular3());
         pst.setString(10, funcionario.getEmail());
-        pst.setString(11, funcionario.getSetor());
-        pst.setString(12, funcionario.getDia());
-        pst.setString(13, funcionario.getHorario());
-        pst.setString(14, funcionario.getObservacao());
-        pst.setBoolean(15, funcionario.getDocente());
-        pst.setBoolean(16, funcionario.getInativo());
-        //pst.setInt(17, funcionario.getId_setor().getInt()); //falta get e set da chave estrangeira²
-        pst.setInt(18,0);
+        pst.setString(11, funcionario.getDia());
+        pst.setString(12, funcionario.getHorario());
+        pst.setString(13, funcionario.getObservacao());
+        pst.setBoolean(14, funcionario.getDocente());
+        pst.setBoolean(15, funcionario.getInativo());
+        pst.setInt(16, funcionario.getSetor().getId()); 
+        pst.setInt(17,0);
         
          pst.execute();
          pst.close();
@@ -143,10 +139,9 @@ public class FuncionarioDAO {
         sql = "select * from Funcionario order by nome";
         pst = Conexao.getInstance().prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
-       
-        SetorDAO setor = new SetorDAO();
         
-        /*while(rs.next()){
+        
+        while(rs.next()){
            listaFuncionario.add(new FuncionarioM(
                    rs.getInt("id"),
                    rs.getString("nome"),
@@ -159,15 +154,14 @@ public class FuncionarioDAO {
                    rs.getString("celular2"),
                    rs.getString("celular3"),
                    rs.getString("email"),
-                   rs.getString("setor"),
                    rs.getString("dia"),
                    rs.getString("horario"),
                    rs.getString("observacao"),
-                   rs.getString("docente"),
-                   rs.getString("inativo"),
-                   setor.buscar(rs.getInt("id_setor") // de novo.
-                   );
-        }*/
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo"),
+                   SetorDAO.busca(rs.getInt("id_setor"))
+                   ));
+        }
       
         
         pst.close();

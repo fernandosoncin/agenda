@@ -413,7 +413,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         funcionario.setCelular2(tfdCelular2.getText());
         funcionario.setCelular3(tfdCelular3.getText());
         funcionario.setEmail(tfdEmail.getText());
-        funcionario.setSetor(cbxSetor.getSelectedItem().toString());
         funcionario.setDia(tfdDia.getText());
         funcionario.setHorario(tfdHorario.getText());
         funcionario.setObservacao(taaObservacao.getText());
@@ -426,6 +425,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
+        
         //atualizarTabelaFuncinario();
         //prepararSalvareCancelar();
         //desativarCampos();
@@ -443,7 +443,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         funcionario.setCelular2(tfdCelular2.getText());
         funcionario.setCelular3(tfdCelular3.getText());
         funcionario.setEmail(tfdEmail.getText());
-        funcionario.setSetor(cbxSetor.getSelectedItem().toString());
         funcionario.setDia(tfdDia.getText());
         funcionario.setHorario(tfdHorario.getText());
         funcionario.setObservacao(taaObservacao.getText());
