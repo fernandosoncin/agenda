@@ -1,25 +1,31 @@
 package view;
 
-import com.sun.istack.internal.logging.Logger;
 import dao.FuncionarioDAO;
-import java.util.List;
-import javax.swing.JFrame;
-import model.SetorM;
-import dao.SetorDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import model.FuncionarioM;
-import sun.util.logging.PlatformLogger;
+import java.util.logging.Logger;
+
 
 
 public class FuncionarioView extends javax.swing.JInternalFrame {
-    FuncionarioM funcionario = new FuncionarioM();
-    List<SetorM> listasetor;
+    
+    FuncionarioM funcionario;
+    FuncionarioDAO funcinarioDAO;
+    List<FuncionarioM> listaFuncionario;
     public FuncionarioView() {
+        listaFuncionario = new ArrayList<>();
+        funcinarioDAO = new FuncionarioDAO();
+        funcionario = new FuncionarioM();
         initComponents();
         this.setVisible(true);
-        
+        atualizarTabelaFuncionario();
     }
 
     /*public void atualizaBoxSetor(){
@@ -27,14 +33,14 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         cbxSetor.removeAllItems();
         cbxSetor.addItem("--Selecione");
         try{
-            listasetor = SetorDAO.;    corrigir
+            listaFuncionario = listaFuncionario;
         }catch(SQLException ex){
             
-            Logger.getLogger(FuncionarioView.class.getClass()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(FuncionarioView.class.getName()).log(Level.SEVERE,null,ex);
         }
-         String dados[][] = new String[listaSetor.size()][5];
+         String dados[][] = new String[listaFuncionario.size()][5];
         int i = 0;
-        for (SetorM gra : listaSetor) {
+        for (FuncionarioM gra : listaFuncionario) {
             cbxSetor.addItem(gra.getId());
         }
     }*/
@@ -94,6 +100,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         jLabel19 = new javax.swing.JLabel();
         tfdId = new javax.swing.JTextField();
         cbxSetor = new javax.swing.JComboBox();
+        btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -161,6 +168,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         cbxDocente.setText("Docente");
 
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -177,6 +189,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnAnterior.setText("<<");
 
@@ -202,6 +219,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         jLabel19.setText("ID");
 
         cbxSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,7 +289,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(161, 161, 161)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar)
+                        .addGap(82, 82, 82)
                         .addComponent(btnAnterior)
                         .addGap(10, 10, 10)
                         .addComponent(jLabel16)
@@ -374,7 +400,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                             .addComponent(btnNovo)
                             .addComponent(btnSalvar)
                             .addComponent(btnExcluir)
-                            .addComponent(btnAlterar)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnAlterar)
+                                .addComponent(btnCancelar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(btnAnterior))
@@ -425,11 +453,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
-        
-        //atualizarTabelaFuncinario();
-        //prepararSalvareCancelar();
-        //desativarCampos();
-        //limpaCamposSetor();
+        atualizarTabelaFuncionario();
+        prepararSalvareCancelar();
+        desativarCampos();
+        limparCamposFuncionario();
     }
     else{
         funcionario.setId(Integer.parseInt(tfdId.getText()));
@@ -455,9 +482,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }catch(SQLException ex){
         JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
     }
-    //atualizarTabelaFuncionario();
-    //prepararSalvareCancelar();
-    //desativarCampos();
+    atualizarTabelaFuncionario();
+    prepararSalvareCancelar();
+    desativarCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void tblFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionarioMouseClicked
@@ -491,22 +518,191 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         if(confirma ==0){
             try{
                 FuncionarioDAO.excluir(funcionario);
-                //limparCamposSetor();
+                limparCamposFuncionario();
                 tfdNome.requestFocusInWindow();
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
-            //atualizarTabelaFuncionario();
-            //prepararExcluir();
+            atualizarTabelaFuncionario();
+            prepararExcluir();
         }
     }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+    limparCamposFuncionario();
+    prepararNovo();
+    ativarCampos();
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+    prepararAlterar();
+    ativarCampos();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    limparCamposFuncionario();
+    prepararSalvareCancelar();
+    desativarCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    public void atualizarTabelaFuncionario(){
+        
+        /*funcionario = new FuncionarioM();
+        try{
+            listaFuncionario = funcinarioDAO.ListaFuncionario();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }*/
+        String dados[][] = new String[listaFuncionario.size()][3];
+           /* int i = 0;
+            for (FuncionarioM funcionario : listaFuncionario) {
+                dados[i][0] = String.valueOf(funcionario.getId());
+                dados[i][1] = funcionario.getNome();
+                dados[i][3] = funcionario.getEndereco();
+                dados[i][4] = funcionario.getCidadeestado();
+                dados[i][5] = funcionario.getTelresidencial();
+                dados[i][6] = funcionario.getTelcomercial1();
+                dados[i][7] = funcionario.getTelcomercial2();
+                dados[i][8] = funcionario.getCelular1();
+                dados[i][9] = funcionario.getCelular2();
+                dados[i][10] = funcionario.getCelular3();
+                dados[i][11] = funcionario.getEmail();
+                dados[i][12] = funcionario.getSetor();
+                dados[i][13] = funcionario.getDia();
+                dados[i][14] = funcionario.getHorario();
+                dados[i][15] = funcionario.getObservacao();
+                dados[i][16] = String.valueOf(funcionario.getDocente());
+                dados[i][17] = String.valueOf(funcionario.getInativo());
+                dados[i][18] = String.valueOf(funcionario.getId_setor());
+                
+                i++;
+            }*/
+           String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Tel Comercial","Tel Comercial", "Celular 1", "Celular 2", "Celular 3", "E-mail", "Setor", "Dia", "Horario","Observação", "Docente", "Inativo"};
+            DefaultTableModel tabelaFuncionario = new DefaultTableModel();
+            tabelaFuncionario.setDataVector(dados, tituloColuna);
+            tblFuncionario.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblFuncionario.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tblFuncionario.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblFuncionario.getColumnModel().getColumn(2).setPreferredWidth(50);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblFuncionario.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblFuncionario.setRowHeight(25);
+            tblFuncionario.updateUI();
+    }
+    public void limparCamposFuncionario(){
+       tfdId.setText("");
+       tfdNome.setText("");
+       tfdEndereco.setText("");
+       tfdCidadeEstado.setText("");
+       tfdTelResidencial.setText("");
+       tfdTelComercial1.setText("");
+       tfdTelComercial2.setText("");
+       tfdCelular1.setText("");
+       tfdCelular2.setText("");
+       tfdCelular3.setText("");
+       tfdEmail.setText("");
+       cbxSetor.setSelectedItem("");
+       tfdDia.setText("");
+       tfdHorario.setText("");
+       taaObservacao.setText("");
+       cbxDocente.setText("");
+       cbxInativo.setText("");
+       cbxFiltro.setSelectedItem("");       
+   }
+   
+   public void ativarCampos(){
+       tfdNome.setEnabled(true);
+       tfdEndereco.setEnabled(true);
+       tfdCidadeEstado.setEnabled(true);
+       tfdTelResidencial.setEnabled(true);
+       tfdTelComercial1.setEnabled(true);
+       tfdTelComercial2.setEnabled(true);
+       tfdCelular1.setEnabled(true);
+       tfdCelular2.setEnabled(true);
+       tfdCelular3.setEnabled(true);
+       tfdEmail.setEnabled(true);
+       cbxSetor.setEnabled(true);
+       tfdDia.setEnabled(true);
+       tfdHorario.setEnabled(true);
+       taaObservacao.setEnabled(true);
+       cbxDocente.setEnabled(true);
+       cbxInativo.setEnabled(true);
+       cbxFiltro.setEnabled(true); 
+   }
+
+   public void desativarCampos(){
+       tfdNome.setEnabled(false);
+       tfdEndereco.setEnabled(false);
+       tfdCidadeEstado.setEnabled(false);
+       tfdTelResidencial.setEnabled(false);
+       tfdTelComercial1.setEnabled(false);
+       tfdTelComercial2.setEnabled(false);
+       tfdCelular1.setEnabled(false);
+       tfdCelular2.setEnabled(false);
+       tfdCelular3.setEnabled(false);
+       tfdEmail.setEnabled(false);
+       cbxSetor.setEnabled(false);
+       tfdDia.setEnabled(false);
+       tfdHorario.setEnabled(false);
+       taaObservacao.setEnabled(false);
+       cbxDocente.setEnabled(false);
+       cbxInativo.setEnabled(false);
+       cbxFiltro.setEnabled(false); 
+   }
+   
+   public void prepararNovo() {
+       btnNovo.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblFuncionario.setEnabled(false);
+       tblFuncionario.clearSelection();
+   }
+   
+   public void prepararSalvareCancelar() {
+       btnNovo.setEnabled(true);
+       btnSalvar.setEnabled(false);
+       btnCancelar.setEnabled(false);
+       tblFuncionario.setEnabled(true);
+   }
+   
+   public void prepararSelecaoTabela(){
+       btnNovo.setEnabled(true);
+       btnExcluir.setEnabled(true);
+       btnAlterar.setEnabled(true);
+   }
+   
+   public void prepararAlterar(){
+       btnNovo.setEnabled(false);
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblFuncionario.setEnabled(false);
+       tblFuncionario.clearSelection();
+   }
+   
+   public void prepararExcluir(){
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnProximo;
