@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import com.sun.istack.internal.logging.Logger;
@@ -19,10 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import model.FuncionarioM;
 import model.SetorM;
 
-/**
- *
- * @author Leopo
- */
+
 public class FuncionarioView extends javax.swing.JInternalFrame {
     //Declaração variáveis de acesso.
     FuncionarioM funcionario = new FuncionarioM();
