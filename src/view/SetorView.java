@@ -204,7 +204,9 @@ public class SetorView extends javax.swing.JInternalFrame {
       prepararSalvareCancelar();
       desativarCampos();
       limparCamposSetor();
-      }
+           }
+          
+    
       else{
            setor.setId(Integer.parseInt(tfdId.getText()));
            setor.setNome(tfdSetor.getText());

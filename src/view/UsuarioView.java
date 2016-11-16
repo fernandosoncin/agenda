@@ -302,8 +302,8 @@ public class UsuarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-         if (tfdNome.getText().isEmpty() || tfdContato.getText().isEmpty() || tfdUsuario.getText().isEmpty() ) {
-             //|| tfdSenha.getText().isEmpty() || tfdConfirmaSenha.getText().isEmpty()
+         if (tfdNome.getText().isEmpty() || tfdContato.getText().isEmpty() || tfdUsuario.getText().isEmpty() || tfdSenha.getText().isEmpty() || tfdConfirmaSenha.getText().isEmpty()) {
+             
             JOptionPane.showMessageDialog(null, "Prencha todos os campos.", "Erro", JOptionPane.WARNING_MESSAGE);
             tfdNome.requestFocusInWindow();
         } else if (tfdId.getText().isEmpty()){
@@ -338,7 +338,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
             }
 
         }
-         else {
+         else{   if(tfdSenha.getText().equals(tfdConfirmaSenha.getText())){         
                 usuarioM = new UsuarioM();
                 usuarioM.setId(Integer.parseInt(tfdId.getText()));
                 usuarioM.setNome(tfdNome.getText());
@@ -361,11 +361,12 @@ public class UsuarioView extends javax.swing.JInternalFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
-                
             }
 
-        }
-                
+        }else{
+                JOptionPane.showMessageDialog(null, "Senhas não coincidem", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+        }   
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

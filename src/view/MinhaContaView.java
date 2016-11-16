@@ -14,14 +14,16 @@ import util.LimiteDigitos;
 public class MinhaContaView extends javax.swing.JInternalFrame {
 
    public UsuarioM usuario = new UsuarioM();
-    public MinhaContaView() {
+    public MinhaContaView(UsuarioM usuario) {
         initComponents();
         this.setVisible(true);
+        this.usuario = usuario;
         
         tfdUsuario.setDocument(new LimiteDigitos(20));
         tfdSenha.setDocument(new LimiteDigitos(20));
         tfdNome.setDocument(new LimiteDigitos(45));
         tfdContato.setDocument(new LimiteDigitos(45));
+        
         iniciaUsuario(usuario);
     }
 
@@ -252,7 +254,8 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
      public void iniciaUsuario(UsuarioM usuario){
-       //tfdId.setText(usuario.getId().toString());
+       
+         
        tfdNome.setText(usuario.getNome());
        tfdContato.setText(usuario.getContato());
        tfdUsuario.setText(usuario.getUsuario());

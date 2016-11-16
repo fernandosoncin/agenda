@@ -10,7 +10,7 @@ import model.UsuarioM;
 public class PrincipalView extends javax.swing.JFrame {
 
     UsuarioM usuarioAtivo = new UsuarioM();
-    
+ 
     public PrincipalView(UsuarioM usuario) {
         initComponents();
         this.setVisible(true);
@@ -234,9 +234,10 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniGerenciarUsuariosMouseClicked
 
     private void mniMinhaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMinhaContaActionPerformed
-    MinhaContaView usuario = new MinhaContaView();
+
+    MinhaContaView minhaconta = new MinhaContaView(usuarioAtivo);
     pnlPrincipal.removeAll();
-    pnlPrincipal.add(usuario);
+    pnlPrincipal.add(minhaconta);
     pnlPrincipal.updateUI();
     }//GEN-LAST:event_mniMinhaContaActionPerformed
 
