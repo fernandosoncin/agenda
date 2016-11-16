@@ -94,16 +94,15 @@ public class UsuarioView extends javax.swing.JInternalFrame {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbeUsuario = new javax.swing.JTable();
         tfdConfirmaSenha = new javax.swing.JPasswordField();
         tfdSenha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         tfdContato = new javax.swing.JTextField();
-        btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Usuário");
 
@@ -125,6 +124,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
         jLabel5.setText("Confirmar senha");
 
         btnNovo.setText("Novo");
+        btnNovo.setPreferredSize(new java.awt.Dimension(75, 23));
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
@@ -133,6 +133,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
+        btnSalvar.setPreferredSize(new java.awt.Dimension(75, 23));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -141,6 +142,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.setPreferredSize(new java.awt.Dimension(75, 23));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -149,9 +151,20 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
+        btnAlterar.setPreferredSize(new java.awt.Dimension(75, 23));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
+        btnCancelar.setMaximumSize(new java.awt.Dimension(65, 23));
+        btnCancelar.setMinimumSize(new java.awt.Dimension(65, 23));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -194,9 +207,6 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
         tfdContato.setEnabled(false);
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,33 +214,38 @@ public class UsuarioView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfdNome)
-                    .addComponent(jSeparator1)
-                    .addComponent(tfdUsuario)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfdId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelar)
-                                .addGap(4, 4, 4)
-                                .addComponent(btnAlterar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6))
-                        .addGap(0, 4, Short.MAX_VALUE))
-                    .addComponent(tfdContato)
-                    .addComponent(tfdSenha)
-                    .addComponent(tfdConfirmaSenha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfdId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(0, 58, Short.MAX_VALUE))
+                            .addComponent(tfdNome)
+                            .addComponent(jSeparator1)
+                            .addComponent(tfdUsuario)
+                            .addComponent(tfdContato)
+                            .addComponent(tfdSenha)
+                            .addComponent(tfdConfirmaSenha)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -263,12 +278,13 @@ public class UsuarioView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfdConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnAlterar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnCancelar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -279,20 +295,116 @@ public class UsuarioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-       
+       limpaCamposUsuario();
+       preparaNovo();
+       ativaCampos();
+       tfdNome.requestFocusInWindow();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+         if (tfdNome.getText().isEmpty() || tfdContato.getText().isEmpty() || tfdUsuario.getText().isEmpty() ) {
+             //|| tfdSenha.getText().isEmpty() || tfdConfirmaSenha.getText().isEmpty()
+            JOptionPane.showMessageDialog(null, "Prencha todos os campos.", "Erro", JOptionPane.WARNING_MESSAGE);
+            tfdNome.requestFocusInWindow();
+        } else if (tfdId.getText().isEmpty()){
+            if(tfdSenha.getText().equals(tfdConfirmaSenha.getText())){
+                
+                usuarioM = new UsuarioM();
+                usuarioM.setNome(tfdNome.getText());
+                usuarioM.setContato(tfdContato.getText());
+                usuarioM.setUsuario(tfdUsuario.getText());
+                usuarioM.setSenha(tfdSenha.getText());
+                
+                
+                try {
+                    UsuarioDAO.salvar(usuarioM);
+                    JOptionPane.showMessageDialog(null, "Usuario Gravado com Sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    atualizaTabelaUsuario();
+                    limpaCamposUsuario();
+                    preparaSalvareCancelar();
+                    desativaCampos();
+                  
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioView.class.getName()).log(Level.SEVERE, null, ex);
+                 if (ex.getErrorCode() == 1062) {
+                        JOptionPane.showMessageDialog(null, "Usuario já existente.", "Erro", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Senhas não coincidem", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
+         else {
+                usuarioM = new UsuarioM();
+                usuarioM.setId(Integer.parseInt(tfdId.getText()));
+                usuarioM.setNome(tfdNome.getText());
+                usuarioM.setContato(tfdContato.getText());              
+                usuarioM.setUsuario(tfdUsuario.getText());
+                usuarioM.setSenha(tfdSenha.getText());
+                usuarioM.setAdmin(isIcon);
+        
+                try {
+                    UsuarioDAO.alterar(usuarioM);
+                    JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    atualizaTabelaUsuario();
+                    preparaSalvareCancelar();
+                    desativaCampos();
+                    
+                    
+                } catch (SQLException ex) {
+                    if (ex.getErrorCode() == 1062) {
+                        JOptionPane.showMessageDialog(null, "Usuário com nome já existente.", "Erro", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
+                
+            }
+
+        }
+                
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+         if (tfdId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um usuario.", "Erro", JOptionPane.WARNING_MESSAGE);
+        } else {
+            usuarioM = new UsuarioM();
+            usuarioM.setId(Integer.parseInt(tfdId.getText()));
+            int confirma = JOptionPane.showConfirmDialog(null, "Deseja Excluir: " + tfdNome.getText() + "?");
+            if (confirma == 0) {
+                try {
+                    UsuarioDAO.excluir(usuarioM);
+                    atualizaTabelaUsuario();
+                    limpaCamposUsuario();
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioView.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
+        }
+        limpaCamposUsuario();
+        atualizaTabelaUsuario();
+        preparaExcluir();
+                                              
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        preparaAlterar();
+        ativaCampos();
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpaCamposUsuario();
+        preparaSalvareCancelar();
+        desativaCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tfdConfirmaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdConfirmaSenhaActionPerformed
         // TODO add your handling code here:
@@ -300,13 +412,14 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
     private void tbeUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbeUsuarioMouseClicked
 
-        tfdId.setText(tbeUsuario.getValueAt(tbeUsuario.getSelectedRow(), 0).toString());
+        
         tfdNome.setText(tbeUsuario.getValueAt(tbeUsuario.getSelectedRow(), 1).toString());
         tfdUsuario.setText(tbeUsuario.getValueAt(tbeUsuario.getSelectedRow(), 2).toString());
         tfdContato.setText(tbeUsuario.getValueAt(tbeUsuario.getSelectedRow(), 3).toString());
-       
+        
         
         // Bloco senha para pegar a senha direto do banco
+        tfdId.setText(tbeUsuario.getValueAt(tbeUsuario.getSelectedRow(), 0).toString());
         try {
         usuarioM = UsuarioDAO.BuscaPorId(Integer.parseInt(tfdId.getText()));
 

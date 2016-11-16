@@ -111,6 +111,7 @@ public class SetorDAO {
     // Você pode criar seus objetos - através de uma classe - e agrupá-los através de ArrayList e realizar, 
     // nessa coleção, várias operações, como: adicionar e retirar elementos, ordená-los, procurar por um elemento específico,
     // apagar um elemento específico, limpar o ArrayList dentre outras possibilidades.
+    
     List<SetorM> listaSetor;
     listaSetor = new ArrayList<>();
     
@@ -169,7 +170,7 @@ public class SetorDAO {
     }
         public List<SetorM> listaTodos() throws SQLException{
         List<SetorM> listasetor = new ArrayList<SetorM>();
-        sql = "select * from Setor order by descricao";
+        sql = "select * from Grau_conservacao order by descricao";
         pst = Conexao.getInstance().prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
         while(rs.next()){

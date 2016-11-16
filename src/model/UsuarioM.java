@@ -10,7 +10,7 @@ package model;
  * @author Leopo
  */
 public class UsuarioM {
-    int id;
+    Integer id;
     String nome;
     String contato;
     String usuario;

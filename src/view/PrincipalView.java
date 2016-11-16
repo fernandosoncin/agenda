@@ -16,7 +16,7 @@ public class PrincipalView extends javax.swing.JFrame {
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.usuarioAtivo = usuario;
-
+        
         if(usuario.isAdmin() == false){
              mnuArquivos.setEnabled(false);
              mnuConsulta.setEnabled(false);
@@ -49,6 +49,7 @@ public class PrincipalView extends javax.swing.JFrame {
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         pnlPrincipal = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         mnuArquivos = new javax.swing.JMenu();
@@ -56,6 +57,8 @@ public class PrincipalView extends javax.swing.JFrame {
         mniDepartamento = new javax.swing.JMenuItem();
         mnuConsulta = new javax.swing.JMenu();
         mnuUsuarios = new javax.swing.JMenu();
+        mniGerenciarUsuarios = new javax.swing.JMenuItem();
+        mniMinhaConta = new javax.swing.JMenuItem();
 
         jMenu5.setText("jMenu5");
 
@@ -74,6 +77,8 @@ public class PrincipalView extends javax.swing.JFrame {
         menuBar2.add(menu4);
 
         jMenu2.setText("jMenu2");
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Agenda");
@@ -144,6 +149,28 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnuUsuariosActionPerformed(evt);
             }
         });
+
+        mniGerenciarUsuarios.setText("Gerenciar usários");
+        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mniGerenciarUsuariosMouseClicked(evt);
+            }
+        });
+        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniGerenciarUsuariosActionPerformed(evt);
+            }
+        });
+        mnuUsuarios.add(mniGerenciarUsuarios);
+
+        mniMinhaConta.setText("Minha conta");
+        mniMinhaConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniMinhaContaActionPerformed(evt);
+            }
+        });
+        mnuUsuarios.add(mniMinhaConta);
+
         jMenuBar2.add(mnuUsuarios);
 
         setJMenuBar(jMenuBar2);
@@ -163,9 +190,9 @@ public class PrincipalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mmiFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmiFuncionarioActionPerformed
-    FuncionarioView funcionario = new FuncionarioView();
+    FuncionarioView contato = new FuncionarioView();
     pnlPrincipal.removeAll();
-    pnlPrincipal.add(funcionario);
+    pnlPrincipal.add(contato);
     pnlPrincipal.updateUI();
     }//GEN-LAST:event_mmiFuncionarioActionPerformed
 
@@ -192,11 +219,26 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuUsuariosActionPerformed
 
     private void mnuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuUsuariosMouseClicked
+    
+    }//GEN-LAST:event_mnuUsuariosMouseClicked
+
+    private void mniGerenciarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGerenciarUsuariosActionPerformed
     UsuarioView usuario = new UsuarioView();
     pnlPrincipal.removeAll();
     pnlPrincipal.add(usuario);
     pnlPrincipal.updateUI();
-    }//GEN-LAST:event_mnuUsuariosMouseClicked
+    }//GEN-LAST:event_mniGerenciarUsuariosActionPerformed
+
+    private void mniGerenciarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mniGerenciarUsuariosMouseClicked
+    
+    }//GEN-LAST:event_mniGerenciarUsuariosMouseClicked
+
+    private void mniMinhaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMinhaContaActionPerformed
+    MinhaContaView usuario = new MinhaContaView();
+    pnlPrincipal.removeAll();
+    pnlPrincipal.add(usuario);
+    pnlPrincipal.updateUI();
+    }//GEN-LAST:event_mniMinhaContaActionPerformed
 
 
 
@@ -210,6 +252,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.Menu menu3;
@@ -218,6 +261,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar2;
     private javax.swing.JMenuItem mmiFuncionario;
     private javax.swing.JMenuItem mniDepartamento;
+    private javax.swing.JMenuItem mniGerenciarUsuarios;
+    private javax.swing.JMenuItem mniMinhaConta;
     private javax.swing.JMenu mnuArquivos;
     private javax.swing.JMenu mnuConsulta;
     private javax.swing.JMenu mnuUsuarios;
