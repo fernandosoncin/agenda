@@ -174,6 +174,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar2.add(mnuUsuarios);
 
+        mnuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/sobre.png"))); // NOI18N
         mnuSobre.setText("Sobre");
         mnuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
