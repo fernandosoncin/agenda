@@ -15,12 +15,11 @@ public class FuncionarioM {
     private String dia;
     private String horario;
     private String observacao;
+    private SetorM setor;
     private Boolean docente;
     private Boolean inativo;
-    private SetorM setor;
 
- 
-    public FuncionarioM(int id, String nome, String endereco, String cidadeestado, String telresidencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String dia, String horario, String observacao, Boolean docente, Boolean inativo, SetorM setor) {
+    public FuncionarioM(int id, String nome, String endereco, String cidadeestado, String telresidencial, String telcomercial1, String telcomercial2, String celular1, String celular2, String celular3, String email, String dia, String horario, String observacao, SetorM setor, Boolean docente, Boolean inativo) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -35,11 +34,12 @@ public class FuncionarioM {
         this.dia = dia;
         this.horario = horario;
         this.observacao = observacao;
+        this.setor = setor;
         this.docente = docente;
         this.inativo = inativo;
-        this.setor = setor;
     }
-   public FuncionarioM() {
+
+    public FuncionarioM() {
     }
 
     public int getId() {
@@ -154,6 +154,14 @@ public class FuncionarioM {
         this.observacao = observacao;
     }
 
+    public SetorM getSetor() {
+        return setor;
+    }
+
+    public void setSetor(SetorM setor) {
+        this.setor = setor;
+    }
+
     public Boolean getDocente() {
         return docente;
     }
@@ -169,14 +177,9 @@ public class FuncionarioM {
     public void setInativo(Boolean inativo) {
         this.inativo = inativo;
     }
-
-    public SetorM getSetor() {
-        return setor;
-    }
-
-    public void setSetor(SetorM setor) {
-        this.setor = setor;
-    }
-
     
+    
+
+ 
+   
 }

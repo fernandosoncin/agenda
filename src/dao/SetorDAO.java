@@ -168,9 +168,26 @@ public class SetorDAO {
         pst.close();
         return set;
     }
+     static  public SetorM buscaNome(String nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        sql = "select * from setor where nome = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, nome);
+        SetorM set = null;
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           set = new SetorM((rs.getInt("id")), 
+                   rs.getString("nome"),
+                   rs.getInt("ramal")
+           );
+        }
+        pst.close();
+        return set;
+    }
         public List<SetorM> listaTodos() throws SQLException{
         List<SetorM> listasetor = new ArrayList<SetorM>();
-        sql = "select * from Setor order by nome";
+        sql = "select * from setor order by nome";
         pst = Conexao.getInstance().prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
         while(rs.next()){
