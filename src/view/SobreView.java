@@ -32,7 +32,7 @@ public class SobreView extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(500, 700));
+        setPreferredSize(new java.awt.Dimension(720, 730));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -40,26 +40,12 @@ public class SobreView extends javax.swing.JInternalFrame {
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        getContentPane().add(jLabel1, java.awt.BorderLayout.CENTER);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/LogoSobre.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, 0)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/logosobre.png"))); // NOI18N
+        jLabel7.setPreferredSize(new java.awt.Dimension(720, 700));
+        getContentPane().add(jLabel7, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
