@@ -19,12 +19,8 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
         this.setVisible(true);
         this.usuario = usuario;
         
-        tfdUsuario.setDocument(new LimiteDigitos(20));
-        tfdSenha.setDocument(new LimiteDigitos(20));
-        tfdNome.setDocument(new LimiteDigitos(45));
-        tfdContato.setDocument(new LimiteDigitos(45));
-        
-        iniciaUsuario(usuario);
+   
+    iniciaUsuario(usuario);
     }
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -39,17 +35,17 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
         tfdId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tfdNome = new javax.swing.JTextField();
-        tfdContato = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        tfdUsuario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        tfdSenha = new javax.swing.JTextField();
-        tfdConfirmaSenha = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnAlterar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        tfdContato = new javax.swing.JTextField();
+        tfdUsuario = new javax.swing.JTextField();
+        tfdSenha = new javax.swing.JTextField();
+        tfdConfirmaSenha = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Minha Conta");
@@ -68,24 +64,11 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
 
         tfdNome.setEnabled(false);
 
-        tfdContato.setEnabled(false);
-
         jLabel5.setText("Contato");
 
         jLabel6.setText("Usuário");
 
-        tfdUsuario.setEnabled(false);
-        tfdUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdUsuarioActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("Senha");
-
-        tfdSenha.setEnabled(false);
-
-        tfdConfirmaSenha.setEnabled(false);
 
         jLabel8.setText("Confirma Senha");
 
@@ -112,6 +95,24 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
             }
         });
 
+        tfdContato.setText("jTextField1");
+        tfdContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdContatoActionPerformed(evt);
+            }
+        });
+
+        tfdUsuario.setText("jTextField1");
+
+        tfdSenha.setText("jTextField1");
+
+        tfdConfirmaSenha.setText("jTextField1");
+        tfdConfirmaSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdConfirmaSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,16 +128,24 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
                         .addComponent(lblTipoDeConta)
                         .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfdConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(12, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfdUsuario)
+                                .addGap(42, 42, 42))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfdContato, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfdConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -147,17 +156,8 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
                                         .addComponent(tfdId, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
-                                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(tfdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(tfdContato, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(13, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,15 +204,11 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
                     .addComponent(btnAlterar)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdUsuarioActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
      if ( tfdNome.getText().isEmpty() || tfdContato.getText().isEmpty() || tfdUsuario.getText().isEmpty() || tfdSenha.getText().isEmpty() || tfdConfirmaSenha.getText().isEmpty() ) {
@@ -253,9 +249,17 @@ public class MinhaContaView extends javax.swing.JInternalFrame {
         desativaCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void tfdContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdContatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdContatoActionPerformed
+
+    private void tfdConfirmaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdConfirmaSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdConfirmaSenhaActionPerformed
+
      public void iniciaUsuario(UsuarioM usuario){
        
-         
+       tfdId.setText(Integer.toString(usuario.getId()));
        tfdNome.setText(usuario.getNome());
        tfdContato.setText(usuario.getContato());
        tfdUsuario.setText(usuario.getUsuario());

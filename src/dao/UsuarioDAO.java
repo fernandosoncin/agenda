@@ -31,9 +31,9 @@ public class UsuarioDAO {
            while(rs.next()){
                usuario = new UsuarioM(rs.getInt("id"),
                        rs.getString("nome"), 
+                       rs.getString("contato"),
                        rs.getString("usuario"),
                        rs.getString("senha"),
-                       rs.getString("contato"),
                        rs.getBoolean("admin")
                );
             }

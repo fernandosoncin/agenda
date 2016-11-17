@@ -139,6 +139,12 @@ public class LoginView extends javax.swing.JFrame {
                     tfdSenha.setText("");
                     tfdUsuario.requestFocus();
                 }else{
+        JOptionPane.showMessageDialog(null, usuarioM.getId()); 
+        JOptionPane.showMessageDialog(null, usuarioM.getNome());
+         JOptionPane.showMessageDialog(null, usuarioM.getContato());
+          JOptionPane.showMessageDialog(null, usuarioM.getUsuario()); 
+          JOptionPane.showMessageDialog(null, usuarioM.getSenha());
+           JOptionPane.showMessageDialog(null, usuarioM.isAdmin());
                     PrincipalView principal = new PrincipalView(usuarioM);
                     this.dispose();
                     

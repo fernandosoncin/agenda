@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.UsuarioM;
 
 public class PrincipalView extends javax.swing.JFrame {
@@ -17,6 +18,9 @@ public class PrincipalView extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.usuarioAtivo = usuario;
         
+        
+           
+           
         if(usuario.isAdmin() == false){
              mnuArquivos.setEnabled(false);
              mnuConsulta.setEnabled(false);
