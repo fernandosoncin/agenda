@@ -172,6 +172,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         tfdNome = new javax.swing.JTextField();
 
+        setClosable(true);
+
         jLabel1.setText("Nome");
 
         tfdEndereco.setEnabled(false);
@@ -549,6 +551,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         taaObservacao.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),14).toString());
         cbxDocente.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),15).toString());
         cbxInativo.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),16).toString());
+        btnAlterar.setEnabled(true);
+        btnExcluir.setEnabled(true);
     }//GEN-LAST:event_tbeFuncionarioMouseClicked
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -650,6 +654,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     limparCamposFuncionario();
     prepararSalvareCancelar();
     desativarCampos();
+    cbxFiltro.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -676,7 +681,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        taaObservacao.setText("");
        cbxDocente.setText("");
        cbxInativo.setText("");
-       cbxFiltro.setSelectedItem("");       
+       cbxFiltro.setSelectedItem("");
+       tfdbusca.setText("");
    }
    
    public void ativarCampos(){
