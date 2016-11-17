@@ -170,7 +170,7 @@ public class SetorDAO {
     }
         public List<SetorM> listaTodos() throws SQLException{
         List<SetorM> listasetor = new ArrayList<SetorM>();
-        sql = "select * from Grau_conservacao order by descricao";
+        sql = "select * from Setor order by nome";
         pst = Conexao.getInstance().prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
         while(rs.next()){

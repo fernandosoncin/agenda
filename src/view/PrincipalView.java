@@ -59,6 +59,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuUsuarios = new javax.swing.JMenu();
         mniGerenciarUsuarios = new javax.swing.JMenuItem();
         mniMinhaConta = new javax.swing.JMenuItem();
+        mnuSobre = new javax.swing.JMenu();
 
         jMenu5.setText("jMenu5");
 
@@ -173,6 +174,19 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar2.add(mnuUsuarios);
 
+        mnuSobre.setText("Sobre");
+        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuSobreMouseClicked(evt);
+            }
+        });
+        mnuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSobreActionPerformed(evt);
+            }
+        });
+        jMenuBar2.add(mnuSobre);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -241,6 +255,17 @@ public class PrincipalView extends javax.swing.JFrame {
     pnlPrincipal.updateUI();
     }//GEN-LAST:event_mniMinhaContaActionPerformed
 
+    private void mnuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSobreActionPerformed
+        
+    }//GEN-LAST:event_mnuSobreActionPerformed
+
+    private void mnuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSobreMouseClicked
+      SobreView sobre = new SobreView();
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(sobre);
+        pnlPrincipal.updateUI();
+    }//GEN-LAST:event_mnuSobreMouseClicked
+
 
 
 
@@ -266,6 +291,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniMinhaConta;
     private javax.swing.JMenu mnuArquivos;
     private javax.swing.JMenu mnuConsulta;
+    private javax.swing.JMenu mnuSobre;
     private javax.swing.JMenu mnuUsuarios;
     private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables
