@@ -17,7 +17,7 @@ public class FuncionarioDAO {
     static public void salvar (FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "insert into setor values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql = "insert into funcionario values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1,0);
         pst.setString(2, funcionario.getNome());
@@ -33,10 +33,10 @@ public class FuncionarioDAO {
         pst.setString(12, funcionario.getDia());
         pst.setString(13, funcionario.getHorario());
         pst.setString(14, funcionario.getObservacao());
-        pst.setBoolean(15, funcionario.getDocente());
-        pst.setBoolean(16, funcionario.getInativo());
-        pst.setInt(17, funcionario.getSetor().getId()); 
-        
+        pst.setInt(15, funcionario.getSetor().getId());
+        pst.setBoolean(16, funcionario.getDocente());
+        pst.setBoolean(17, funcionario.getInativo());
+         
         pst.execute();
         pst.close();
     }
@@ -45,9 +45,9 @@ public class FuncionarioDAO {
         PreparedStatement pst;
         String sql;
         FuncionarioM funcionario = null;
-        SetorDAO setor = new SetorDAO();
+        SetorDAO setorDAO = new SetorDAO();
         
-        sql = "select * from Funcionario where id = ?";
+        sql = "select * from funcionario where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
@@ -67,9 +67,10 @@ public class FuncionarioDAO {
                    rs.getString("dia"),
                    rs.getString("horario"),
                    rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo"),
-                   setor.busca(rs.getInt("id_setor")));
+                   rs.getBoolean("inativo"));
+                   
         }
         pst.close();
         
@@ -79,7 +80,7 @@ public class FuncionarioDAO {
     static public void excluir(FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "delete from Funcionario where id = ?";
+        sql = "delete from funcionario where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, funcionario.getId());
         pst.execute();
@@ -89,12 +90,10 @@ public class FuncionarioDAO {
     static public void alterar(FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "update Funcionario set "
+        sql = "update funcionario set "
                  + "nome = ?, "
                  + "endereco = ?, "
                  + "cidadeestado = ?, "
-                 + "residencial  = ?, "
-                 + "telcomercial  = ?, "
                  + "telresidencial  = ?, "
                  + "telcomercial1  = ?, "
                  + "telcomercial2  = ?, "
@@ -106,12 +105,13 @@ public class FuncionarioDAO {
                  + "dia  = ?, "
                  + "horario  = ?, "
                  + "observacao  = ?, "
+                 + "id_setor = ?, "
                  + "docente  = ?, "
                  + "inativo  = ?, "
-                 + "id_setor = ?, "
+                
                  + "where id = ?";
          pst = Conexao.getInstance().prepareStatement(sql);
-         
+        pst.setString(0, funcionario.getNome());
         pst.setString(1, funcionario.getNome());
         pst.setString(2, funcionario.getEndereco());
         pst.setString(3, funcionario.getCidadeestado());
@@ -125,9 +125,9 @@ public class FuncionarioDAO {
         pst.setString(11, funcionario.getDia());
         pst.setString(12, funcionario.getHorario());
         pst.setString(13, funcionario.getObservacao());
-        pst.setBoolean(14, funcionario.getDocente());
-        pst.setBoolean(15, funcionario.getInativo());
-        pst.setInt(16, funcionario.getSetor().getId()); 
+        pst.setInt(14, funcionario.getSetor().getId());
+        pst.setBoolean(15, funcionario.getDocente());
+        pst.setBoolean(16, funcionario.getInativo());
         pst.setInt(17,0);
         
          pst.execute();
@@ -135,11 +135,11 @@ public class FuncionarioDAO {
      }
     
     public List<FuncionarioM> listaTodos() throws SQLException{
-        List<FuncionarioM> listaFuncionario = new ArrayList<FuncionarioM>();
-        sql = "select * from Funcionario order by nome";
+        List<FuncionarioM> listaFuncionario = new ArrayList<>();
+        sql = "select * from funcionario order by nome";
         pst = Conexao.getInstance().prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
-        
+        SetorDAO setorDAO = new SetorDAO();
         
         while(rs.next()){
            listaFuncionario.add(new FuncionarioM(
@@ -157,10 +157,10 @@ public class FuncionarioDAO {
                    rs.getString("dia"),
                    rs.getString("horario"),
                    rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo"),
-                   SetorDAO.busca(rs.getInt("id_setor"))
-                   ));
+                   rs.getBoolean("inativo")));
+                   
         }
       
         
@@ -192,10 +192,9 @@ public class FuncionarioDAO {
                    rs.getString("dia"),
                    rs.getString("horario"),
                    rs.getString("observacao"),
+                   SetorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo"),
-                   SetorDAO.busca(rs.getInt("id_setor"))
-                   ));
+                   rs.getBoolean("inativo")));
         }
     pst.close();
     return listaFuncionario;

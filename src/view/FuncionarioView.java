@@ -560,10 +560,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             tfdTelComercial1.getText().isEmpty() || tfdTelComercial2.getText().isEmpty() || tfdCelular1.getText().isEmpty() || tfdCelular2.getText().isEmpty() || tfdCelular3.getText().isEmpty() ||
             tfdEmail.getText().isEmpty() || tfdDia.getText().isEmpty() || tfdHorario.getText().isEmpty() || taaObservacao.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            tfdNome.requestFocusInWindow();
         }
         else if(tfdId.getText().isEmpty()){
-
+            
             funcionario.setNome(tfdNome.getText());
             funcionario.setEndereco(tfdEndereco.getText());
             funcionario.setCidadeestado(tfdCidadeEstado.getText());
@@ -577,8 +576,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             funcionario.setDia(tfdDia.getText());
             funcionario.setHorario(tfdHorario.getText());
             funcionario.setObservacao(taaObservacao.getText());
+            funcionario.setSetor(pegaSetor());
             funcionario.setDocente(cbxDocente.isSelected());
             funcionario.setInativo(cbxInativo.isSelected());
+            
             try{
                 FuncionarioDAO.salvar(funcionario);
                 JOptionPane.showMessageDialog(null, "Gravado com sucesso!");
@@ -607,6 +608,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             funcionario.setDia(tfdDia.getText());
             funcionario.setHorario(tfdHorario.getText());
             funcionario.setObservacao(taaObservacao.getText());
+            funcionario.setSetor(pegaSetor());
             funcionario.setDocente(cbxDocente.isSelected());
             funcionario.setInativo(cbxInativo.isSelected());
         }
@@ -630,7 +632,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tfdNome.getText());
             if(confirma ==0){
                 try{
-                    FuncionarioDAO.excluir(funcionario);
+                    funcionarioDAO.excluir(funcionario);
                     limparCamposFuncionario();
                     tfdNome.requestFocusInWindow();
                 }catch(SQLException ex){
@@ -658,10 +660,52 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        if(tfdId.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Selecione um Cliente");
+        }else{
+            funcionario.setId(Integer.parseInt(tfdId.getText()));
+            funcionario.setNome(tfdNome.getText());
+            funcionario.setEndereco(tfdEndereco.getText());
+            funcionario.setCidadeestado(tfdCidadeEstado.getText());
+            funcionario.setTelresidencial(tfdTelResidencial.getText());
+            funcionario.setTelcomercial1(tfdTelComercial1.getText());
+            funcionario.setTelcomercial2(tfdTelComercial2.getText());
+            funcionario.setCelular1(tfdCelular1.getText());
+            funcionario.setCelular2(tfdCelular2.getText());
+            funcionario.setCelular3(tfdCelular3.getText());
+            funcionario.setEmail(tfdEmail.getText());
+            funcionario.setDia(tfdDia.getText());
+            funcionario.setHorario(tfdHorario.getText());
+            funcionario.setObservacao(taaObservacao.getText());
+            funcionario.setSetor(pegaSetor());
+            funcionario.setDocente(cbxDocente.isSelected());
+            funcionario.setInativo(cbxInativo.isSelected());
+        }
+        try{
+            FuncionarioDAO.alterar(funcionario);
+            JOptionPane.showMessageDialog(null, "alterado com sucesso!");
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
         prepararAlterar();
         ativarCampos();
     }//GEN-LAST:event_btnAlterarActionPerformed
    
+    public SetorM pegaSetor(){
+        try{
+            if(cbxSetor.getSelectedIndex() == 0){
+                JOptionPane.showMessageDialog(null, "Slecione um setor.");
+            }else{
+                return setorDAO.buscaNome(cbxSetor.getSelectedItem().toString());
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(FuncionarioView.class.getClass()).log(Level.SEVERE,null,ex);
+        }
+        return null;
+    }
+    
+    
     // DECLARAÇÃO DE MÉTODOS DE CONTROLE DE BOTÕES
    public void limparCamposFuncionario(){
        tfdId.setText("");

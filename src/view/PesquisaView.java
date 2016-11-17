@@ -1,11 +1,38 @@
 package view;
 
+import dao.FuncionarioDAO;
+import dao.SetorDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import model.FuncionarioM;
+import model.SetorM;
+
 public class PesquisaView extends javax.swing.JInternalFrame {
 
-
+    FuncionarioM funcionario = new FuncionarioM();
+    
+    List<FuncionarioM> listaFuncionario;
+    List<SetorM> listaSetor;
+    SetorDAO setorDAO;
+    FuncionarioDAO funcionarioDAO;
+    
     public PesquisaView() {
         initComponents();
         this.setVisible(true);
+        
+        //Intansciação das váriaves de acesso na classe
+        this.funcionarioDAO = new FuncionarioDAO();
+        this.setorDAO = new SetorDAO();  
+        this.listaSetor = new ArrayList<>();
+        this.listaFuncionario = new ArrayList<>();
+        
+        atualizaTabelaFuncionario();
+        PanelInfo.setVisible(false);
     }
 
 
@@ -15,13 +42,13 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbeConsulta = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
         jTextField15 = new javax.swing.JTextField();
         PanelBusca = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtRamal = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -64,31 +91,27 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {"Leonardo Barcelos", "Rua das Flores 278"},
-                {null, null},
-                {null, null},
-                {null, null}
+                {"", "", ""},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String []
             {
-                "Nome", "Ramal"
+                "..", ".Ramal", "Setor."
             }
-        )
+        ));
+        tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter()
         {
-            boolean[] canEdit = new boolean []
+            public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
+                tbeConsultaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbeConsulta);
 
         jLabel17.setText("Ir para:");
 
@@ -96,17 +119,17 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener()
+        txtNome.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField2ActionPerformed(evt);
+                txtNomeActionPerformed(evt);
             }
         });
 
         jLabel12.setText("Ramal");
 
-        jLabel11.setText("Departamento");
+        jLabel11.setText("Setor");
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener()
@@ -117,9 +140,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             }
         });
 
-        cbxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
 
-        jCheckBox1.setText("Doscentes");
+        jCheckBox1.setText("Docentes");
 
         jCheckBox2.setText("Inativos");
 
@@ -132,27 +155,24 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelBuscaLayout.createSequentialGroup()
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
                             .addGroup(PanelBuscaLayout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(cbxDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(PanelBuscaLayout.createSequentialGroup()
-                                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addGroup(PanelBuscaLayout.createSequentialGroup()
-                                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCheckBox1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCheckBox2)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(PanelBuscaLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                                .addComponent(txtRamal, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBox1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBox2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel11)
-                        .addGap(172, 172, 172))))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelBuscaLayout.createSequentialGroup()
+                        .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(32, 32, 32)
+                        .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(cbxDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         PanelBuscaLayout.setVerticalGroup(
             PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,13 +185,13 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRamal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1)
                             .addComponent(jCheckBox2))))
                 .addGap(0, 9, Short.MAX_VALUE))
@@ -222,7 +242,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             PanelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelObsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -316,7 +336,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(LabelHora)
-                                .addGap(123, 123, 123))
+                                .addGap(129, 129, 129))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInfoLayout.createSequentialGroup()
                                 .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelInfoLayout.createSequentialGroup()
@@ -399,8 +419,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel19)
                     .addComponent(LabelDia)
                     .addComponent(LabelHora))
-                .addGap(26, 26, 26)
-                .addComponent(PanelObs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addComponent(PanelObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -409,48 +429,139 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(1409, Short.MAX_VALUE)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(584, 584, 584))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1118, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(PanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                        .addGap(79, 79, 79))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtNomeActionPerformed
+    
+    public void atualizaTabelaFuncionario(){
+        funcionario = new FuncionarioM();
+        try {
+            listaFuncionario = funcionarioDAO.listaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaFuncionario.size()][18];
+            int i = 0;
+            for (FuncionarioM funcionario : listaFuncionario) {
+                dados[i][0] = funcionario.getNome();
+                        
+                dados[i][1] = funcionario.getSetor().getNome();
+                dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
+                dados[i][3] = funcionario.getCidadeestado();
+                dados[i][4] = funcionario.getTelresidencial();
+                dados[i][5] = funcionario.getTelcomercial1();
+                dados[i][6] = funcionario.getTelcomercial2();
+                dados[i][7] = funcionario.getCelular1();
+                dados[i][8] = funcionario.getCelular2();
+                dados[i][9] = funcionario.getCelular3();
+                dados[i][10] = funcionario.getEmail();
+                dados[i][11] = funcionario.getEndereco();
+                dados[i][12] = String.valueOf(funcionario.getId());
+                dados[i][13] = funcionario.getDia();
+                dados[i][14] = funcionario.getHorario();
+                dados[i][15] = funcionario.getObservacao();
+                dados[i][16] = String.valueOf(funcionario.getDocente());
+                dados[i][17] = String.valueOf(funcionario.getInativo());
+               
+                i++;
+            }
+            String tituloColuna[] = {"Nome", "Setor", "Ramal",};
+            DefaultTableModel tabelaConsulta = new DefaultTableModel();
+            tabelaConsulta.setDataVector(dados, tituloColuna);
+            tbeConsulta.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, //false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                };
 
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tbeConsulta.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tbeConsulta.getColumnModel().getColumn(2).setPreferredWidth(50);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tbeConsulta.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tbeConsulta.setRowHeight(25);
+            tbeConsulta.updateUI();
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        
+        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxDepartamento.getSelectedItem().toString() == "Selecione")
+        {
+            // Mostrar todos os Funcionarios;
+        }
+        else if(txtNome.getText() != null)
+        {
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbeConsultaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbeConsultaMouseClicked
+    {//GEN-HEADEREND:event_tbeConsultaMouseClicked
+        // Quando Clicado
+        
+        PanelInfo.setVisible(true);
+        
+        
+        LabelNome.setText(tbeConsulta.getValueAt(tbeConsulta.getSelectedRow(),1).toString());
+        LabelEnd.setText(tbeConsulta.getValueAt(tbeConsulta.getSelectedRow(),11).toString());
+        LabelCidade.setText(tbeConsulta.getValueAt(tbeConsulta.getSelectedRow(),3).toString());
+        /*LabelTelResidencial.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),4).toString());
+        tfdTelComercial1.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),5).toString());
+        tfdTelComercial2.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),6).toString());
+        tfdCelular1.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),7).toString());
+        tfdCelular2.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),8).toString());
+        tfdCelular3.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),9).toString());
+        tfdEmail.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),10).toString());
+        cbxSetor.setSelectedItem(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),11).toString());
+        tfdDia.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),12).toString());
+        tfdHorario.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),13).toString());
+        taaObservacao.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),14).toString());
+        cbxDocente.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),15).toString());
+        cbxInativo.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),16).toString());*/
+    }//GEN-LAST:event_tbeConsultaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -496,9 +607,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tbeConsulta;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtRamal;
     // End of variables declaration//GEN-END:variables
 }
