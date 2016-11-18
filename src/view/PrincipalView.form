@@ -121,7 +121,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuConsultaMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuConsultaActionPerformed"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuUsuarios">

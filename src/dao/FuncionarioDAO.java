@@ -56,10 +56,10 @@ public class FuncionarioDAO {
                    rs.getInt("id"),
                    rs.getString("nome"),
                    rs.getString("endereco"),
-                   rs.getString("cidadeestado"),
-                   rs.getString("telresidencial"),
-                   rs.getString("telcomercial1"),
-                   rs.getString("telcomercial2"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
                    rs.getString("celular1"),
                    rs.getString("celular2"),
                    rs.getString("celular3"),
@@ -93,10 +93,10 @@ public class FuncionarioDAO {
         sql = "update funcionario set "
                  + "nome = ?, "
                  + "endereco = ?, "
-                 + "cidadeestado = ?, "
-                 + "telresidencial  = ?, "
-                 + "telcomercial1  = ?, "
-                 + "telcomercial2  = ?, "
+                 + "cidade_estado = ?, "
+                 + "tel_residencial  = ?, "
+                 + "tel_comercial1  = ?, "
+                 + "tel_comercial2  = ?, "
                  + "celular1  = ?, "
                  + "celular2  = ?, "
                  + "celular3  = ?, "
@@ -181,10 +181,10 @@ public class FuncionarioDAO {
                    rs.getInt("id"),
                    rs.getString("nome"),
                    rs.getString("endereco"),
-                   rs.getString("cidadeestado"),
-                   rs.getString("telresidencial"),
-                   rs.getString("telcomercial1"),
-                   rs.getString("telcomercial2"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
                    rs.getString("celular1"),
                    rs.getString("celular2"),
                    rs.getString("celular3"),

@@ -38,7 +38,8 @@ public class PrincipalView extends javax.swing.JFrame {
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -108,8 +109,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mmiFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mmiFuncionario.setText("Funcionários");
-        mmiFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mmiFuncionario.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mmiFuncionarioActionPerformed(evt);
             }
         });
@@ -117,8 +120,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mniDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniDepartamento.setText("Setores");
-        mniDepartamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mniDepartamento.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mniDepartamentoActionPerformed(evt);
             }
         });
@@ -129,14 +134,11 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/consulta.png"))); // NOI18N
         mnuConsulta.setText("Consulta");
         mnuConsulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mnuConsultaMouseClicked(evt);
-            }
-        });
-        mnuConsulta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuConsultaActionPerformed(evt);
             }
         });
         jMenuBar2.add(mnuConsulta);
@@ -144,33 +146,43 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/usuário.png"))); // NOI18N
         mnuUsuarios.setText("Usuários");
         mnuUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mnuUsuariosMouseClicked(evt);
             }
         });
-        mnuUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mnuUsuarios.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mnuUsuariosActionPerformed(evt);
             }
         });
 
         mniGerenciarUsuarios.setText("Gerenciar usários");
-        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mniGerenciarUsuariosMouseClicked(evt);
             }
         });
-        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mniGerenciarUsuariosActionPerformed(evt);
             }
         });
         mnuUsuarios.add(mniGerenciarUsuarios);
 
         mniMinhaConta.setText("Minha conta");
-        mniMinhaConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mniMinhaConta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mniMinhaContaActionPerformed(evt);
             }
         });
@@ -180,13 +192,17 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mnuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/sobre.png"))); // NOI18N
         mnuSobre.setText("Sobre");
-        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mnuSobreMouseClicked(evt);
             }
         });
-        mnuSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mnuSobre.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mnuSobreActionPerformed(evt);
             }
         });
@@ -222,12 +238,8 @@ public class PrincipalView extends javax.swing.JFrame {
     pnlPrincipal.updateUI();
     }//GEN-LAST:event_mniDepartamentoActionPerformed
 
-    private void mnuConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaActionPerformed
-
-    }//GEN-LAST:event_mnuConsultaActionPerformed
-
     private void mnuConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuConsultaMouseClicked
-    ConsultaView pesquisa = new ConsultaView();
+    PesquisaView pesquisa = new PesquisaView();
     pnlPrincipal.removeAll();
     pnlPrincipal.add(pesquisa);
     pnlPrincipal.updateUI();

@@ -2,9 +2,13 @@ package view;
 
 import dao.FuncionarioDAO;
 import dao.SetorDAO;
+import java.awt.Frame;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -14,15 +18,16 @@ import model.SetorM;
 
 public class PesquisaView extends javax.swing.JInternalFrame {
 
-    FuncionarioM funcionario = new FuncionarioM();
+    FuncionarioM funcionario;
     
     List<FuncionarioM> listaFuncionario;
     List<SetorM> listaSetor;
     SetorDAO setorDAO;
     FuncionarioDAO funcionarioDAO;
     
-    public PesquisaView() {
+    public PesquisaView(){
         initComponents();
+        
         this.setVisible(true);
         
         //Intansciação das váriaves de acesso na classe
@@ -51,10 +56,10 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         txtRamal = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        cbxDepartamento = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        btnBusca = new javax.swing.JButton();
+        cbxSetor = new javax.swing.JComboBox<>();
+        ckbDocente_Busca = new javax.swing.JCheckBox();
+        ckbInativo_Busca = new javax.swing.JCheckBox();
         PanelInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -70,23 +75,25 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         PanelObs = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TextObs = new javax.swing.JTextArea();
+        taaObs = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        LabelNome = new javax.swing.JLabel();
-        LabelRamal = new javax.swing.JLabel();
-        LabelEmail = new javax.swing.JLabel();
-        LabelTelRes = new javax.swing.JLabel();
-        LabelTel1 = new javax.swing.JLabel();
-        LabelTel2 = new javax.swing.JLabel();
-        LabelDep = new javax.swing.JLabel();
-        LabelCel1 = new javax.swing.JLabel();
-        LabelCel2 = new javax.swing.JLabel();
-        LabelCel3 = new javax.swing.JLabel();
-        LabelCidade = new javax.swing.JLabel();
-        LabelEnd = new javax.swing.JLabel();
-        LabelDia = new javax.swing.JLabel();
-        LabelHora = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        lblRamal = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblTelRes = new javax.swing.JLabel();
+        lblTel1 = new javax.swing.JLabel();
+        lbllTel2 = new javax.swing.JLabel();
+        lblSetor = new javax.swing.JLabel();
+        lblCel1 = new javax.swing.JLabel();
+        lblCel2 = new javax.swing.JLabel();
+        lblCel3 = new javax.swing.JLabel();
+        lblCidade = new javax.swing.JLabel();
+        lblEnd = new javax.swing.JLabel();
+        lblDia = new javax.swing.JLabel();
+        lblHora = new javax.swing.JLabel();
+        ckbDocente = new javax.swing.JCheckBox();
+        ckbInativo = new javax.swing.JCheckBox();
 
         setClosable(true);
         setMaximizable(true);
@@ -101,9 +108,20 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             },
             new String []
             {
-                "..", ".Ramal", "Setor."
+                "ID", "Nome", "Ramal"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -112,6 +130,14 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tbeConsulta);
+        if (tbeConsulta.getColumnModel().getColumnCount() > 0)
+        {
+            tbeConsulta.getColumnModel().getColumn(0).setMinWidth(0);
+            tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tbeConsulta.getColumnModel().getColumn(0).setMaxWidth(0);
+            tbeConsulta.getColumnModel().getColumn(1).setResizable(false);
+            tbeConsulta.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jLabel17.setText("Ir para:");
 
@@ -131,20 +157,20 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Setor");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        btnBusca.setText("Buscar");
+        btnBusca.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                btnBuscaActionPerformed(evt);
             }
         });
 
-        cbxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
+        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
 
-        jCheckBox1.setText("Docentes");
+        ckbDocente_Busca.setText("Docentes");
 
-        jCheckBox2.setText("Inativos");
+        ckbInativo_Busca.setText("Inativos");
 
         javax.swing.GroupLayout PanelBuscaLayout = new javax.swing.GroupLayout(PanelBusca);
         PanelBusca.setLayout(PanelBuscaLayout);
@@ -159,11 +185,11 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                             .addGroup(PanelBuscaLayout.createSequentialGroup()
                                 .addComponent(txtRamal, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox1)
+                                .addComponent(ckbDocente_Busca)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox2)))
+                                .addComponent(ckbInativo_Busca)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelBuscaLayout.createSequentialGroup()
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,14 +197,14 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                         .addGap(32, 32, 32)
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(cbxDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbxSetor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         PanelBuscaLayout.setVerticalGroup(
             PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBuscaLayout.createSequentialGroup()
                 .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelBuscaLayout.createSequentialGroup()
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -186,15 +212,15 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtRamal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2))))
-                .addGap(0, 9, Short.MAX_VALUE))
+                            .addComponent(ckbDocente_Busca)
+                            .addComponent(ckbInativo_Busca))))
+                .addGap(0, 29, Short.MAX_VALUE))
         );
 
         PanelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
@@ -203,7 +229,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Ramal");
 
-        jLabel4.setText("Departamento");
+        jLabel4.setText("Setor");
 
         jLabel5.setText("Telefone Residencial");
 
@@ -225,9 +251,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         PanelObs.setBorder(javax.swing.BorderFactory.createTitledBorder("Observações"));
 
-        TextObs.setColumns(20);
-        TextObs.setRows(5);
-        jScrollPane2.setViewportView(TextObs);
+        taaObs.setColumns(20);
+        taaObs.setRows(5);
+        jScrollPane2.setViewportView(taaObs);
 
         javax.swing.GroupLayout PanelObsLayout = new javax.swing.GroupLayout(PanelObs);
         PanelObs.setLayout(PanelObsLayout);
@@ -250,34 +276,40 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel19.setText("Horário");
 
-        LabelNome.setBackground(new java.awt.Color(255, 255, 255));
-        LabelNome.setText("----");
+        lblNome.setBackground(new java.awt.Color(255, 255, 255));
+        lblNome.setText("----");
 
-        LabelRamal.setText("-----");
+        lblRamal.setText("-----");
 
-        LabelEmail.setText("-----");
+        lblEmail.setText("-----");
 
-        LabelTelRes.setText("----");
+        lblTelRes.setText("----");
 
-        LabelTel1.setText("----");
+        lblTel1.setText("----");
 
-        LabelTel2.setText("----");
+        lbllTel2.setText("----");
 
-        LabelDep.setText("----");
+        lblSetor.setText("----");
 
-        LabelCel1.setText("----");
+        lblCel1.setText("----");
 
-        LabelCel2.setText("----");
+        lblCel2.setText("----");
 
-        LabelCel3.setText("----");
+        lblCel3.setText("----");
 
-        LabelCidade.setText("----");
+        lblCidade.setText("----");
 
-        LabelEnd.setText("----");
+        lblEnd.setText("----");
 
-        LabelDia.setText("----");
+        lblDia.setText("----");
 
-        LabelHora.setText("----");
+        lblHora.setText("----");
+
+        ckbDocente.setText("Docente");
+        ckbDocente.setEnabled(false);
+
+        ckbInativo.setText("Inativo");
+        ckbInativo.setEnabled(false);
 
         javax.swing.GroupLayout PanelInfoLayout = new javax.swing.GroupLayout(PanelInfo);
         PanelInfo.setLayout(PanelInfoLayout);
@@ -292,50 +324,39 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addGroup(PanelInfoLayout.createSequentialGroup()
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelInfoLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelCidade))
-                            .addGroup(PanelInfoLayout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelEnd)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(PanelInfoLayout.createSequentialGroup()
-                        .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelTelRes))
+                                .addComponent(lblTelRes))
                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelTel1))
+                                .addComponent(lblTel1))
                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelTel2))
+                                .addComponent(lbllTel2))
                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelDia))
+                                .addComponent(lblDia))
                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelRamal))
+                                .addComponent(lblRamal))
                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelNome))
+                                .addComponent(lblNome))
                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelEmail)))
+                                .addComponent(lblEmail)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInfoLayout.createSequentialGroup()
                                 .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelHora)
+                                .addComponent(lblHora)
                                 .addGap(129, 129, 129))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInfoLayout.createSequentialGroup()
                                 .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,20 +366,34 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                                 .addComponent(jLabel8)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(LabelCel1))
+                                                .addComponent(lblCel1))
                                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                                 .addComponent(jLabel9)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(LabelCel2))
+                                                .addComponent(lblCel2))
                                             .addGroup(PanelInfoLayout.createSequentialGroup()
                                                 .addComponent(jLabel10)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(LabelCel3))))
+                                                .addComponent(lblCel3))))
                                     .addGroup(PanelInfoLayout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(LabelDep)))
-                                .addGap(60, 60, 60))))))
+                                        .addComponent(lblSetor)))
+                                .addGap(60, 60, 60))))
+                    .addGroup(PanelInfoLayout.createSequentialGroup()
+                        .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ckbDocente)
+                            .addGroup(PanelInfoLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCidade))
+                            .addGroup(PanelInfoLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblEnd)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ckbInativo)
+                        .addGap(127, 127, 127))))
         );
         PanelInfoLayout.setVerticalGroup(
             PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,58 +403,62 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addGroup(PanelInfoLayout.createSequentialGroup()
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(LabelNome))
+                            .addComponent(lblNome))
                         .addGap(18, 18, 18)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(LabelRamal))
+                            .addComponent(lblRamal))
                         .addGap(22, 22, 22)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(LabelEmail))
+                            .addComponent(lblEmail))
                         .addGap(18, 18, 18)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(LabelTelRes))
+                            .addComponent(lblTelRes))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(LabelTel1))
+                            .addComponent(lblTel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(LabelTel2)))
+                            .addComponent(lbllTel2)))
                     .addGroup(PanelInfoLayout.createSequentialGroup()
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(LabelDep))
+                            .addComponent(lblSetor))
                         .addGap(86, 86, 86)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(LabelCel1))
+                            .addComponent(lblCel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(LabelCel2))
+                            .addComponent(lblCel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(LabelCel3))))
+                            .addComponent(lblCel3))))
                 .addGap(44, 44, 44)
                 .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(LabelCidade))
+                    .addComponent(lblCidade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(LabelEnd))
+                    .addComponent(lblEnd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
-                    .addComponent(LabelDia)
-                    .addComponent(LabelHora))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                    .addComponent(lblDia)
+                    .addComponent(lblHora))
+                .addGap(27, 27, 27)
+                .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ckbDocente)
+                    .addComponent(ckbInativo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(PanelObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -477,11 +516,13 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
         
-        String dados[][] = new String[listaFuncionario.size()][18];
+        String dados[][] = new String[listaFuncionario.size()][3];
             int i = 0;
             for (FuncionarioM funcionario : listaFuncionario) {
-                dados[i][0] = funcionario.getNome();
-                        
+                dados[i][0] = String.valueOf(funcionario.getId());
+                dados[i][1] = funcionario.getNome();
+                dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
+               /* dados[i][0] = funcionario.getNome();        
                 dados[i][1] = funcionario.getSetor().getNome();
                 dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
                 dados[i][3] = funcionario.getCidadeestado();
@@ -499,15 +540,15 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 dados[i][15] = funcionario.getObservacao();
                 dados[i][16] = String.valueOf(funcionario.getDocente());
                 dados[i][17] = String.valueOf(funcionario.getInativo());
-               
+               */
                 i++;
             }
-            String tituloColuna[] = {"Nome", "Setor", "Ramal",};
+            String tituloColuna[] = {"Id","Nome", "Ramal"};
             DefaultTableModel tabelaConsulta = new DefaultTableModel();
             tabelaConsulta.setDataVector(dados, tituloColuna);
             tbeConsulta.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, //false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                    false, false, false//, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -515,20 +556,26 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 }
             });
 
-            tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tbeConsulta.getColumnModel().getColumn(0).setMinWidth(40);
+            tbeConsulta.getColumnModel().getColumn(0).setMaxWidth(40);
             tbeConsulta.getColumnModel().getColumn(1).setPreferredWidth(100);
-            tbeConsulta.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tbeConsulta.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tbeConsulta.getColumnModel().getColumn(2).setMinWidth(80);
+            tbeConsulta.getColumnModel().getColumn(2).setMaxWidth(80);
+            tbeConsulta.getTableHeader().setReorderingAllowed(false);
             
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
             tbeConsulta.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tbeConsulta.getColumnModel().getColumn(2).setCellRenderer(centralizado);
             tbeConsulta.setRowHeight(25);
             tbeConsulta.updateUI();
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxDepartamento.getSelectedItem().toString() == "Selecione")
+    private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
+    {//GEN-HEADEREND:event_btnBuscaActionPerformed
+        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione")
         {
             // Mostrar todos os Funcionarios;
         }
@@ -536,57 +583,56 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         {
             
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBuscaActionPerformed
 
     private void tbeConsultaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbeConsultaMouseClicked
     {//GEN-HEADEREND:event_tbeConsultaMouseClicked
         // Quando Clicado
         
+        funcionario = new FuncionarioM();
         PanelInfo.setVisible(true);
+
+        lblNome.setText(tbeConsulta.getValueAt(tbeConsulta.getSelectedRow(),0).toString());
         
+        String integer = lblNome.getText();
+        int id = Integer.parseInt(integer);
+        funcionario.setId( id );
+         try{
+            funcionario = FuncionarioDAO.busca(id);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
         
-        LabelNome.setText(tbeConsulta.getValueAt(tbeConsulta.getSelectedRow(),1).toString());
-        LabelEnd.setText(tbeConsulta.getValueAt(tbeConsulta.getSelectedRow(),11).toString());
-        LabelCidade.setText(tbeConsulta.getValueAt(tbeConsulta.getSelectedRow(),3).toString());
-        /*LabelTelResidencial.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),4).toString());
-        tfdTelComercial1.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),5).toString());
-        tfdTelComercial2.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),6).toString());
-        tfdCelular1.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),7).toString());
-        tfdCelular2.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),8).toString());
-        tfdCelular3.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),9).toString());
-        tfdEmail.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),10).toString());
-        cbxSetor.setSelectedItem(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),11).toString());
-        tfdDia.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),12).toString());
-        tfdHorario.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),13).toString());
-        taaObservacao.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),14).toString());
-        cbxDocente.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),15).toString());
-        cbxInativo.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),16).toString());*/
+        lblNome.setText(funcionario.getNome());
+        lblSetor.setText(funcionario.getSetor().getNome());
+        lblRamal.setText(Integer.toString(funcionario.getSetor().getRamal()));
+        lblCidade.setText(funcionario.getCidadeestado());
+        lblTelRes.setText(funcionario.getTelresidencial());
+        lblTel1.setText(funcionario.getTelcomercial1().toString());
+        lbllTel2.setText(funcionario.getTelcomercial2().toString());
+        lblCel1.setText(funcionario.getCelular1().toString());
+        lblCel2.setText(funcionario.getCelular2().toString());
+        lblCel3.setText(funcionario.getCelular3().toString());
+        lblEmail.setText(funcionario.getEmail());
+        lblEnd.setText(funcionario.getEndereco().toString());
+        lblDia.setText(funcionario.getDia().toString());
+        lblHora.setText(funcionario.getHorario().toString());
+        taaObs.setText(funcionario.getObservacao());
+        ckbDocente.setSelected(funcionario.getDocente());
+        ckbInativo.setSelected(funcionario.getInativo());
     }//GEN-LAST:event_tbeConsultaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelCel1;
-    private javax.swing.JLabel LabelCel2;
-    private javax.swing.JLabel LabelCel3;
-    private javax.swing.JLabel LabelCidade;
-    private javax.swing.JLabel LabelDep;
-    private javax.swing.JLabel LabelDia;
-    private javax.swing.JLabel LabelEmail;
-    private javax.swing.JLabel LabelEnd;
-    private javax.swing.JLabel LabelHora;
-    private javax.swing.JLabel LabelNome;
-    private javax.swing.JLabel LabelRamal;
-    private javax.swing.JLabel LabelTel1;
-    private javax.swing.JLabel LabelTel2;
-    private javax.swing.JLabel LabelTelRes;
     private javax.swing.JPanel PanelBusca;
     private javax.swing.JPanel PanelInfo;
     private javax.swing.JPanel PanelObs;
-    private javax.swing.JTextArea TextObs;
-    private javax.swing.JComboBox<String> cbxDepartamento;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JButton btnBusca;
+    private javax.swing.JComboBox<String> cbxSetor;
+    private javax.swing.JCheckBox ckbDocente;
+    private javax.swing.JCheckBox ckbDocente_Busca;
+    private javax.swing.JCheckBox ckbInativo;
+    private javax.swing.JCheckBox ckbInativo_Busca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -608,6 +654,21 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField15;
+    private javax.swing.JLabel lblCel1;
+    private javax.swing.JLabel lblCel2;
+    private javax.swing.JLabel lblCel3;
+    private javax.swing.JLabel lblCidade;
+    private javax.swing.JLabel lblDia;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEnd;
+    private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblRamal;
+    private javax.swing.JLabel lblSetor;
+    private javax.swing.JLabel lblTel1;
+    private javax.swing.JLabel lblTelRes;
+    private javax.swing.JLabel lbllTel2;
+    private javax.swing.JTextArea taaObs;
     private javax.swing.JTable tbeConsulta;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtRamal;
