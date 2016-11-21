@@ -573,7 +573,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             funcionario.setCelular2(tfdCelular2.getText());
             funcionario.setCelular3(tfdCelular3.getText());
             funcionario.setEmail(tfdEmail.getText());
-            funcionario.setSetor().getRamal(tfd);
             funcionario.setDia(tfdDia.getText());
             funcionario.setHorario(tfdHorario.getText());
             funcionario.setObservacao(taaObservacao.getText());
@@ -661,34 +660,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if(tfdId.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Selecione um Cliente");
-        }else{
-            funcionario.setId(Integer.parseInt(tfdId.getText()));
-            funcionario.setNome(tfdNome.getText());
-            funcionario.setEndereco(tfdEndereco.getText());
-            funcionario.setCidadeestado(tfdCidadeEstado.getText());
-            funcionario.setTelresidencial(tfdTelResidencial.getText());
-            funcionario.setTelcomercial1(tfdTelComercial1.getText());
-            funcionario.setTelcomercial2(tfdTelComercial2.getText());
-            funcionario.setCelular1(tfdCelular1.getText());
-            funcionario.setCelular2(tfdCelular2.getText());
-            funcionario.setCelular3(tfdCelular3.getText());
-            funcionario.setEmail(tfdEmail.getText());
-            funcionario.setDia(tfdDia.getText());
-            funcionario.setHorario(tfdHorario.getText());
-            funcionario.setObservacao(taaObservacao.getText());
-            funcionario.setSetor(pegaSetor());
-            funcionario.setDocente(cbxDocente.isSelected());
-            funcionario.setInativo(cbxInativo.isSelected());
-        }
-        try{
-            FuncionarioDAO.alterar(funcionario);
-            JOptionPane.showMessageDialog(null, "alterado com sucesso!");
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
-        }
-        
         prepararAlterar();
         ativarCampos();
     }//GEN-LAST:event_btnAlterarActionPerformed

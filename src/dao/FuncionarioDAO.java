@@ -17,7 +17,7 @@ public class FuncionarioDAO {
     static public void salvar (FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "insert into Funcionario values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql = "insert into Funcionario values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1,0);
         pst.setString(2, funcionario.getNome());
