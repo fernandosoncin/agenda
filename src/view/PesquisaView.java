@@ -48,8 +48,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbeConsulta = new javax.swing.JTable();
-        jLabel17 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
         PanelBusca = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -97,6 +95,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setMaximizable(true);
+        setPreferredSize(new java.awt.Dimension(1440, 790));
 
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -122,6 +121,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbeConsulta.setFocusable(false);
         tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -132,14 +132,11 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tbeConsulta);
         if (tbeConsulta.getColumnModel().getColumnCount() > 0)
         {
-            tbeConsulta.getColumnModel().getColumn(0).setMinWidth(0);
+            tbeConsulta.getColumnModel().getColumn(0).setResizable(false);
             tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
-            tbeConsulta.getColumnModel().getColumn(0).setMaxWidth(0);
             tbeConsulta.getColumnModel().getColumn(1).setResizable(false);
             tbeConsulta.getColumnModel().getColumn(2).setResizable(false);
         }
-
-        jLabel17.setText("Ir para:");
 
         PanelBusca.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca"));
 
@@ -467,12 +464,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(1409, Short.MAX_VALUE)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(584, 584, 584))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -480,7 +471,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,15 +480,11 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14))
+                        .addGap(17, 239, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                         .addGap(79, 79, 79))))
         );
 
@@ -575,14 +562,27 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
+        funcionario = new FuncionarioM();
         if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione")
         {
-            // Mostrar todos os Funcionarios;
+            JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
         }
         else if(txtNome.getText() != null)
         {
-            
+            JOptionPane.showMessageDialog( null, "treste!");
+            String Nome;
+            Nome = txtNome.getText();
+            try
+            {
+                funcionario = FuncionarioDAO.buscaNome(Nome);
+                
+            }catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog( null, "Erro: "+ex);
+            }
         }
+        
+        atualizaTabelaFuncionario();
     }//GEN-LAST:event_btnBuscaActionPerformed
 
     private void tbeConsultaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbeConsultaMouseClicked
@@ -640,7 +640,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -653,7 +652,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JLabel lblCel1;
     private javax.swing.JLabel lblCel2;
     private javax.swing.JLabel lblCel3;

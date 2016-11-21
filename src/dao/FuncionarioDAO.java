@@ -17,7 +17,7 @@ public class FuncionarioDAO {
     static public void salvar (FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "insert into funcionario values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql = "insert into Funcionario values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1,0);
         pst.setString(2, funcionario.getNome());
@@ -40,6 +40,42 @@ public class FuncionarioDAO {
         pst.execute();
         pst.close();
     }
+    
+    static public FuncionarioM buscaNome(String Nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        FuncionarioM funcionario = null;
+        SetorDAO setorDAO = new SetorDAO();
+        
+        sql = "select * from Funcionario where nome like ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, Nome);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           funcionario = new FuncionarioM(
+                   rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo"));
+                   
+        }
+        pst.close();
+        
+        return funcionario;
+    }
                                
     static public FuncionarioM busca(int id) throws SQLException{
         PreparedStatement pst;
@@ -47,7 +83,7 @@ public class FuncionarioDAO {
         FuncionarioM funcionario = null;
         SetorDAO setorDAO = new SetorDAO();
         
-        sql = "select * from funcionario where id = ?";
+        sql = "select * from Funcionario where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
@@ -80,7 +116,7 @@ public class FuncionarioDAO {
     static public void excluir(FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "delete from funcionario where id = ?";
+        sql = "delete from Funcionario where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, funcionario.getId());
         pst.execute();
@@ -90,7 +126,7 @@ public class FuncionarioDAO {
     static public void alterar(FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "update funcionario set "
+        sql = "update Funcionario set "
                  + "nome = ?, "
                  + "endereco = ?, "
                  + "cidade_estado = ?, "
@@ -136,7 +172,7 @@ public class FuncionarioDAO {
     
     public List<FuncionarioM> listaTodos() throws SQLException{
         List<FuncionarioM> listaFuncionario = new ArrayList<>();
-        sql = "select * from funcionario order by nome";
+        sql = "select * from Funcionario order by nome";
         pst = Conexao.getInstance().prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
         SetorDAO setorDAO = new SetorDAO();
@@ -172,7 +208,7 @@ public class FuncionarioDAO {
     List<FuncionarioM> listaFuncionario;
     listaFuncionario = new ArrayList<>();
     
-    sql = "select * from funcionarios order by nome";
+    sql = "select * from Funcionarios order by nome";
     pst = Conexao.getInstance().prepareStatement(sql);
     ResultSet rs = pst.executeQuery();
     

@@ -573,6 +573,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             funcionario.setCelular2(tfdCelular2.getText());
             funcionario.setCelular3(tfdCelular3.getText());
             funcionario.setEmail(tfdEmail.getText());
+            funcionario.setSetor().getRamal(tfd);
             funcionario.setDia(tfdDia.getText());
             funcionario.setHorario(tfdHorario.getText());
             funcionario.setObservacao(taaObservacao.getText());
@@ -740,6 +741,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        tfdCelular2.setEnabled(true);
        tfdCelular3.setEnabled(true);
        tfdEmail.setEnabled(true);
+       tfdRamal.setEnabled(true);
        cbxSetor.setEnabled(true);
        tfdDia.setEnabled(true);
        tfdHorario.setEnabled(true);
@@ -761,6 +763,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        tfdCelular3.setEnabled(false);
        tfdEmail.setEnabled(false);
        cbxSetor.setEnabled(false);
+       tfdRamal.setEnabled(false);
        tfdDia.setEnabled(false);
        tfdHorario.setEnabled(false);
        taaObservacao.setEnabled(false);
