@@ -604,20 +604,26 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
-        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione")
+        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione" && ckbDocente_Busca.isSelected() == false|| ckbInativo_Busca.isSelected() == false)
         {
-            JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
+            //JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
+            atualizaTabelaBusca();
         }
-        else if(txtNome.getText() != null)
+        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || cbxSetor.getSelectedItem().toString() != "Selecione"
+                || ckbDocente_Busca.isSelected() == true || ckbInativo_Busca.isSelected() == true)
         {
                         
-            try
-            {
-                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText());
+            //try
+            //{
+                
+                //int Setor = Integer.parseInt(cbxSetor.getSelectedItem());
+                //String Docente = ckbDocente_Busca.gSelected().toString();
+                        
+                //listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText().toString(), Integer.parseInt(txtRamal.getText()), Setor, ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
                 //JOptionPane.showMessageDialog( null, "treste!");
-            }catch(SQLException ex)
+            //}catch(SQLException ex)
             {
-                JOptionPane.showMessageDialog( null, "Erro: "+ex);
+                //JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
         }
         

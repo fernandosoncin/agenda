@@ -41,7 +41,7 @@ public class FuncionarioDAO {
         pst.close();
     }
     
-    static public List<FuncionarioM> buscaNome(String Nome) throws SQLException{
+    /*static public List<FuncionarioM> buscaNome(String Nome) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
@@ -78,19 +78,23 @@ public class FuncionarioDAO {
         pst.close();
         
         return funcionario;
-    }
+    }*/
                                
-    static public List<FuncionarioM> busca(String Nome) throws SQLException{
+    static public List<FuncionarioM> buscaNome(String Nome, int Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
         SetorDAO setorDAO = new SetorDAO();
         
-        String aux = "%"+Nome+"%";
+        //String aux = "%"+Nome+"%";
         
-        sql = "select * from funcionario where nome like ?";
+        sql = "select * from funcionario where nome like ? or where ramal like ? or where setor = ? or where docente = ? or where inativo = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setString(1, aux);
+        pst.setString(1, Nome);
+        pst.setInt(2, Ramal);
+        pst.setString(3, Setor);
+        pst.setBoolean(4, Docente);
+        pst.setBoolean(5, Inativo);
         ResultSet rs = pst.executeQuery();
         while(rs.next()){
            funcionario.add(new FuncionarioM(
