@@ -655,7 +655,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
                 }
-                //atualizaTabelaFuncionario();
+                atualizaTabelaFuncionario();
                 prepararExcluir();
             }
         }
