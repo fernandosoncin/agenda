@@ -40,7 +40,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         PanelInfo.setVisible(false);
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -560,6 +559,48 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             tbeConsulta.updateUI();
     }
     
+    public void atualizaTabelaBusca(){
+        
+               
+        String dados[][] = new String[listaFuncionario.size()][3];
+        int i = 0;
+        for (FuncionarioM funcionario : listaFuncionario) {
+            dados[i][0] = String.valueOf(funcionario.getId());
+            dados[i][1] = funcionario.getNome();
+            dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
+            
+            i++;
+        }
+        String tituloColuna[] = {"Id","Nome", "Ramal"};
+        DefaultTableModel tabelaConsulta = new DefaultTableModel();
+        tabelaConsulta.setDataVector(dados, tituloColuna);
+        tbeConsulta.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false//, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+        
+        tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(40);
+        tbeConsulta.getColumnModel().getColumn(0).setMinWidth(40);
+        tbeConsulta.getColumnModel().getColumn(0).setMaxWidth(40);
+        tbeConsulta.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tbeConsulta.getColumnModel().getColumn(2).setPreferredWidth(80);
+        tbeConsulta.getColumnModel().getColumn(2).setMinWidth(80);
+        tbeConsulta.getColumnModel().getColumn(2).setMaxWidth(80);
+        tbeConsulta.getTableHeader().setReorderingAllowed(false);
+            
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        tbeConsulta.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+        tbeConsulta.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+        tbeConsulta.setRowHeight(25);
+        tbeConsulta.updateUI();
+    }
+    
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
@@ -569,20 +610,18 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         }
         else if(txtNome.getText() != null)
         {
-            JOptionPane.showMessageDialog( null, "treste!");
-            String Nome;
-            Nome = txtNome.getText();
+                        
             try
             {
-                funcionario = FuncionarioDAO.buscaNome(Nome);
-                
+                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText());
+                //JOptionPane.showMessageDialog( null, "treste!");
             }catch(SQLException ex)
             {
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
         }
         
-        atualizaTabelaFuncionario();
+        atualizaTabelaBusca();
     }//GEN-LAST:event_btnBuscaActionPerformed
 
     private void tbeConsultaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbeConsultaMouseClicked

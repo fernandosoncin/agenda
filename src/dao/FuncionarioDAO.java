@@ -41,18 +41,20 @@ public class FuncionarioDAO {
         pst.close();
     }
     
-    static public FuncionarioM buscaNome(String Nome) throws SQLException{
+    static public List<FuncionarioM> buscaNome(String Nome) throws SQLException{
         PreparedStatement pst;
         String sql;
-        FuncionarioM funcionario = null;
+        List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
         SetorDAO setorDAO = new SetorDAO();
         
-        sql = "select * from Funcionario where nome like ?";
+        String aux = "%"+Nome+"%";
+        
+        sql = "select * from funcionario where nome like ?";
         pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setString(1, Nome);
+        pst.setString(1, aux);
         ResultSet rs = pst.executeQuery();
         while(rs.next()){
-           funcionario = new FuncionarioM(
+           funcionario.add(new FuncionarioM(
                    rs.getInt("id"),
                    rs.getString("nome"),
                    rs.getString("endereco"),
@@ -69,14 +71,54 @@ public class FuncionarioDAO {
                    rs.getString("observacao"),
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo"));
+                   rs.getBoolean("inativo")));
                    
         }
+        //pst.execute();
         pst.close();
         
         return funcionario;
     }
                                
+    static public List<FuncionarioM> busca(String Nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
+        SetorDAO setorDAO = new SetorDAO();
+        
+        String aux = "%"+Nome+"%";
+        
+        sql = "select * from funcionario where nome like ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, aux);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           funcionario.add(new FuncionarioM(
+                   rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));
+                   
+        }
+        //pst.execute();
+        pst.close();
+        
+        return funcionario;
+    }
+    
     static public FuncionarioM busca(int id) throws SQLException{
         PreparedStatement pst;
         String sql;
