@@ -14,7 +14,7 @@ public class FuncionarioDAO {
     PreparedStatement pst;
     String sql;
     
-    static public void salvar (FuncionarioM funcionario) throws SQLException{
+static public void salvar (FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Funcionario values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -40,6 +40,7 @@ public class FuncionarioDAO {
         pst.execute();
         pst.close();
     }
+
     
     /*static public List<FuncionarioM> buscaNome(String Nome) throws SQLException{
         PreparedStatement pst;
@@ -172,7 +173,7 @@ public class FuncionarioDAO {
     static public void alterar(FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "update Funcionario set "
+        sql = "update funcionario set "
                  + "nome = ?, "
                  + "endereco = ?, "
                  + "cidade_estado = ?, "
@@ -183,21 +184,18 @@ public class FuncionarioDAO {
                  + "celular2  = ?, "
                  + "celular3  = ?, "
                  + "email  = ?, "
-                 + "setor  = ?, "
                  + "dia  = ?, "
                  + "horario  = ?, "
                  + "observacao  = ?, "
                  + "id_setor = ?, "
                  + "docente  = ?, "
-                 + "inativo  = ?, "
-                
-                 + "where id = ?";
-         pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setString(0, funcionario.getNome());
+                 + "inativo  = ? "
+                 + "where id = ?" ;
+        pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, funcionario.getNome());
         pst.setString(2, funcionario.getEndereco());
         pst.setString(3, funcionario.getCidadeestado());
-        pst.setString(4, funcionario.getTelresidencial());
+        pst.setString(4, funcionario.getTelresidencial()); 
         pst.setString(5, funcionario.getTelcomercial1());
         pst.setString(6, funcionario.getTelcomercial2());
         pst.setString(7, funcionario.getCelular1());
@@ -210,10 +208,9 @@ public class FuncionarioDAO {
         pst.setInt(14, funcionario.getSetor().getId());
         pst.setBoolean(15, funcionario.getDocente());
         pst.setBoolean(16, funcionario.getInativo());
-        pst.setInt(17,0);
-        
-         pst.execute();
-         pst.close();
+        pst.setInt(17, funcionario.getId());
+        pst.execute();
+        pst.close();
      }
     
     public List<FuncionarioM> listaTodos() throws SQLException{

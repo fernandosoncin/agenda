@@ -65,6 +65,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             listaFuncionario = funcionarioDAO.listaTodos();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+ 
         }
         
         String dados[][] = new String[listaFuncionario.size()][18];
@@ -171,6 +172,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         cbxSetor = new javax.swing.JComboBox();
         btnCancelar = new javax.swing.JButton();
         tfdNome = new javax.swing.JTextField();
+        BOTAOSETAR = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -212,6 +214,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Ramal");
 
+        tfdRamal.setEditable(false);
         tfdRamal.setEnabled(false);
 
         tfdDia.setEnabled(false);
@@ -328,6 +331,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         tfdNome.setEnabled(false);
 
+        BOTAOSETAR.setText("SETAR");
+        BOTAOSETAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BOTAOSETARActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,15 +351,18 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(438, 438, 438)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BOTAOSETAR)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(280, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -437,7 +450,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     .addComponent(btnAlterar)
                     .addComponent(btnExcluir)
                     .addComponent(btnNovo))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(BOTAOSETAR))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -586,6 +600,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 tfdNome.requestFocusInWindow();
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+               
             }
 
             atualizaTabelaFuncionario();
@@ -611,16 +626,18 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             funcionario.setSetor(pegaSetor());
             funcionario.setDocente(cbxDocente.isSelected());
             funcionario.setInativo(cbxInativo.isSelected());
-        }
+        
         try{
             FuncionarioDAO.alterar(funcionario);
-            JOptionPane.showMessageDialog(null, "alterado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+               JOptionPane.showMessageDialog(null, "Erro: BUNDA2");
         }
         atualizaTabelaFuncionario();
         prepararSalvareCancelar();
         desativarCampos();
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -663,6 +680,24 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         prepararAlterar();
         ativarCampos();
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void BOTAOSETARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BOTAOSETARActionPerformed
+    
+       tfdNome.setText("danilo");
+       tfdEndereco.setText("parana");
+       tfdCidadeEstado.setText("frutal");
+       tfdTelResidencial.setText("123");
+       tfdTelComercial1.setText("456");
+       tfdTelComercial2.setText("789");
+       tfdCelular1.setText("987");
+       tfdCelular2.setText("654");
+       tfdCelular3.setText("321");
+       tfdEmail.setText("@gmail");
+       cbxSetor.setSelectedItem("2");
+       tfdDia.setText("123");
+       tfdHorario.setText("123");
+       taaObservacao.setText("123");
+    }//GEN-LAST:event_BOTAOSETARActionPerformed
    
     public SetorM pegaSetor(){
         try{
@@ -699,6 +734,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        cbxInativo.setText("");
        cbxFiltro.setSelectedItem("");
        tfdbusca.setText("");
+       atualizaBoxSetor();
    }
    
    public void ativarCampos(){
@@ -712,7 +748,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        tfdCelular2.setEnabled(true);
        tfdCelular3.setEnabled(true);
        tfdEmail.setEnabled(true);
-       tfdRamal.setEnabled(true);
        cbxSetor.setEnabled(true);
        tfdDia.setEnabled(true);
        tfdHorario.setEnabled(true);
@@ -734,7 +769,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        tfdCelular3.setEnabled(false);
        tfdEmail.setEnabled(false);
        cbxSetor.setEnabled(false);
-       tfdRamal.setEnabled(false);
        tfdDia.setEnabled(false);
        tfdHorario.setEnabled(false);
        taaObservacao.setEnabled(false);
@@ -749,6 +783,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        btnCancelar.setEnabled(true);
        tbeFuncionario.setEnabled(false);
        tbeFuncionario.clearSelection();
+       atualizaBoxSetor();
    }
    
    public void prepararSalvareCancelar() {
@@ -781,6 +816,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BOTAOSETAR;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnBuscar;
