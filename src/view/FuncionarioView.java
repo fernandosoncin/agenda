@@ -64,7 +64,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         try {
             listaFuncionario = funcionarioDAO.listaTodos();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
  
         }
         
@@ -214,7 +214,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Ramal");
 
-        tfdRamal.setEditable(false);
         tfdRamal.setEnabled(false);
 
         tfdDia.setEnabled(false);
@@ -320,6 +319,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         cbxSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxSetor.setEnabled(false);
+        cbxSetor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxSetorItemStateChanged(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
@@ -450,7 +454,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     .addComponent(btnAlterar)
                     .addComponent(btnExcluir)
                     .addComponent(btnNovo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(BOTAOSETAR))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -573,7 +577,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         if(tfdNome.getText().isEmpty() || tfdEndereco.getText().isEmpty() || tfdCidadeEstado.getText().isEmpty() || tfdTelResidencial.getText().isEmpty() || tfdTelComercial1.getText().isEmpty() ||
             tfdTelComercial1.getText().isEmpty() || tfdTelComercial2.getText().isEmpty() || tfdCelular1.getText().isEmpty() || tfdCelular2.getText().isEmpty() || tfdCelular3.getText().isEmpty() ||
             tfdEmail.getText().isEmpty() || tfdDia.getText().isEmpty() || tfdHorario.getText().isEmpty() || taaObservacao.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else if(tfdId.getText().isEmpty()){
             
@@ -596,10 +600,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             
             try{
                 FuncionarioDAO.salvar(funcionario);
-                JOptionPane.showMessageDialog(null, "Gravado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 tfdNome.requestFocusInWindow();
             }catch(SQLException ex){
-                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                
             }
 
@@ -629,10 +633,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         
         try{
             FuncionarioDAO.alterar(funcionario);
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
-               JOptionPane.showMessageDialog(null, "Erro: BUNDA2");
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
         }
         atualizaTabelaFuncionario();
         prepararSalvareCancelar();
@@ -642,7 +645,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if(tfdId.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Selecione um Funcionario");
+            JOptionPane.showMessageDialog(null, "Selecione um Funcionario", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else{
             funcionario.setId(Integer.parseInt(tfdId.getText()));
@@ -653,7 +656,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     limparCamposFuncionario();
                     tfdNome.requestFocusInWindow();
                 }catch(SQLException ex){
-                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                 }
                 atualizaTabelaFuncionario();
                 prepararExcluir();
@@ -698,11 +701,17 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        tfdHorario.setText("123");
        taaObservacao.setText("123");
     }//GEN-LAST:event_BOTAOSETARActionPerformed
+
+    private void cbxSetorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSetorItemStateChanged
+    if(cbxSetor.getSelectedIndex()>=1){
+        tfdRamal.setText(Integer.toString(pegaSetor().getRamal()));
+    }
+    }//GEN-LAST:event_cbxSetorItemStateChanged
    
     public SetorM pegaSetor(){
         try{
             if(cbxSetor.getSelectedIndex() == 0){
-                JOptionPane.showMessageDialog(null, "Slecione um setor.");
+                JOptionPane.showMessageDialog(null, "Slecione um setor.", "erro", JOptionPane.WARNING_MESSAGE);
             }else{
                 return setorDAO.buscaNome(cbxSetor.getSelectedItem().toString());
             }
