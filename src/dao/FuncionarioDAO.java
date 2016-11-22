@@ -81,21 +81,22 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
         return funcionario;
     }*/
                                
-    static public List<FuncionarioM> buscaNome(String Nome, int Ramal, int Setor, boolean Docente, boolean Inativo) throws SQLException{
+    static public List<FuncionarioM> buscaNome(String Nome, String Setor, String Ramal, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
         SetorDAO setorDAO = new SetorDAO();
+        FuncionarioM fun = new FuncionarioM();
         
         //String aux = "%"+Nome+"%";
         
-        sql = "select * from funcionario where nome like ? or where ramal like ? or where setor = ? or where docente = ? or where inativo = ?";
+        sql = "select * from funcionario where nome like ?";// or where id_setor = ? or where docente = ? or where inativo = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, Nome);
-        pst.setInt(2, Ramal);
-        pst.setInt(3, Setor);
-        pst.setBoolean(4, Docente);
-        pst.setBoolean(5, Inativo);
+        //pst.setInt(2, fun.getSetor().getRamal());
+        //pst.setString(2, Setor);
+        //pst.setBoolean(3, Docente);
+        //pst.setBoolean(4, Inativo);
         ResultSet rs = pst.executeQuery();
         while(rs.next()){
            funcionario.add(new FuncionarioM(
@@ -118,7 +119,7 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
                    rs.getBoolean("inativo")));
                    
         }
-        //pst.execute();
+        pst.execute();
         pst.close();
         
         return funcionario;

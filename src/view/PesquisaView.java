@@ -8,6 +8,7 @@ import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -24,6 +25,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     List<SetorM> listaSetor;
     SetorDAO setorDAO;
     FuncionarioDAO funcionarioDAO;
+    
+    //JComboBox cbxSetor = new JComboBox();
     
     public PesquisaView(){
         initComponents();
@@ -604,46 +607,38 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
-        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione" && ckbDocente_Busca.isSelected() == false|| ckbInativo_Busca.isSelected() == false)
-        {
-            //JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
-            atualizaTabelaBusca();
+       //if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione" && ckbDocente_Busca.isSelected() == false|| ckbInativo_Busca.isSelected() == false)
+        //{
+          //  JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
+           // atualizaTabelaBusca();
+        //}
+        //if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || cbxSetor.getSelectedItem().toString() != "Selecione")
+                //|| ckbDocente_Busca.isSelected() == true || ckbInativo_Busca.isSelected() == true)
+        //{
+        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione")
+        {  
+            atualizaTabelaFuncionario();
         }
-        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || cbxSetor.getSelectedItem().toString() != "Selecione"
-                || ckbDocente_Busca.isSelected() == true || ckbInativo_Busca.isSelected() == true)
-        {
-                        
             try
             {
-                
-                int Setor = 0;
-                /*NUPSI = 1
+                String Setor = (String) cbxSetor.getSelectedItem();
+                  /*NUPSI = 1
                   Informática = 2
                   Recepção = 3
                   Coordenação = 4
                   Serviços Gerais = 5
                   Administração = 6*/
                 
-                if(cbxSetor.getSelectedItem() == "NUPSI" )
-                    Setor = 1;
-                if(cbxSetor.getSelectedItem() == "Informática")
-                    Setor = 2;
-                if(cbxSetor.getSelectedItem() == "Recepção")
-                    Setor = 3; 
-                if(cbxSetor.getSelectedItem() == "Coordenação")
-                    Setor = 4;
-                if(cbxSetor.getSelectedItem() == "Serviços Gerais")
-                    Setor = 5;
-                if(cbxSetor.getSelectedItem() == "Administração")
-                    Setor = 6;
-  
-                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), Integer.parseInt(txtRamal.getText()), Setor, ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
-                JOptionPane.showMessageDialog( null, "treste!");
+                //Setor = Integer.parseInt((String) cbxSetor.getSelectedItem());
+                
+                  
+                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), Setor, txtRamal.getText(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                
             }catch(SQLException ex)
             {
-                //JOptionPane.showMessageDialog( null, "Erro: "+ex);
+                JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
-        }
+        //}
         
         atualizaTabelaBusca();
     }//GEN-LAST:event_btnBuscaActionPerformed

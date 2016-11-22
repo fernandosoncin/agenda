@@ -185,6 +185,7 @@ public class SetorDAO {
         pst.close();
         return set;
     }
+     
         public List<SetorM> listaTodos() throws SQLException{
         List<SetorM> listasetor = new ArrayList<SetorM>();
         sql = "select * from setor order by nome";
