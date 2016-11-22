@@ -81,7 +81,7 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
         return funcionario;
     }*/
                                
-    static public List<FuncionarioM> buscaNome(String Nome, int Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
+    static public List<FuncionarioM> buscaNome(String Nome, int Ramal, int Setor, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
@@ -93,7 +93,7 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, Nome);
         pst.setInt(2, Ramal);
-        pst.setString(3, Setor);
+        pst.setInt(3, Setor);
         pst.setBoolean(4, Docente);
         pst.setBoolean(5, Inativo);
         ResultSet rs = pst.executeQuery();

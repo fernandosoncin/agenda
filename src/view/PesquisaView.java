@@ -613,15 +613,33 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 || ckbDocente_Busca.isSelected() == true || ckbInativo_Busca.isSelected() == true)
         {
                         
-            //try
-            //{
+            try
+            {
                 
-                //int Setor = Integer.parseInt(cbxSetor.getSelectedItem());
-                //String Docente = ckbDocente_Busca.gSelected().toString();
-                        
-                //listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText().toString(), Integer.parseInt(txtRamal.getText()), Setor, ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
-                //JOptionPane.showMessageDialog( null, "treste!");
-            //}catch(SQLException ex)
+                int Setor = 0;
+                /*NUPSI = 1
+                  Informática = 2
+                  Recepção = 3
+                  Coordenação = 4
+                  Serviços Gerais = 5
+                  Administração = 6*/
+                
+                if(cbxSetor.getSelectedItem() == "NUPSI" )
+                    Setor = 1;
+                if(cbxSetor.getSelectedItem() == "Informática")
+                    Setor = 2;
+                if(cbxSetor.getSelectedItem() == "Recepção")
+                    Setor = 3; 
+                if(cbxSetor.getSelectedItem() == "Coordenação")
+                    Setor = 4;
+                if(cbxSetor.getSelectedItem() == "Serviços Gerais")
+                    Setor = 5;
+                if(cbxSetor.getSelectedItem() == "Administração")
+                    Setor = 6;
+  
+                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), Integer.parseInt(txtRamal.getText()), Setor, ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                JOptionPane.showMessageDialog( null, "treste!");
+            }catch(SQLException ex)
             {
                 //JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
