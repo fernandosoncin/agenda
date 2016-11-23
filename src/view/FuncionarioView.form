@@ -578,6 +578,7 @@
     <Component class="javax.swing.JCheckBox" name="cbxDocente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Docente"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnNovo">
