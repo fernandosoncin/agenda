@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.FuncionarioM;
 
 
@@ -89,47 +90,27 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
         FuncionarioM fun = new FuncionarioM();
         
         String aux = "%"+Nome+"%";
-        sql = "select * from funcionario";
+        sql = "select * from funcionario ";
         int cont = 0;
         if(!Nome.equals(""))
         {
-            sql.concat("where nome like ?");
-            cont = 1;
-        }
-        
-        if(!Setor.equals(""))
-        {
-            if(cont == 0){
-                 sql.concat("where id_setor = ?");
-                 cont = 1;
-            }
-            else
-            {
-                sql.concat("and id_setor = ?");
-            }
-        }
-        if(!Setor.equals(""))
-        {
-            if(cont == 0)
-            {
-                sql.concat("where ramal like ?");
-            }
-            else
-            {
-                sql.concat("and ramal like ?");
-            }
-        }
-        
-        pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setString(1, aux);
-        //pst.setInt(2, fun.getSetor().getRamal());
-        //pst.setString(2, Setor);
-        //pst.setBoolean(3, Docente);
-        //pst.setBoolean(4, Inativo);
-        ResultSet rs = pst.executeQuery();
-        while(rs.next()){
-           funcionario.add(new FuncionarioM(
-                   rs.getInt("id"),
+            
+                String concat = sql.concat("where nome like '" + Nome+ "'");
+                cont = 1;
+                
+                JOptionPane.showMessageDialog( null, "Alguma coisa aqui " +concat);
+                
+                pst = Conexao.getInstance().prepareStatement(sql);
+                
+                //pst.setString(1, aux);
+                //pst.setInt(2, fun.getSetor().getRamal());
+                //pst.setString(2, Setor);
+                //pst.setBoolean(3, Docente);
+                //pst.setBoolean(4, Inativo);
+                ResultSet rs = pst.executeQuery();
+                while(rs.next()){
+                    funcionario.add(new FuncionarioM(
+                    rs.getInt("id"),
                    rs.getString("nome"),
                    rs.getString("endereco"),
                    rs.getString("cidade_estado"),
@@ -146,11 +127,11 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));
-                   
+            }
+                
+                pst.execute();
+                pst.close();
         }
-        pst.execute();
-        pst.close();
-        
         return funcionario;
     }
     
