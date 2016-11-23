@@ -22,12 +22,11 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     FuncionarioM funcionario;
     
     List<FuncionarioM> listaFuncionario;
-    List<FuncionarioM> listaFuncionarioBusca;
     List<SetorM> listaSetor;
     SetorDAO setorDAO;
     FuncionarioDAO funcionarioDAO;
     
-    //JComboBox cbxSetor = new JComboBox();
+    String SetorSelecionado = "";
     
     public PesquisaView(){
         initComponents();
@@ -39,7 +38,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         this.setorDAO = new SetorDAO();  
         this.listaSetor = new ArrayList<>();
         this.listaFuncionario = new ArrayList<>();
-        this.listaFuncionarioBusca = new ArrayList<>();
         
         atualizaTabelaFuncionario();
         PanelInfo.setVisible(false);
@@ -47,8 +45,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbeConsulta = new javax.swing.JTable();
@@ -102,40 +99,32 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(1440, 790));
 
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"", "", ""},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "ID", "Nome", "Ramal"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         tbeConsulta.setFocusable(false);
-        tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbeConsultaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbeConsulta);
-        if (tbeConsulta.getColumnModel().getColumnCount() > 0)
-        {
+        if (tbeConsulta.getColumnModel().getColumnCount() > 0) {
             tbeConsulta.getColumnModel().getColumn(0).setResizable(false);
             tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
             tbeConsulta.getColumnModel().getColumn(1).setResizable(false);
@@ -146,10 +135,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
             }
         });
@@ -159,15 +146,18 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         jLabel11.setText("Setor");
 
         btnBusca.setText("Buscar");
-        btnBusca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscaActionPerformed(evt);
             }
         });
 
-        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
+        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
+        cbxSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxSetorActionPerformed(evt);
+            }
+        });
 
         ckbDocente_Busca.setText("Docentes");
 
@@ -475,7 +465,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1129, Short.MAX_VALUE))
+                .addContainerGap(466, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,7 +478,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                         .addGap(79, 79, 79))))
         );
 
@@ -513,25 +503,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 dados[i][0] = String.valueOf(funcionario.getId());
                 dados[i][1] = funcionario.getNome();
                 dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
-               /* dados[i][0] = funcionario.getNome();        
-                dados[i][1] = funcionario.getSetor().getNome();
-                dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
-                dados[i][3] = funcionario.getCidadeestado();
-                dados[i][4] = funcionario.getTelresidencial();
-                dados[i][5] = funcionario.getTelcomercial1();
-                dados[i][6] = funcionario.getTelcomercial2();
-                dados[i][7] = funcionario.getCelular1();
-                dados[i][8] = funcionario.getCelular2();
-                dados[i][9] = funcionario.getCelular3();
-                dados[i][10] = funcionario.getEmail();
-                dados[i][11] = funcionario.getEndereco();
-                dados[i][12] = String.valueOf(funcionario.getId());
-                dados[i][13] = funcionario.getDia();
-                dados[i][14] = funcionario.getHorario();
-                dados[i][15] = funcionario.getObservacao();
-                dados[i][16] = String.valueOf(funcionario.getDocente());
-                dados[i][17] = String.valueOf(funcionario.getInativo());
-               */
                 i++;
             }
             String tituloColuna[] = {"Id","Nome", "Ramal"};
@@ -565,18 +536,17 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     }
     
     public void atualizaTabelaBusca(){
-        
-               
-        String dados[][] = new String[listaFuncionarioBusca.size()][3];
+        funcionario = new FuncionarioM();
+        String dados[][] = new String[listaFuncionario.size()][3];
         int i = 0;
-        for (FuncionarioM funcionario : listaFuncionarioBusca) {
+        for (FuncionarioM funcionario : listaFuncionario) {
             dados[i][0] = String.valueOf(funcionario.getId());
             dados[i][1] = funcionario.getNome();
             dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
             
             i++;
         }
-        String tituloColuna[] = {"Id","Nome", "Ramal"};
+        String tituloColuna[] = {"Id", "Nome", "Ramal"};
         DefaultTableModel tabelaConsulta = new DefaultTableModel();
         tabelaConsulta.setDataVector(dados, tituloColuna);
         tbeConsulta.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -609,41 +579,25 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
-       //if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione" && ckbDocente_Busca.isSelected() == false|| ckbInativo_Busca.isSelected() == false)
-        //{
-          //  JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
-           // atualizaTabelaBusca();
-        //}
-        //if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || cbxSetor.getSelectedItem().toString() != "Selecione")
-                //|| ckbDocente_Busca.isSelected() == true || ckbInativo_Busca.isSelected() == true)
-        //{
-        if(txtNome.getText().isEmpty() && txtRamal.getText().isEmpty() && cbxSetor.getSelectedItem().toString() == "Selecione")
-        {  
+        if(txtNome.getText().length() <= 0 && txtRamal.getText().length() <= 0 && cbxSetor.getSelectedItem().toString() == "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false)
+        {
+            //JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
             atualizaTabelaFuncionario();
+            //atualizaTabelaBusca();
         }
-            try
-            {
-                String Setor = (String) cbxSetor.getSelectedItem();
-                  /*NUPSI = 1
-                  Informática = 2
-                  Recepção = 3
-                  Coordenação = 4
-                  Serviços Gerais = 5
-                  Administração = 6*/
-                
-                //Setor = Integer.parseInt((String) cbxSetor.getSelectedItem());
-                
-                  
-                listaFuncionarioBusca = FuncionarioDAO.buscaNome(txtNome.getText(), Setor, txtRamal.getText(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos"){
+                        
+            try{
+                //JOptionPane.showMessageDialog(null, "Docente: "+ckbDocente_Busca.isSelected()+"\nInativo: "+ckbInativo_Busca.isSelected());
+                //String SetorSelecionado = (String) cbxSetor.getSelectedItem();
+                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                //listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText());
                 atualizaTabelaBusca();
-                
-            }catch(SQLException ex)
-            {
+            }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
-        //}
+        }
         
-        atualizaTabelaBusca();
     }//GEN-LAST:event_btnBuscaActionPerformed
 
     private void tbeConsultaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbeConsultaMouseClicked
@@ -658,7 +612,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         String integer = lblNome.getText();
         int id = Integer.parseInt(integer);
         funcionario.setId( id );
-         try{
+        
+        try{
             funcionario = FuncionarioDAO.busca(id);
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
@@ -682,6 +637,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         ckbDocente.setSelected(funcionario.getDocente());
         ckbInativo.setSelected(funcionario.getInativo());
     }//GEN-LAST:event_tbeConsultaMouseClicked
+
+    private void cbxSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSetorActionPerformed
+    }//GEN-LAST:event_cbxSetorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
