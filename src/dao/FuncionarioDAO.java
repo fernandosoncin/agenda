@@ -88,11 +88,40 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
         SetorDAO setorDAO = new SetorDAO();
         FuncionarioM fun = new FuncionarioM();
         
-        //String aux = "%"+Nome+"%";
+        String aux = "%"+Nome+"%";
+        sql = "select * from funcionario";
+        int cont = 0;
+        if(!Nome.equals(""))
+        {
+            sql.concat("where nome like ?");
+            cont = 1;
+        }
         
-        sql = "select * from funcionario where nome like ?";// or where id_setor = ? or where docente = ? or where inativo = ?";
+        if(!Setor.equals(""))
+        {
+            if(cont == 0){
+                 sql.concat("where id_setor = ?");
+                 cont = 1;
+            }
+            else
+            {
+                sql.concat("and id_setor = ?");
+            }
+        }
+        if(!Setor.equals(""))
+        {
+            if(cont == 0)
+            {
+                sql.concat("where ramal like ?");
+            }
+            else
+            {
+                sql.concat("and ramal like ?");
+            }
+        }
+        
         pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setString(1, Nome);
+        pst.setString(1, aux);
         //pst.setInt(2, fun.getSetor().getRamal());
         //pst.setString(2, Setor);
         //pst.setBoolean(3, Docente);
