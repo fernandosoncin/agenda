@@ -38,8 +38,7 @@ public class PrincipalView extends javax.swing.JFrame {
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -55,12 +54,14 @@ public class PrincipalView extends javax.swing.JFrame {
         buttonGroup4 = new javax.swing.ButtonGroup();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         pnlPrincipal = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         mnuArquivos = new javax.swing.JMenu();
         mmiFuncionario = new javax.swing.JMenuItem();
         mniDepartamento = new javax.swing.JMenuItem();
         mnuConsulta = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         mnuUsuarios = new javax.swing.JMenu();
         mniGerenciarUsuarios = new javax.swing.JMenuItem();
         mniMinhaConta = new javax.swing.JMenuItem();
@@ -86,6 +87,8 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuItem3.setText("jMenuItem3");
 
+        jMenuItem2.setText("jMenuItem2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Agenda");
 
@@ -93,11 +96,11 @@ public class PrincipalView extends javax.swing.JFrame {
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1216, Short.MAX_VALUE)
+            .addGap(0, 881, Short.MAX_VALUE)
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 376, Short.MAX_VALUE)
         );
 
         jMenuBar2.setPreferredSize(new java.awt.Dimension(56, 48));
@@ -109,10 +112,8 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mmiFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mmiFuncionario.setText("Funcionários");
-        mmiFuncionario.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mmiFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mmiFuncionarioActionPerformed(evt);
             }
         });
@@ -120,10 +121,8 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mniDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniDepartamento.setText("Setores");
-        mniDepartamento.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mniDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniDepartamentoActionPerformed(evt);
             }
         });
@@ -134,55 +133,46 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/consulta.png"))); // NOI18N
         mnuConsulta.setText("Consulta");
         mnuConsulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuConsultaMouseClicked(evt);
             }
         });
         jMenuBar2.add(mnuConsulta);
 
+        jMenu1.setText("Relatorio");
+        jMenuBar2.add(jMenu1);
+
         mnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/usuário.png"))); // NOI18N
         mnuUsuarios.setText("Usuários");
         mnuUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuUsuariosMouseClicked(evt);
             }
         });
-        mnuUsuarios.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mnuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuUsuariosActionPerformed(evt);
             }
         });
 
         mniGerenciarUsuarios.setText("Gerenciar usários");
-        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mniGerenciarUsuariosMouseClicked(evt);
             }
         });
-        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniGerenciarUsuariosActionPerformed(evt);
             }
         });
         mnuUsuarios.add(mniGerenciarUsuarios);
 
         mniMinhaConta.setText("Minha conta");
-        mniMinhaConta.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mniMinhaConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniMinhaContaActionPerformed(evt);
             }
         });
@@ -192,17 +182,13 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mnuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/sobre.png"))); // NOI18N
         mnuSobre.setText("Sobre");
-        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuSobreMouseClicked(evt);
             }
         });
-        mnuSobre.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mnuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuSobreActionPerformed(evt);
             }
         });
@@ -214,11 +200,17 @@ public class PrincipalView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(325, 325, 325))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -291,10 +283,12 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
