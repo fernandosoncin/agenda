@@ -22,6 +22,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     FuncionarioM funcionario;
     
     List<FuncionarioM> listaFuncionario;
+    List<FuncionarioM> listaFuncionarioBusca;
     List<SetorM> listaSetor;
     SetorDAO setorDAO;
     FuncionarioDAO funcionarioDAO;
@@ -38,6 +39,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         this.setorDAO = new SetorDAO();  
         this.listaSetor = new ArrayList<>();
         this.listaFuncionario = new ArrayList<>();
+        this.listaFuncionarioBusca = new ArrayList<>();
         
         atualizaTabelaFuncionario();
         PanelInfo.setVisible(false);
@@ -565,9 +567,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     public void atualizaTabelaBusca(){
         
                
-        String dados[][] = new String[listaFuncionario.size()][3];
+        String dados[][] = new String[listaFuncionarioBusca.size()][3];
         int i = 0;
-        for (FuncionarioM funcionario : listaFuncionario) {
+        for (FuncionarioM funcionario : listaFuncionarioBusca) {
             dados[i][0] = String.valueOf(funcionario.getId());
             dados[i][1] = funcionario.getNome();
             dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
@@ -632,7 +634,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 //Setor = Integer.parseInt((String) cbxSetor.getSelectedItem());
                 
                   
-                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), Setor, txtRamal.getText(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                listaFuncionarioBusca = FuncionarioDAO.buscaNome(txtNome.getText(), Setor, txtRamal.getText(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                atualizaTabelaBusca();
                 
             }catch(SQLException ex)
             {

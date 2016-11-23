@@ -85,31 +85,33 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
     static public List<FuncionarioM> buscaNome(String Nome, String Setor, String Ramal, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
-        List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
+        List<FuncionarioM> funcionarioBusca = new ArrayList<>();
         SetorDAO setorDAO = new SetorDAO();
         FuncionarioM fun = new FuncionarioM();
         
+        String concat;
         String aux = "%"+Nome+"%";
-        sql = "select * from funcionario ";
+        sql = "select * from funcionario f inner join setor s on s.id = f.id_setor ";
         int cont = 0;
-        if(!Nome.equals(""))
+        if(!Nome.equals("") && cont == 0)
         {
             
-                String concat = sql.concat("where nome like '" + Nome+ "'");
+                concat = sql.concat("where f.nome like ?");
                 cont = 1;
                 
                 JOptionPane.showMessageDialog( null, "Alguma coisa aqui " +concat);
                 
-                pst = Conexao.getInstance().prepareStatement(sql);
+                pst = Conexao.getInstance().prepareStatement(concat);
                 
-                //pst.setString(1, aux);
+                pst.setString(1, aux);
                 //pst.setInt(2, fun.getSetor().getRamal());
                 //pst.setString(2, Setor);
                 //pst.setBoolean(3, Docente);
                 //pst.setBoolean(4, Inativo);
+                
                 ResultSet rs = pst.executeQuery();
                 while(rs.next()){
-                    funcionario.add(new FuncionarioM(
+                    funcionarioBusca.add(new FuncionarioM(
                     rs.getInt("id"),
                    rs.getString("nome"),
                    rs.getString("endereco"),
@@ -132,7 +134,92 @@ static public void salvar (FuncionarioM funcionario) throws SQLException{
                 pst.execute();
                 pst.close();
         }
-        return funcionario;
+        if(!Setor.equals("Selecione"))
+        {
+            if(cont == 0)
+            {
+                concat = sql.concat("where s.nome like ?");
+                
+                JOptionPane.showMessageDialog( null, "Alguma coisa aqui " +concat);
+                pst = Conexao.getInstance().prepareStatement(concat);
+                
+                pst.setString( 1, Setor);
+                
+                ResultSet rs = pst.executeQuery();
+                while(rs.next()){
+                    funcionarioBusca.add(new FuncionarioM(
+                    rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));
+            }
+                
+                pst.execute();
+                pst.close();
+            }
+            else
+            {
+                concat = sql.concat("and s.nome like ?");
+                
+                
+                JOptionPane.showMessageDialog( null, "Alguma coisa aqui " +concat);
+                pst = Conexao.getInstance().prepareStatement(concat);
+                
+                pst.setString( 1, Setor);
+                
+                ResultSet rs = pst.executeQuery();
+                while(rs.next()){
+                    funcionarioBusca.add(new FuncionarioM(
+                    rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));
+            }
+                
+                pst.execute();
+                pst.close();
+            }
+        }
+        if(!Ramal.equals(""))
+        {
+            if(cont == 0)
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+        
+        
+        return funcionarioBusca;
     }
     
     static public FuncionarioM busca(int id) throws SQLException{
