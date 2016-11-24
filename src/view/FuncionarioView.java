@@ -771,7 +771,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxSetorItemStateChanged
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-    
+    /*
         if(tfdbusca.getText().equals("") )
         {
             JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
@@ -798,7 +798,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
             }
-        }
+        }*/
     }//GEN-LAST:event_btnBuscarActionPerformed
    
     public SetorM pegaSetor(){
