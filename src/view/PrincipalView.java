@@ -143,6 +143,11 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/Relatório48x48.png"))); // NOI18N
         jMenu1.setText("Relatorio");
         jMenu1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
         jMenuBar2.add(jMenu1);
 
         mnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/usuário.png"))); // NOI18N
@@ -266,11 +271,18 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuSobreActionPerformed
 
     private void mnuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSobreMouseClicked
-      SobreView sobre = new SobreView();
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(sobre);
-        pnlPrincipal.updateUI();
+    SobreView sobre = new SobreView();
+    pnlPrincipal.removeAll();
+    pnlPrincipal.add(sobre);
+    pnlPrincipal.updateUI();
     }//GEN-LAST:event_mnuSobreMouseClicked
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    RelatorioView relatorio = new RelatorioView();
+    pnlPrincipal.removeAll();
+    pnlPrincipal.add(relatorio);
+    pnlPrincipal.updateUI();
+    }//GEN-LAST:event_jMenu1MouseClicked
 
 
 
