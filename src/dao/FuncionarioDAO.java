@@ -74,12 +74,67 @@ public class FuncionarioDAO {
                    
         }
         //pst.execute();
-        pst.close();
+        pst.close();                           
         
         return funcionario;
     }
                                
-    static public List<FuncionarioM> buscaNome(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
+    static public List<FuncionarioM> buscaGenerica(String Nome, String Ramal, String Setor) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<FuncionarioM> funcionario = new ArrayList<>();
+        SetorDAO setorDAO = new SetorDAO();
+        
+        String nome = "%"+Nome+"%";
+        String ramal = "%"+Ramal+"%";
+        
+        if (Setor.equals("Todos"))
+            Setor = "";
+        
+        String setor = "%"+Setor+"%";
+                
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and s.nome like ?";
+        
+        pst = Conexao.getInstance().prepareStatement(sql);
+        
+        pst.setString(1, nome);
+        pst.setString(2, ramal);
+        //pst.setBoolean(3, Docente);
+        //pst.setBoolean(4, Inativo);
+        pst.setString(3, setor);
+        
+        JOptionPane.showMessageDialog(null, pst);
+        
+        ResultSet rs = pst.executeQuery();
+        
+        while(rs.next()){
+           funcionario.add(new FuncionarioM(
+                   rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));     
+        }
+
+        pst.execute();
+        pst.close();
+        
+        return funcionario;
+    }
+    
+    static public List<FuncionarioM> buscaDocente(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<>();
@@ -97,11 +152,125 @@ public class FuncionarioDAO {
 
         String aux = "";
         
-        
-        //sql = "select f.id, f.nome, s.nome from funcionario f inner join setor s on f.id_setor = s.id where f.nome like 'Danilo%' and s.ramal like '10%' and f.docente = 0 and f.inativo = 0 and s.nome = 'NUPSI'";
         sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.docente = ? and f.inativo = ? and s.nome like ?";
-           //inner join setor s on f.id_setor = s.id
-        //sql = "select f.id, f.nome, f.id_setor from funcionario f inner join setor s on f.id_setor = s.id where f.nome like ? or s.ramal = ? or s.id = ? or f.docente = ? or f.inativo = ?";
+        
+        pst = Conexao.getInstance().prepareStatement(sql);
+        
+        pst.setString(1, nome);
+        pst.setString(2, ramal);
+        pst.setBoolean(3, Docente);
+        pst.setBoolean(4, Inativo);
+        pst.setString(5, setor);
+        
+        JOptionPane.showMessageDialog(null, pst);
+        
+        ResultSet rs = pst.executeQuery();
+        
+        while(rs.next()){
+           funcionario.add(new FuncionarioM(
+                   rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));     
+        }
+
+        pst.execute();
+        pst.close();
+        
+        return funcionario;
+    }
+    
+    static public List<FuncionarioM> buscaInativo(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<FuncionarioM> funcionario = new ArrayList<>();
+        SetorDAO setorDAO = new SetorDAO();
+        
+        String nome = "%"+Nome+"%";
+        String ramal = "%"+Ramal+"%";
+        
+        if (Setor.equals("Todos"))
+            Setor = "";
+        
+        String setor = "%"+Setor+"%";
+        
+        JOptionPane.showMessageDialog(null, "Docente: "+Docente+"\nInativo: "+Inativo);
+
+        String aux = "";
+        
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.inativo = ? and s.nome like ?";
+        
+        pst = Conexao.getInstance().prepareStatement(sql);
+        
+        pst.setString(1, nome);
+        pst.setString(2, ramal);
+        //pst.setBoolean(3, Docente);
+        pst.setBoolean(3, Inativo);
+        pst.setString(4, setor);
+        
+        JOptionPane.showMessageDialog(null, pst);
+        
+        ResultSet rs = pst.executeQuery();
+        
+        while(rs.next()){
+           funcionario.add(new FuncionarioM(
+                   rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));     
+        }
+
+        pst.execute();
+        pst.close();
+        
+        return funcionario;
+    }
+    
+    static public List<FuncionarioM> buscaDocenteInativo(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<FuncionarioM> funcionario = new ArrayList<>();
+        SetorDAO setorDAO = new SetorDAO();
+        
+        String nome = "%"+Nome+"%";
+        String ramal = "%"+Ramal+"%";
+        
+        if (Setor.equals("Todos"))
+            Setor = "";
+        
+        String setor = "%"+Setor+"%";
+        
+        JOptionPane.showMessageDialog(null, "Docente: "+Docente+"\nInativo: "+Inativo);
+
+        String aux = "";
+        
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.docente = ? and f.inativo = ? and s.nome like ?";
         
         pst = Conexao.getInstance().prepareStatement(sql);
         
