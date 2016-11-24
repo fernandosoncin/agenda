@@ -140,7 +140,9 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar2.add(mnuConsulta);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/Relatório48x48.png"))); // NOI18N
         jMenu1.setText("Relatorio");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jMenuBar2.add(jMenu1);
 
         mnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/usuário.png"))); // NOI18N
@@ -182,6 +184,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mnuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/sobre.png"))); // NOI18N
         mnuSobre.setText("Sobre");
+        mnuSobre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mnuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuSobreMouseClicked(evt);
