@@ -691,20 +691,20 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     private void BOTAOSETARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BOTAOSETARActionPerformed
     
-       tfdNome.setText("danilo");
-       tfdEndereco.setText("parana");
-       tfdCidadeEstado.setText("frutal");
-       tfdTelResidencial.setText("123");
-       tfdTelComercial1.setText("456");
-       tfdTelComercial2.setText("789");
-       tfdCelular1.setText("987");
-       tfdCelular2.setText("654");
-       tfdCelular3.setText("321");
-       tfdEmail.setText("@gmail");
+       tfdNome.setText("Fernando Soncin");
+       tfdEndereco.setText("Delfino Nunes 188 Centro");
+       tfdCidadeEstado.setText("Frutal");
+       tfdTelResidencial.setText("32813053");
+       tfdTelComercial1.setText("4566816");
+       tfdTelComercial2.setText("78921651");
+       tfdCelular1.setText("996587412");
+       tfdCelular2.setText("452178561");
+       tfdCelular3.setText("774584564");
+       tfdEmail.setText("fernando@gmail");
        cbxSetor.setSelectedItem("2");
        tfdDia.setText("123");
        tfdHorario.setText("123");
-       taaObservacao.setText("123");
+       taaObservacao.setText("TESTE TESTE TESTE  TESTE");
     }//GEN-LAST:event_BOTAOSETARActionPerformed
 
     private void cbxSetorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSetorItemStateChanged
