@@ -93,12 +93,12 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Tel Comercial","Tel Comercial", "Celular 1", "Celular 2", "Celular 3", "E-mail", "Setor", "Dia", "Horario","Observação", "Docente", "Inativo"};
+            String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Tel Comercial","Tel Comercial", "Celular 1", "Celular 2", "Celular 3", "E-mail", "Setor","Ramal", "Dia", "Horario","Observação", "Docente", "Inativo"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tbeFuncionario.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -571,9 +571,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         tfdCelular3.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),9).toString());
         tfdEmail.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),10).toString());
         cbxSetor.setSelectedItem(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),11).toString());
-        tfdDia.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),12).toString());
-        tfdHorario.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),13).toString());
-        taaObservacao.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),14).toString());
+        tfdRamal.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),12).toString());
+        tfdDia.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),13).toString());
+        tfdHorario.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),14).toString());
+        taaObservacao.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),15).toString());
         btnAlterar.setEnabled(true);
         btnExcluir.setEnabled(true);
     }//GEN-LAST:event_tbeFuncionarioMouseClicked

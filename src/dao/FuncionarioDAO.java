@@ -202,17 +202,15 @@ public class FuncionarioDAO {
                  + "celular2  = ?, "
                  + "celular3  = ?, "
                  + "email  = ?, "
-                 + "setor  = ?, "
                  + "dia  = ?, "
                  + "horario  = ?, "
                  + "observacao  = ?, "
                  + "id_setor = ?, "
                  + "docente  = ?, "
-                 + "inativo  = ?, "
+                 + "inativo  = ? "
                 
                  + "where id = ?";
          pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setString(0, funcionario.getNome());
         pst.setString(1, funcionario.getNome());
         pst.setString(2, funcionario.getEndereco());
         pst.setString(3, funcionario.getCidadeestado());
