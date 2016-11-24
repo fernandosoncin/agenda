@@ -40,7 +40,7 @@ public class FuncionarioDAO {
         pst.close();
     }
     
-    /*static public List<FuncionarioM> buscaNome(String Nome) throws SQLException{
+    static public List<FuncionarioM> buscaFiltro(String Nome) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
@@ -77,7 +77,7 @@ public class FuncionarioDAO {
         pst.close();
         
         return funcionario;
-    }*/
+    }
                                
     static public List<FuncionarioM> buscaNome(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
