@@ -117,6 +117,56 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             tbeFuncionario.updateUI();
     }
     
+      public void atualizaTabelaFiltro(){
+        funcionario = new FuncionarioM();
+
+        String dados[][] = new String[listaFuncionario.size()][18];
+            int i = 0;
+            for (FuncionarioM funcionario : listaFuncionario) {
+                dados[i][0] = String.valueOf(funcionario.getId());
+                dados[i][1] = funcionario.getNome();
+                dados[i][2] = funcionario.getEndereco();
+                dados[i][3] = funcionario.getCidadeestado();
+                dados[i][4] = funcionario.getTelresidencial();
+                dados[i][5] = funcionario.getTelcomercial1();
+                dados[i][6] = funcionario.getTelcomercial2();
+                dados[i][7] = funcionario.getCelular1();
+                dados[i][8] = funcionario.getCelular2();
+                dados[i][9] = funcionario.getCelular3();
+                dados[i][10] = funcionario.getEmail();
+                dados[i][11] = funcionario.getSetor().getNome();
+                dados[i][12] = String.valueOf(funcionario.getSetor().getRamal());
+                dados[i][13] = funcionario.getDia();
+                dados[i][14] = funcionario.getHorario();
+                dados[i][15] = funcionario.getObservacao();
+                dados[i][16] = String.valueOf(funcionario.getDocente());
+                dados[i][17] = String.valueOf(funcionario.getInativo());
+               
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Tel Comercial","Tel Comercial", "Celular 1", "Celular 2", "Celular 3", "E-mail", "Setor","Ramal", "Dia", "Horario","Observação", "Docente", "Inativo"};
+            DefaultTableModel tabelaFuncionario = new DefaultTableModel();
+            tabelaFuncionario.setDataVector(dados, tituloColuna);
+            tbeFuncionario.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tbeFuncionario.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tbeFuncionario.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tbeFuncionario.getColumnModel().getColumn(2).setPreferredWidth(50);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tbeFuncionario.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tbeFuncionario.setRowHeight(25);
+            tbeFuncionario.updateUI();
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -721,27 +771,33 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxSetorItemStateChanged
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        funcionario = new FuncionarioM();
-        if(cbxFiltro.getSelectedItem() == null)
+    
+        if(tfdbusca.getText().equals("") )
         {
             JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
         }
-        else if(cbxFiltro.getSelectedItem() == "Nome")
+        else if(cbxFiltro.getSelectedIndex()== 0)
         {
-            
-            atualizaTabelaFuncionario();
-            
-        }
-        else if(cbxFiltro.getSelectedItem() == "Setor"){
-                        
-           /* try{
+            try{
                 
+                listaFuncionario = FuncionarioDAO.buscaFiltroNome(tfdbusca.getText());
+                atualizaTabelaFiltro();
                 
-                
-                atualizaTabelaFuncionario();
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
-            }*/
+            }
+            
+        }
+        else if(cbxFiltro.getSelectedIndex() == 1){
+                        
+            try{
+                
+                listaFuncionario = FuncionarioDAO.buscaFiltroSetor(tfdbusca.getText());
+                atualizaTabelaFiltro();
+
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
    
