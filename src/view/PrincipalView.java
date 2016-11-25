@@ -23,7 +23,9 @@ public class PrincipalView extends javax.swing.JFrame {
            
         if(usuario.isAdmin() == false){
              mnuArquivos.setEnabled(false);
-             mnuConsulta.setEnabled(false);
+             //mnuConsulta.setEnabled(false);
+             jMenu1.setEnabled(false);
+             mnuUsuarios.setEnabled(false);
              ConsultaConvidadoView consulta = new ConsultaConvidadoView();
              pnlPrincipal.removeAll();
              pnlPrincipal.add(consulta);
@@ -38,7 +40,8 @@ public class PrincipalView extends javax.swing.JFrame {
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -112,8 +115,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mmiFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mmiFuncionario.setText("Funcionários");
-        mmiFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mmiFuncionario.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mmiFuncionarioActionPerformed(evt);
             }
         });
@@ -121,8 +126,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
         mniDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniDepartamento.setText("Setores");
-        mniDepartamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mniDepartamento.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mniDepartamentoActionPerformed(evt);
             }
         });
@@ -133,8 +140,10 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/consulta.png"))); // NOI18N
         mnuConsulta.setText("Consulta");
         mnuConsulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mnuConsultaMouseClicked(evt);
             }
         });
@@ -143,8 +152,10 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/Relatório48x48.png"))); // NOI18N
         jMenu1.setText("Relatorio");
         jMenu1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenu1MouseClicked(evt);
             }
         });
@@ -153,33 +164,43 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/usuário.png"))); // NOI18N
         mnuUsuarios.setText("Usuários");
         mnuUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mnuUsuariosMouseClicked(evt);
             }
         });
-        mnuUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mnuUsuarios.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mnuUsuariosActionPerformed(evt);
             }
         });
 
         mniGerenciarUsuarios.setText("Gerenciar usários");
-        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mniGerenciarUsuariosMouseClicked(evt);
             }
         });
-        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mniGerenciarUsuariosActionPerformed(evt);
             }
         });
         mnuUsuarios.add(mniGerenciarUsuarios);
 
         mniMinhaConta.setText("Minha conta");
-        mniMinhaConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mniMinhaConta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mniMinhaContaActionPerformed(evt);
             }
         });
@@ -190,13 +211,17 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/sobre.png"))); // NOI18N
         mnuSobre.setText("Sobre");
         mnuSobre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 mnuSobreMouseClicked(evt);
             }
         });
-        mnuSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mnuSobre.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 mnuSobreActionPerformed(evt);
             }
         });
@@ -233,10 +258,23 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniDepartamentoActionPerformed
 
     private void mnuConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuConsultaMouseClicked
-    PesquisaView pesquisa = new PesquisaView();
-    pnlPrincipal.removeAll();
-    pnlPrincipal.add(pesquisa);
-    pnlPrincipal.updateUI();
+    
+        if(usuarioAtivo.isAdmin() == false)
+        {
+            ConsultaConvidadoView pesquisaConvidado = new ConsultaConvidadoView();
+            pnlPrincipal.removeAll();
+            pnlPrincipal.add(pesquisaConvidado);
+            pnlPrincipal.updateUI();
+           
+            
+        }else
+        {
+            PesquisaView pesquisa = new PesquisaView();
+            pnlPrincipal.removeAll();
+            pnlPrincipal.add(pesquisa);
+            pnlPrincipal.updateUI();
+        }
+        
     }//GEN-LAST:event_mnuConsultaMouseClicked
 
     private void mnuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuUsuariosActionPerformed
@@ -271,10 +309,12 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuSobreActionPerformed
 
     private void mnuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSobreMouseClicked
-    SobreView sobre = new SobreView();
-    pnlPrincipal.removeAll();
-    pnlPrincipal.add(sobre);
-    pnlPrincipal.updateUI();
+
+        SobreView sobre = new SobreView();
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(sobre);
+        pnlPrincipal.updateUI();
+
     }//GEN-LAST:event_mnuSobreMouseClicked
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked

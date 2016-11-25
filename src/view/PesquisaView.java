@@ -25,11 +25,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     List<SetorM> listaSetor;
     SetorDAO setorDAO;
     FuncionarioDAO funcionarioDAO;
-    FuncionarioDAO funDAO = new FuncionarioDAO();
     
     String SetorSelecionado = "";
     
-    int cout = 0;
     
     public PesquisaView(){
         initComponents();
@@ -604,9 +602,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
             
             i++;
-            cout++;
             
-            JOptionPane.showMessageDialog( null, cout);
         }
         String tituloColuna[] = {"Id", "Nome", "Ramal"};
         DefaultTableModel tabelaConsulta = new DefaultTableModel();
@@ -641,10 +637,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
-        if(funcionario== funcionario) /// erro qui
-        {
-            JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
-        }
         if(txtNome.getText().length() <= 0 && txtRamal.getText().length() <= 0 && cbxSetor.getSelectedItem().toString() == "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false)
         {
             
@@ -652,36 +644,46 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             
         }
         
-        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false){
+        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false)){
             
             //Esta busca ignorará docentes e inativos, ou seja, buscará todos.
             try{
                 
                 listaFuncionario = FuncionarioDAO.buscaGenerica(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString());
-
-                atualizaTabelaBusca();
                 
+                if(listaFuncionario == null)
+                {  
+                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
+                }
+                else
+                    atualizaTabelaBusca();
+
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
         }
         
-        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos" && ckbDocente_Busca.isSelected() == true && ckbInativo_Busca.isSelected() == false)
+        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == true && ckbInativo_Busca.isSelected() == false))
         {
             
             //Busca de Docentes ativos.
             try{
                 
                 listaFuncionario = FuncionarioDAO.buscaDocente(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
-
-                atualizaTabelaBusca();
+                
+                if(listaFuncionario == null)
+                {  
+                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
+                }
+                else
+                    atualizaTabelaBusca();
                 
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
         }
         
-        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == true)
+        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == true))
         {
             
             //Busca de todos inativos.
@@ -689,22 +691,33 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 
                 listaFuncionario = FuncionarioDAO.buscaInativo(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
 
-                atualizaTabelaBusca();
+                if(listaFuncionario == null)
+                {  
+                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
+                }
+                else
+                    atualizaTabelaBusca();
+                
                 
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
         }
         
-        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos" && ckbDocente_Busca.isSelected() == true && ckbInativo_Busca.isSelected() == true)
+        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == true && ckbInativo_Busca.isSelected() == true))
         {
             
             //Busca de Docentes inativos.
             try{
                 
                 listaFuncionario = FuncionarioDAO.buscaDocenteInativo(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
-
-                atualizaTabelaBusca();
+                
+                if(listaFuncionario == null)
+                {  
+                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
+                }
+                else
+                    atualizaTabelaBusca();
                 
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);

@@ -12,7 +12,6 @@ public class FuncionarioDAO {
     
     PreparedStatement pst;
     String sql;
-    int cont;
     
     static public void salvar (FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
@@ -83,11 +82,14 @@ public class FuncionarioDAO {
     static public List<FuncionarioM> buscaGenerica(String Nome, String Ramal, String Setor) throws SQLException{
         PreparedStatement pst;
         String sql;
+        int cont;
         List<FuncionarioM> funcionario = new ArrayList<>();
         SetorDAO setorDAO = new SetorDAO();
         
         String nome = "%"+Nome+"%";
         String ramal = "%"+Ramal+"%";
+        
+        cont = 0;
         
         if (Setor.equals("Todos"))
             Setor = "";
@@ -125,9 +127,12 @@ public class FuncionarioDAO {
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));     
-           
+            cont++;
         }
-
+        
+        if(cont == 0)
+            return null;
+        
         pst.execute();
         pst.close();
         
@@ -137,6 +142,7 @@ public class FuncionarioDAO {
     static public List<FuncionarioM> buscaDocente(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
+        int cont = 0;
         List<FuncionarioM> funcionario = new ArrayList<>();
         SetorDAO setorDAO = new SetorDAO();
         
@@ -180,9 +186,13 @@ public class FuncionarioDAO {
                    rs.getString("observacao"),
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo")));     
+                   rs.getBoolean("inativo")));   
+           cont++;
         }
 
+        if(cont == 0)
+            return null;
+        
         pst.execute();
         pst.close();
         
@@ -192,6 +202,7 @@ public class FuncionarioDAO {
     static public List<FuncionarioM> buscaInativo(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
+        int cont = 0;
         List<FuncionarioM> funcionario = new ArrayList<>();
         SetorDAO setorDAO = new SetorDAO();
         
@@ -205,7 +216,7 @@ public class FuncionarioDAO {
 
         String aux = "";
         
-        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.inativo = ? and s.nome like ? order by f.nome";
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.inativo = ? and s.nome like ?";
         
         pst = Conexao.getInstance().prepareStatement(sql);
         
@@ -238,9 +249,12 @@ public class FuncionarioDAO {
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));
            
-                   
+                   cont++;
         }
 
+        if(cont == 0)
+            return null;
+        
         pst.execute();
         pst.close();
         
@@ -250,6 +264,7 @@ public class FuncionarioDAO {
     static public List<FuncionarioM> buscaDocenteInativo(String Nome, String Ramal, String Setor, boolean Docente, boolean Inativo) throws SQLException{
         PreparedStatement pst;
         String sql;
+        int cont = 0;
         List<FuncionarioM> funcionario = new ArrayList<>();
         SetorDAO setorDAO = new SetorDAO();
         
@@ -294,8 +309,13 @@ public class FuncionarioDAO {
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));     
+                   
+                   cont++;
         }
 
+        if(cont == 0)
+            return null;
+        
         pst.execute();
         pst.close();
         

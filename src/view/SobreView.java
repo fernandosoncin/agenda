@@ -26,16 +26,19 @@ public class SobreView extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(720, 730));
-        try {
+        try
+        {
             setSelected(true);
-        } catch (java.beans.PropertyVetoException e1) {
+        } catch (java.beans.PropertyVetoException e1)
+        {
             e1.printStackTrace();
         }
 
