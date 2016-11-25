@@ -25,8 +25,11 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     List<SetorM> listaSetor;
     SetorDAO setorDAO;
     FuncionarioDAO funcionarioDAO;
+    FuncionarioDAO funDAO = new FuncionarioDAO();
     
     String SetorSelecionado = "";
+    
+    int cout = 0;
     
     public PesquisaView(){
         initComponents();
@@ -61,6 +64,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         ckbInativo_Busca = new javax.swing.JCheckBox();
         ckbDocente_Busca = new javax.swing.JCheckBox();
+        btnLimpar = new javax.swing.JButton();
         PanelInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -202,6 +206,15 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelBuscaLayout = new javax.swing.GroupLayout(PanelBusca);
         PanelBusca.setLayout(PanelBuscaLayout);
         PanelBuscaLayout.setHorizontalGroup(
@@ -213,7 +226,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)))
@@ -223,7 +236,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                             .addComponent(txtRamal, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -238,17 +253,22 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelBuscaLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRamal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBuscaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelBuscaLayout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(PanelBuscaLayout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtRamal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
@@ -281,6 +301,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         taaObs.setColumns(20);
         taaObs.setRows(5);
+        taaObs.setEnabled(false);
         jScrollPane2.setViewportView(taaObs);
 
         javax.swing.GroupLayout PanelObsLayout = new javax.swing.GroupLayout(PanelObs);
@@ -501,9 +522,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addGap(108, 108, 108)
+                .addGap(44, 44, 44)
                 .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,7 +537,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                         .addGap(153, 153, 153))))
         );
 
@@ -583,6 +604,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             dados[i][2] = String.valueOf(funcionario.getSetor().getRamal());
             
             i++;
+            cout++;
+            
+            JOptionPane.showMessageDialog( null, cout);
         }
         String tituloColuna[] = {"Id", "Nome", "Ramal"};
         DefaultTableModel tabelaConsulta = new DefaultTableModel();
@@ -617,11 +641,15 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscaActionPerformed
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
+        if(funcionario== funcionario) /// erro qui
+        {
+            JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
+        }
         if(txtNome.getText().length() <= 0 && txtRamal.getText().length() <= 0 && cbxSetor.getSelectedItem().toString() == "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false)
         {
-            //JOptionPane.showMessageDialog( null, "Por favor digite pelo menos um dos campos de pesquisa!");
-            atualizaTabelaFuncionario();
-            //atualizaTabelaBusca();
+            
+            JOptionPane.showMessageDialog( null, "Preencha algum dos campos para realizar a busca!");
+            
         }
         
         else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false){
@@ -695,7 +723,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         
         String integer = lblNome.getText();
         int id = Integer.parseInt(integer);
-        funcionario.setId( id );
+        funcionario.setId(id);
         
         try{
             funcionario = FuncionarioDAO.busca(id);
@@ -725,12 +753,27 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void cbxSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSetorActionPerformed
     }//GEN-LAST:event_cbxSetorActionPerformed
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLimparActionPerformed
+    {//GEN-HEADEREND:event_btnLimparActionPerformed
+        // Limpar e atualiza
+        
+        txtNome.setText("");
+        txtRamal.setText("");
+        cbxSetor.setSelectedItem("Todos");
+        ckbDocente_Busca.setSelected(false);
+        ckbInativo_Busca.setSelected(false);
+        
+        atualizaTabelaFuncionario();
+                
+    }//GEN-LAST:event_btnLimparActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelBusca;
     private javax.swing.JPanel PanelInfo;
     private javax.swing.JPanel PanelObs;
     private javax.swing.JButton btnBusca;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JComboBox<String> cbxSetor;
     private javax.swing.JCheckBox ckbDocente;
     private javax.swing.JCheckBox ckbDocente_Busca;

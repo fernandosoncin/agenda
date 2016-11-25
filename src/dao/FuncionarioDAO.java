@@ -12,6 +12,7 @@ public class FuncionarioDAO {
     
     PreparedStatement pst;
     String sql;
+    int cont;
     
     static public void salvar (FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
@@ -93,7 +94,7 @@ public class FuncionarioDAO {
         
         String setor = "%"+Setor+"%";
                 
-        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and s.nome like ?";
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and s.nome like ? order by f.nome";
         
         pst = Conexao.getInstance().prepareStatement(sql);
         
@@ -102,8 +103,6 @@ public class FuncionarioDAO {
         //pst.setBoolean(3, Docente);
         //pst.setBoolean(4, Inativo);
         pst.setString(3, setor);
-        
-        JOptionPane.showMessageDialog(null, pst);
         
         ResultSet rs = pst.executeQuery();
         
@@ -126,6 +125,7 @@ public class FuncionarioDAO {
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));     
+           
         }
 
         pst.execute();
@@ -148,11 +148,9 @@ public class FuncionarioDAO {
         
         String setor = "%"+Setor+"%";
         
-        JOptionPane.showMessageDialog(null, "Docente: "+Docente+"\nInativo: "+Inativo);
-
         String aux = "";
         
-        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.docente = ? and f.inativo = ? and s.nome like ?";
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.docente = ? and f.inativo = ? and s.nome like ? order by f.nome";
         
         pst = Conexao.getInstance().prepareStatement(sql);
         
@@ -161,8 +159,6 @@ public class FuncionarioDAO {
         pst.setBoolean(3, Docente);
         pst.setBoolean(4, Inativo);
         pst.setString(5, setor);
-        
-        JOptionPane.showMessageDialog(null, pst);
         
         ResultSet rs = pst.executeQuery();
         
@@ -206,12 +202,10 @@ public class FuncionarioDAO {
             Setor = "";
         
         String setor = "%"+Setor+"%";
-        
-        JOptionPane.showMessageDialog(null, "Docente: "+Docente+"\nInativo: "+Inativo);
 
         String aux = "";
         
-        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.inativo = ? and s.nome like ?";
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.inativo = ? and s.nome like ? order by f.nome";
         
         pst = Conexao.getInstance().prepareStatement(sql);
         
@@ -221,9 +215,8 @@ public class FuncionarioDAO {
         pst.setBoolean(3, Inativo);
         pst.setString(4, setor);
         
-        JOptionPane.showMessageDialog(null, pst);
-        
         ResultSet rs = pst.executeQuery();
+        
         
         while(rs.next()){
            funcionario.add(new FuncionarioM(
@@ -243,7 +236,9 @@ public class FuncionarioDAO {
                    rs.getString("observacao"),
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo")));     
+                   rs.getBoolean("inativo")));
+           
+                   
         }
 
         pst.execute();
@@ -266,11 +261,9 @@ public class FuncionarioDAO {
         
         String setor = "%"+Setor+"%";
         
-        JOptionPane.showMessageDialog(null, "Docente: "+Docente+"\nInativo: "+Inativo);
-
         String aux = "";
         
-        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.docente = ? and f.inativo = ? and s.nome like ?";
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where f.nome like ? and s.ramal like ? and f.docente = ? and f.inativo = ? and s.nome like ? order by f.nome";
         
         pst = Conexao.getInstance().prepareStatement(sql);
         
@@ -279,8 +272,6 @@ public class FuncionarioDAO {
         pst.setBoolean(3, Docente);
         pst.setBoolean(4, Inativo);
         pst.setString(5, setor);
-        
-        JOptionPane.showMessageDialog(null, pst);
         
         ResultSet rs = pst.executeQuery();
         
