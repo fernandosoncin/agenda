@@ -46,8 +46,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbeConsulta = new javax.swing.JTable();
@@ -103,40 +102,32 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(1440, 790));
 
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"", "", ""},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "ID", "Nome", "Ramal"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         tbeConsulta.setFocusable(false);
-        tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbeConsultaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbeConsulta);
-        if (tbeConsulta.getColumnModel().getColumnCount() > 0)
-        {
+        if (tbeConsulta.getColumnModel().getColumnCount() > 0) {
             tbeConsulta.getColumnModel().getColumn(0).setResizable(false);
             tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
             tbeConsulta.getColumnModel().getColumn(1).setResizable(false);
@@ -147,10 +138,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
             }
         });
@@ -160,19 +149,15 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         jLabel11.setText("Setor");
 
         btnBusca.setText("Buscar");
-        btnBusca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscaActionPerformed(evt);
             }
         });
 
         cbxSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
-        cbxSetor.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cbxSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxSetorActionPerformed(evt);
             }
         });
@@ -205,10 +190,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         );
 
         btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
             }
         });
@@ -522,7 +505,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1))
                 .addGap(44, 44, 44)
                 .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -638,87 +621,11 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     {//GEN-HEADEREND:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
         if(txtNome.getText().length() <= 0 && txtRamal.getText().length() <= 0 && cbxSetor.getSelectedItem().toString() == "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false)
-        {
-            
-            JOptionPane.showMessageDialog( null, "Preencha algum dos campos para realizar a busca!");
-            
-        }
-        
-        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false)){
-            
-            //Esta busca ignorará docentes e inativos, ou seja, buscará todos.
+            atualizaTabelaFuncionario();
+        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos"){     
             try{
-                
-                listaFuncionario = FuncionarioDAO.buscaGenerica(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString());
-                
-                if(listaFuncionario == null)
-                {  
-                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
-                }
-                else
-                    atualizaTabelaBusca();
-
-            }catch(SQLException ex){
-                JOptionPane.showMessageDialog( null, "Erro: "+ex);
-            }
-        }
-        
-        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == true && ckbInativo_Busca.isSelected() == false))
-        {
-            
-            //Busca de Docentes ativos.
-            try{
-                
-                listaFuncionario = FuncionarioDAO.buscaDocente(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
-                
-                if(listaFuncionario == null)
-                {  
-                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
-                }
-                else
-                    atualizaTabelaBusca();
-                
-            }catch(SQLException ex){
-                JOptionPane.showMessageDialog( null, "Erro: "+ex);
-            }
-        }
-        
-        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == true))
-        {
-            
-            //Busca de todos inativos.
-            try{
-                
-                listaFuncionario = FuncionarioDAO.buscaInativo(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
-
-                if(listaFuncionario == null)
-                {  
-                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
-                }
-                else
-                    atualizaTabelaBusca();
-                
-                
-            }catch(SQLException ex){
-                JOptionPane.showMessageDialog( null, "Erro: "+ex);
-            }
-        }
-        
-        else if((txtNome.getText().length() > 0 || txtRamal.getText().length() > 0 || SetorSelecionado != "Todos") && (ckbDocente_Busca.isSelected() == true && ckbInativo_Busca.isSelected() == true))
-        {
-            
-            //Busca de Docentes inativos.
-            try{
-                
-                listaFuncionario = FuncionarioDAO.buscaDocenteInativo(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
-                
-                if(listaFuncionario == null)
-                {  
-                    JOptionPane.showMessageDialog( null, "Nenhum funcionario encontrado!");
-                }
-                else
-                    atualizaTabelaBusca();
-                
+                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                atualizaTabelaBusca();
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
