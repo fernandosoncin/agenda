@@ -72,6 +72,9 @@ public class RelatorioView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("jLabel1");
 
+        setClosable(true);
+        setMaximizable(true);
+
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", ""},

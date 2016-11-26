@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import model.FuncionarioM;
 import model.SetorM;
 
@@ -176,17 +178,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         tfdEndereco = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tfdTelResidencial = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        tfdTelComercial1 = new javax.swing.JTextField();
-        tfdTelComercial2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        tfdCelular1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        tfdCelular2 = new javax.swing.JTextField();
-        tfdCelular3 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -224,8 +220,15 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         tfdNome = new javax.swing.JTextField();
         BOTAOSETAR = new javax.swing.JButton();
+        tfdTelResidencial = new javax.swing.JFormattedTextField();
+        tfdTelComercial1 = new javax.swing.JFormattedTextField();
+        tfdTelComercial2 = new javax.swing.JFormattedTextField();
+        tfdCelular1 = new javax.swing.JFormattedTextField();
+        tfdCelular2 = new javax.swing.JFormattedTextField();
+        tfdCelular3 = new javax.swing.JFormattedTextField();
 
         setClosable(true);
+        setMaximizable(true);
 
         jLabel1.setText("Nome");
 
@@ -235,27 +238,15 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Cidade/Estado");
 
-        tfdTelResidencial.setEnabled(false);
-
         jLabel4.setText("Tel Residêncial");
 
         jLabel5.setText("Tel Comercial (1)");
 
-        tfdTelComercial1.setEnabled(false);
-
-        tfdTelComercial2.setEnabled(false);
-
         jLabel6.setText("Tel Comercial (2)");
-
-        tfdCelular1.setEnabled(false);
 
         jLabel7.setText("Celular (1)");
 
         jLabel8.setText("Celular (2)");
-
-        tfdCelular2.setEnabled(false);
-
-        tfdCelular3.setEnabled(false);
 
         jLabel9.setText("Celular (3)");
 
@@ -367,7 +358,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         tfdEmail.setEnabled(false);
 
-        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Setor" }));
+        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Setor", "Inativo" }));
         cbxFiltro.setPreferredSize(new java.awt.Dimension(95, 23));
 
         jLabel19.setText("ID");
@@ -400,6 +391,18 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }
         });
 
+        tfdTelResidencial.setFormatterFactory(setFormatoTelefone());
+
+        tfdTelComercial1.setFormatterFactory(setFormatoTelefone());
+
+        tfdTelComercial2.setFormatterFactory(setFormatoTelefone());
+
+        tfdCelular1.setFormatterFactory(setFormatoCelular());
+
+        tfdCelular2.setFormatterFactory(setFormatoCelular());
+
+        tfdCelular3.setFormatterFactory(setFormatoCelular());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -429,8 +432,15 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                                 .addGap(3, 3, 3)
                                 .addComponent(tfdPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdTelResidencial)
+                            .addComponent(tfdTelComercial1)
+                            .addComponent(tfdTelComercial2)
+                            .addComponent(tfdCelular1)
+                            .addComponent(tfdCelular2)
+                            .addComponent(tfdCelular3, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(98, 98, 98)
@@ -463,12 +473,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tfdEndereco)
-                        .addComponent(tfdTelResidencial)
-                        .addComponent(tfdTelComercial1)
-                        .addComponent(tfdTelComercial2)
-                        .addComponent(tfdCelular1)
-                        .addComponent(tfdCelular2)
-                        .addComponent(tfdCelular3)
                         .addComponent(tfdRamal)
                         .addComponent(tfdDia)
                         .addComponent(tfdHorario)
@@ -500,7 +504,19 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(121, 121, 121)
+                        .addComponent(tfdTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(tfdTelComercial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(tfdTelComercial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(tfdCelular1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(tfdCelular2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(tfdCelular3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,7 +546,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(BOTAOSETAR)
-                                .addContainerGap(26, Short.MAX_VALUE))))
+                                .addContainerGap(30, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -554,29 +570,17 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                             .addComponent(tfdCidadeEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(1, 1, 1)
                             .addComponent(jLabel4)
-                            .addGap(6, 6, 6)
-                            .addComponent(tfdTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
+                            .addGap(32, 32, 32)
                             .addComponent(jLabel5)
-                            .addGap(6, 6, 6)
-                            .addComponent(tfdTelComercial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
+                            .addGap(32, 32, 32)
                             .addComponent(jLabel6)
-                            .addGap(6, 6, 6)
-                            .addComponent(tfdTelComercial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
+                            .addGap(32, 32, 32)
                             .addComponent(jLabel7)
-                            .addGap(6, 6, 6)
-                            .addComponent(tfdCelular1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
+                            .addGap(32, 32, 32)
                             .addComponent(jLabel8)
-                            .addGap(6, 6, 6)
-                            .addComponent(tfdCelular2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
+                            .addGap(32, 32, 32)
                             .addComponent(jLabel9)
-                            .addGap(6, 6, 6)
-                            .addComponent(tfdCelular3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
+                            .addGap(32, 32, 32)
                             .addComponent(jLabel10)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tfdEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -608,7 +612,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel16)
                                     .addComponent(btnProximo)))))
-                    .addContainerGap(48, Short.MAX_VALUE)))
+                    .addContainerGap(65, Short.MAX_VALUE)))
         );
 
         pack();
@@ -724,14 +728,14 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 prepararExcluir();
             }
         }
-        
-        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
      limparCamposFuncionario();
      prepararNovo();
      ativarCampos();
+     btnAlterar.setEnabled(false);
+     btnExcluir.setEnabled(false);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -771,10 +775,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxSetorItemStateChanged
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-    /*
+    listaFuncionario = null;
         if(tfdbusca.getText().equals("") )
         {
             JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
+            atualizaTabelaFuncionario();
         }
         else if(cbxFiltro.getSelectedIndex()== 0)
         {
@@ -784,7 +789,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 atualizaTabelaFiltro();
                 
             }catch(SQLException ex){
-                JOptionPane.showMessageDialog( null, "Erro: "+ex);
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
             }
             
         }
@@ -798,13 +803,23 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
             }
-        }*/
+        }else if(cbxFiltro.getSelectedIndex() == 2){
+            
+             try{
+                
+                listaFuncionario = FuncionarioDAO.buscaFiltroInativo(tfdbusca.getText());
+                atualizaTabelaFiltro();
+
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
    
     public SetorM pegaSetor(){
         try{
             if(cbxSetor.getSelectedIndex() == 0){
-                JOptionPane.showMessageDialog(null, "Slecione um setor.", "erro", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Selecione um setor.", "erro", JOptionPane.WARNING_MESSAGE);
             }else{
                 return setorDAO.buscaNome(cbxSetor.getSelectedItem().toString());
             }
@@ -814,6 +829,31 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         return null;
     }
     
+    
+    public static DefaultFormatterFactory setFormatoTelefone(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("(##) ####-####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
+    }
+    
+    public static DefaultFormatterFactory setFormatoCelular(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("(##)9####-####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
+    } 
+
     
     // DECLARAÇÃO DE MÉTODOS DE CONTROLE DE BOTÕES
    public void limparCamposFuncionario(){
@@ -954,9 +994,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea taaObservacao;
     private javax.swing.JTable tbeFuncionario;
-    private javax.swing.JTextField tfdCelular1;
-    private javax.swing.JTextField tfdCelular2;
-    private javax.swing.JTextField tfdCelular3;
+    private javax.swing.JFormattedTextField tfdCelular1;
+    private javax.swing.JFormattedTextField tfdCelular2;
+    private javax.swing.JFormattedTextField tfdCelular3;
     private javax.swing.JTextField tfdCidadeEstado;
     private javax.swing.JTextField tfdDia;
     private javax.swing.JTextField tfdEmail;
@@ -966,9 +1006,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdNome;
     private javax.swing.JTextField tfdPaginas;
     private javax.swing.JTextField tfdRamal;
-    private javax.swing.JTextField tfdTelComercial1;
-    private javax.swing.JTextField tfdTelComercial2;
-    private javax.swing.JTextField tfdTelResidencial;
+    private javax.swing.JFormattedTextField tfdTelComercial1;
+    private javax.swing.JFormattedTextField tfdTelComercial2;
+    private javax.swing.JFormattedTextField tfdTelResidencial;
     private javax.swing.JTextField tfdbusca;
     // End of variables declaration//GEN-END:variables
 }

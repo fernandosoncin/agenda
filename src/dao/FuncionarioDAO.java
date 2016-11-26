@@ -40,7 +40,7 @@ public class FuncionarioDAO {
         pst.close();
     }
     
-    static public List<FuncionarioM> buscaFiltro(String Nome) throws SQLException{
+    static public List<FuncionarioM> buscaFiltroNome(String Nome) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
@@ -48,7 +48,7 @@ public class FuncionarioDAO {
         
         String name = "%"+Nome+"%";
         
-        sql = "select * from funcionario where nome like ?";
+        sql = "select * from Funcionario where nome like ? order by nome";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, name);
         ResultSet rs = pst.executeQuery();
@@ -70,10 +70,83 @@ public class FuncionarioDAO {
                    rs.getString("observacao"),
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo")));
-                   
+                   rs.getBoolean("inativo")));  
         }
-        //pst.execute();
+        pst.close();                           
+        
+        return funcionario;
+    }
+    
+    
+    static public List<FuncionarioM> buscaFiltroSetor(String Setor) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
+        SetorDAO setorDAO = new SetorDAO();
+        
+        String set = "%"+Setor+"%";
+        
+        sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where s.nome like ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, set);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           funcionario.add(new FuncionarioM(
+                   rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));  
+        }
+        pst.close();                           
+        
+        return funcionario;
+    }
+    
+    static public List<FuncionarioM> buscaFiltroInativo(String Inativo) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
+        SetorDAO setorDAO = new SetorDAO();
+        
+        String inat = "%"+Inativo+"%";
+        
+        sql = "select * from Funcionario where nome like ? and inativo = 1 order by nome";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, inat);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           funcionario.add(new FuncionarioM(
+                   rs.getInt("id"),
+                   rs.getString("nome"),
+                   rs.getString("endereco"),
+                   rs.getString("cidade_estado"),
+                   rs.getString("tel_residencial"),
+                   rs.getString("tel_comercial1"),
+                   rs.getString("tel_comercial2"),
+                   rs.getString("celular1"),
+                   rs.getString("celular2"),
+                   rs.getString("celular3"),
+                   rs.getString("email"),
+                   rs.getString("dia"),
+                   rs.getString("horario"),
+                   rs.getString("observacao"),
+                   setorDAO.busca(rs.getInt("id_setor")),
+                   rs.getBoolean("docente"),
+                   rs.getBoolean("inativo")));  
+        }
         pst.close();                           
         
         return funcionario;
