@@ -122,6 +122,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     //atualiza parcialmente os funcionarios a partir do que foi digitado na busca
     public void atualizaTabelaFiltro(){
         funcionario = new FuncionarioM();
+        
 
         String dados[][] = new String[listaFuncionario.size()][18];
             int i = 0;
