@@ -1,1 +1,4 @@
 /dist/
+*.class
+private.properties
+private.xlm
