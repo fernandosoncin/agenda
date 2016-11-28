@@ -1,10 +1,15 @@
 package view;
 
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.UsuarioM;
 
@@ -37,7 +42,8 @@ public class PrincipalView extends javax.swing.JFrame {
         this.setIconImage(imagemTitulo);
     }
 
-  
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -262,6 +268,10 @@ public class PrincipalView extends javax.swing.JFrame {
         if(usuarioAtivo.isAdmin() == false)
         {
             ConsultaConvidadoView pesquisaConvidado = new ConsultaConvidadoView();
+            pnlPrincipal.add(pesquisaConvidado);
+            pesquisaConvidado.setVisible(true);
+            //pesquisaConvidado.setPosicao();
+            
             pnlPrincipal.removeAll();
             pnlPrincipal.add(pesquisaConvidado);
             pnlPrincipal.updateUI();

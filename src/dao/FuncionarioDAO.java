@@ -9,9 +9,99 @@ import javax.swing.JOptionPane;
 import model.FuncionarioM;
 
 public class FuncionarioDAO {
+
+    
     
     PreparedStatement pst;
     String sql;
+    
+    public static List<FuncionarioM> buscaConvidado(String Nome, String Ramal, String Setor) throws SQLException
+    {
+        SetorDAO setorDAO = new SetorDAO();
+        Conexao c;
+	PreparedStatement ps;
+	ResultSet rs;
+        int cont = 0;
+        
+        if (Setor.equals("Todos"))
+            Setor = "";
+        String setor = "%"+Setor+"%";
+
+        boolean whereAdd = false;
+        StringBuffer sb = new StringBuffer("select * from Funcionario f inner join Setor s on f.id_setor = s.id");
+        
+        //concatenar nome se preenchido.
+        if (Nome.length() > 0){
+            if (whereAdd == false){
+                sb.append(" WHERE ");
+                whereAdd = true;
+                sb.append("f.nome like ");
+                sb.append("'%" + Nome + "%'");
+            }
+        }
+        //concatenar ramal se preenchido.
+        if (Ramal.length() > 0){
+            if (whereAdd == false){
+                sb.append(" WHERE ");
+                whereAdd = true;
+            }
+            else
+                sb.append(" AND ");
+            sb.append("s.ramal like ");
+            sb.append("'%" + Ramal + "%'");
+        }   
+        //concatenar setor se preenchido/alterado de todos
+        if (Setor.length() > 0){
+            if (whereAdd == false){
+                sb.append(" WHERE ");
+                whereAdd = true;
+            }
+            else
+                sb.append(" AND ");
+            sb.append("s.nome like ");
+            sb.append("'%" + Setor + "%'");
+        }   
+                
+        ps = Conexao.getInstance().prepareStatement(sb.toString());
+        
+        rs = ps.executeQuery(sb.toString());
+        List<FuncionarioM> funcionarios = new ArrayList<>();
+        while(rs.next()){
+            FuncionarioM funcionario = new FuncionarioM();
+                   funcionario.setId(rs.getInt("id"));
+                   funcionario.setNome(rs.getString("nome"));
+                   funcionario.setEndereco(rs.getString("endereco"));
+                   funcionario.setCidadeestado(rs.getString("cidade_estado"));
+                   funcionario.setTelresidencial(rs.getString("tel_residencial"));
+                   funcionario.setTelcomercial1(rs.getString("tel_comercial1"));
+                   funcionario.setTelcomercial2(rs.getString("tel_comercial2"));
+                   funcionario.setCelular1(rs.getString("celular1"));
+                   funcionario.setCelular2(rs.getString("celular2"));
+                   funcionario.setCelular3(rs.getString("celular3"));
+                   funcionario.setEmail(rs.getString("email"));
+                   funcionario.setDia(rs.getString("dia"));
+                   funcionario.setHorario(rs.getString("horario"));
+                   funcionario.setObservacao(rs.getString("observacao"));
+                   funcionario.setSetor(SetorDAO.busca(rs.getInt("id_setor")));
+                   funcionario.setDocente(rs.getBoolean("docente"));
+                   funcionario.setInativo(rs.getBoolean("inativo"));
+           funcionarios.add(funcionario);
+           cont++;
+                  
+        }
+        
+        if(cont == 0)
+        {
+            return null;
+        }
+            
+        ps.execute();
+        
+        ps.close();
+        rs.close();
+        
+        return funcionarios;
+    }
     
     static public void salvar (FuncionarioM funcionario) throws SQLException{
         PreparedStatement pst;
@@ -157,6 +247,7 @@ public class FuncionarioDAO {
         Conexao c;
 	PreparedStatement ps;
 	ResultSet rs;
+        int cont = 0;
         
         //Para pesquisar no banco de dados todos os setores.
         if (Setor.equals("Todos"))
@@ -244,8 +335,15 @@ public class FuncionarioDAO {
                    funcionario.setDocente(rs.getBoolean("docente"));
                    funcionario.setInativo(rs.getBoolean("inativo"));
            funcionarios.add(funcionario);
+           cont++;
+                  
         }
         
+        if(cont == 0)
+        {
+            return null;
+        }
+            
         ps.execute();
         
         ps.close();
