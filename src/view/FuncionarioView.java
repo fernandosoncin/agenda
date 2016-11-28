@@ -18,9 +18,9 @@ import model.SetorM;
 
 
 public class FuncionarioView extends javax.swing.JInternalFrame {
+   
     //Declaração variáveis de acesso.
     FuncionarioM funcionario = new FuncionarioM();
-    
     List<FuncionarioM> listaFuncionario;
     List<SetorM> listaSetor;
     SetorDAO setorDAO;
@@ -44,7 +44,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         desativarCampos();
     }
 
-  
+    //Pega a lista de setores 
     public void atualizaBoxSetor(){
        
         cbxSetor.removeAllItems();
@@ -62,7 +62,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     
     
     
-     
+     //Atualiza todos os funcionario para a tabela
      public void atualizaTabelaFuncionario(){
         funcionario = new FuncionarioM();
         try {
@@ -119,8 +119,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             tbeFuncionario.setRowHeight(25);
             tbeFuncionario.updateUI();
     }
-    
-      public void atualizaTabelaFiltro(){
+    //atualiza parcialmente os funcionarios a partir do que foi digitado na busca
+    public void atualizaTabelaFiltro(){
         funcionario = new FuncionarioM();
 
         String dados[][] = new String[listaFuncionario.size()][18];
@@ -572,7 +572,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Pega valores das colunas e transcreve para os campos de texto
     private void tbeFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbeFuncionarioMouseClicked
         tbeFuncionario.getTableHeader().setReorderingAllowed(false);
         tfdId.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),0).toString());
@@ -594,14 +595,15 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         btnAlterar.setEnabled(true);
         btnExcluir.setEnabled(true);
     }//GEN-LAST:event_tbeFuncionarioMouseClicked
-
+    
+    
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(tfdNome.getText().isEmpty() || tfdEndereco.getText().isEmpty() || tfdCidadeEstado.getText().isEmpty() || tfdTelResidencial.getText().isEmpty()||
             tfdCelular1.getText().isEmpty() ||tfdEmail.getText().isEmpty() || cbxSetor.getSelectedIndex()!=0){
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else if(tfdId.getText().isEmpty()){
-            
+            //Salva tudo digitado no campo de texto para o objeto e salva no banco de dados
             funcionario.setNome(tfdNome.getText());
             funcionario.setEndereco(tfdEndereco.getText());
             funcionario.setCidadeestado(tfdCidadeEstado.getText());
@@ -634,6 +636,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             limparCamposFuncionario();
         }
         else{
+            //Salva tudo que foi alterado nos campos de texto para o objeto e salva no banco de dados
             funcionario.setId(Integer.parseInt(tfdId.getText()));
             funcionario.setNome(tfdNome.getText());
             funcionario.setEndereco(tfdEndereco.getText());
@@ -663,7 +666,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         desativarCampos();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
-
+    
+    //O botão excluir é liberado após escolhido um funcionario na tabela
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if(tfdId.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Selecione um Funcionario", "erro", JOptionPane.WARNING_MESSAGE);
@@ -723,6 +727,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        taaObservacao.setText("TESTE TESTE TESTE  TESTE");
     }//GEN-LAST:event_BOTAOSETARActionPerformed
 
+    //Quando o setor é selecionado, é transcrito para o campo de texto "Ramal"
     private void cbxSetorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSetorItemStateChanged
     if(cbxSetor.getSelectedIndex()>=1){
         tfdRamal.setText(Integer.toString(pegaSetor().getRamal()));
@@ -771,6 +776,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
    
+    //Ao selecionario um setor, é chamada o dao para fazer a busca no banco de dados
     public SetorM pegaSetor(){
         try{
             if(cbxSetor.getSelectedIndex() == 0){
@@ -784,7 +790,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         return null;
     }
     
-    
+    //Mascara que formata para regularizar como é inserido o telefone
     public static DefaultFormatterFactory setFormatoTelefone(){  
         MaskFormatter comFoco = null;  
         try   
@@ -797,6 +803,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         return factory;  
     }
     
+    //Mascara que formata para regularizar como é inserido o celular
     public static DefaultFormatterFactory setFormatoCelular(){  
         MaskFormatter comFoco = null;  
         try   
