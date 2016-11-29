@@ -332,6 +332,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         });
 
         tfdbusca.setPreferredSize(new java.awt.Dimension(6, 23));
+        tfdbusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfdbuscaKeyPressed(evt);
+            }
+        });
 
         tfdHorario.setEnabled(false);
 
@@ -747,8 +752,16 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             try{
                 
                 listaFuncionario = FuncionarioDAO.buscaFiltroNome(tfdbusca.getText());
+                if(listaFuncionario == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    atualizaTabelaFuncionario();
+                    
+                }else{
+                    
                 atualizaTabelaFiltro();
                 
+                }
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
             }
@@ -759,7 +772,16 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             try{
                 
                 listaFuncionario = FuncionarioDAO.buscaFiltroSetor(tfdbusca.getText());
+                if(listaFuncionario == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    atualizaTabelaFuncionario();
+                    
+                }else{
+                    
                 atualizaTabelaFiltro();
+                
+                }
 
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
@@ -769,13 +791,26 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
              try{
                 
                 listaFuncionario = FuncionarioDAO.buscaFiltroInativo(tfdbusca.getText());
+                if(listaFuncionario == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    atualizaTabelaFuncionario();
+                    
+                }else{
+                    
                 atualizaTabelaFiltro();
+                
+                }
 
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tfdbuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdbuscaKeyPressed
+    
+    }//GEN-LAST:event_tfdbuscaKeyPressed
    
     //Ao selecionario um setor, é chamada o dao para fazer a busca no banco de dados
     public SetorM pegaSetor(){
