@@ -133,7 +133,7 @@ public class FuncionarioDAO {
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
         SetorDAO setorDAO = new SetorDAO();
-        
+        int cont = 0;
         String name = "%"+Nome+"%";
         
         sql = "select * from Funcionario where nome like ? order by nome";
@@ -158,10 +158,14 @@ public class FuncionarioDAO {
                    rs.getString("observacao"),
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo")));  
+                   rs.getBoolean("inativo")));
+            cont++;
         }
         pst.close();                           
-        
+         if(cont == 0)
+        {
+            return null;
+        }
         return funcionario;
     }
     
@@ -171,7 +175,7 @@ public class FuncionarioDAO {
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
         SetorDAO setorDAO = new SetorDAO();
-        
+        int cont = 0;
         String set = "%"+Setor+"%";
         
         sql = "select * from Funcionario f inner join Setor s on f.id_setor = s.id where s.nome like ?";
@@ -196,10 +200,14 @@ public class FuncionarioDAO {
                    rs.getString("observacao"),
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo")));  
+                   rs.getBoolean("inativo")));
+            cont++;
         }
         pst.close();                           
-        
+         if(cont == 0)
+        {
+            return null;
+        }
         return funcionario;
     }
     
@@ -208,7 +216,7 @@ public class FuncionarioDAO {
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
         SetorDAO setorDAO = new SetorDAO();
-        
+        int cont = 0;
         String inat = "%"+Inativo+"%";
         
         sql = "select * from Funcionario where nome like ? and inativo = 1 order by nome";
@@ -233,10 +241,14 @@ public class FuncionarioDAO {
                    rs.getString("observacao"),
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
-                   rs.getBoolean("inativo")));  
+                   rs.getBoolean("inativo")));
+            cont++;
         }
         pst.close();                           
-        
+         if(cont == 0)
+        {
+            return null;
+        }
         return funcionario;
     }
                                
