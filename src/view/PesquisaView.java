@@ -26,9 +26,6 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     SetorDAO setorDAO;
     FuncionarioDAO funcionarioDAO;
     
-    String SetorSelecionado = "";
-    
-    
     public PesquisaView(){
         initComponents();
         
@@ -639,20 +636,16 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         funcionario = new FuncionarioM();
         if(txtNome.getText().length() <= 0 && txtRamal.getText().length() <= 0 && cbxSetor.getSelectedItem().toString() == "Todos" && ckbDocente_Busca.isSelected() == false && ckbInativo_Busca.isSelected() == false)
             atualizaTabelaFuncionario();
-        else if(txtNome.getText().length() > 0 || txtRamal.getText().length()>0 || SetorSelecionado != "Todos"){     
+        else{     
             try{
                 listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
                 
-                if(listaFuncionario == null)
-                {
+                if(listaFuncionario == null){
                     JOptionPane.showMessageDialog( null, "Nenhum contato encontrado!");
                     atualizaTabelaFuncionario();
                 }
                 else
-                {
                     atualizaTabelaBusca();
-                }
-                
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog( null, "Erro: "+ex);
             }
@@ -703,15 +696,13 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLimparActionPerformed
     {//GEN-HEADEREND:event_btnLimparActionPerformed
         // Limpar e atualiza
-        
         txtNome.setText("");
         txtRamal.setText("");
         cbxSetor.setSelectedItem("Todos");
         ckbDocente_Busca.setSelected(false);
         ckbInativo_Busca.setSelected(false);
         
-        atualizaTabelaFuncionario();
-                
+        atualizaTabelaFuncionario();     
     }//GEN-LAST:event_btnLimparActionPerformed
 
 

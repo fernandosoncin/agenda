@@ -86,12 +86,10 @@ public class FuncionarioDAO {
                    funcionario.setDocente(rs.getBoolean("docente"));
                    funcionario.setInativo(rs.getBoolean("inativo"));
            funcionarios.add(funcionario);
-           cont++;
-                  
+           cont++;          
         }
         
-        if(cont == 0)
-        {
+        if(cont == 0){
             return null;
         }
             
@@ -336,14 +334,90 @@ public class FuncionarioDAO {
                    funcionario.setInativo(rs.getBoolean("inativo"));
            funcionarios.add(funcionario);
            cont++;
-                  
         }
         
-        if(cont == 0)
-        {
+        if(cont == 0){
             return null;
         }
             
+        ps.execute();
+        
+        ps.close();
+        rs.close();
+        
+        return funcionarios;
+    }
+    
+    static public List<FuncionarioM> relatorioFuncionario(String tipos, String order, String filtro) throws SQLException{
+        Conexao c;
+	PreparedStatement ps;
+	ResultSet rs;
+    
+        //verifica o FILTRO TODOS/DOCENTE/INATIVO
+        boolean docente = false;
+        boolean inativo = false;
+
+        if (filtro.equals("Docentes"))
+            docente = true;
+        else if (filtro.equals("Inativos"))
+            inativo = true;
+        
+        boolean whereAdd = false;
+        StringBuffer sb = new StringBuffer("select * from funcionario f inner join setor s on f.id_setor = s.id");
+        
+        //Relatorio por Funcionarios.
+        if (tipos.equals("Funcionarios")){
+            if (docente == true){
+                if (whereAdd == false)
+                    sb.append (" WHERE ");
+                
+                sb.append("f.docente = ");
+                sb.append(docente);
+            }
+            if (inativo == true){
+                if (whereAdd == false)
+                    sb.append (" WHERE ");
+                
+                sb.append("f.inativo = ");
+                sb.append(inativo);
+            }
+            //verificação em qual dos dois tipos os funcionarios vão ser ordenados
+            if (tipos.equals("Funcionarios") && order == "Nome"){
+                sb.append(" order by f.nome ");
+            }
+            //irá order os nomes por setores.
+            if (tipos.equals("Funcionarios") && order == "Setor"){
+                sb.append(" order by s.nome, f.nome");
+            }
+        }
+        
+        List<FuncionarioM> funcionarios = new ArrayList<>();
+        ps = Conexao.getInstance().prepareStatement(sb.toString());
+        
+        rs = ps.executeQuery(sb.toString());
+        
+        while(rs.next()){
+            FuncionarioM funcionario = new FuncionarioM();
+                   funcionario.setId(rs.getInt("id"));
+                   funcionario.setNome(rs.getString("nome"));
+                   funcionario.setEndereco(rs.getString("endereco"));
+                   funcionario.setCidadeestado(rs.getString("cidade_estado"));
+                   funcionario.setTelresidencial(rs.getString("tel_residencial"));
+                   funcionario.setTelcomercial1(rs.getString("tel_comercial1"));
+                   funcionario.setTelcomercial2(rs.getString("tel_comercial2"));
+                   funcionario.setCelular1(rs.getString("celular1"));
+                   funcionario.setCelular2(rs.getString("celular2"));
+                   funcionario.setCelular3(rs.getString("celular3"));
+                   funcionario.setEmail(rs.getString("email"));
+                   funcionario.setDia(rs.getString("dia"));
+                   funcionario.setHorario(rs.getString("horario"));
+                   funcionario.setObservacao(rs.getString("observacao"));
+                   funcionario.setSetor(SetorDAO.busca(rs.getInt("id_setor")));
+                   funcionario.setDocente(rs.getBoolean("docente"));
+                   funcionario.setInativo(rs.getBoolean("inativo"));
+           funcionarios.add(funcionario);
+        }
+        
         ps.execute();
         
         ps.close();
