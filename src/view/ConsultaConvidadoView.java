@@ -352,9 +352,9 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
             tbeConsulta.getColumnModel().getColumn(3).setMinWidth(80);
             tbeConsulta.getColumnModel().getColumn(3).setMaxWidth(80);
             
-            tbeConsulta.getColumnModel().getColumn(4).setPreferredWidth(120);
-            tbeConsulta.getColumnModel().getColumn(4).setMinWidth(120);
-            tbeConsulta.getColumnModel().getColumn(4).setMaxWidth(120);
+            tbeConsulta.getColumnModel().getColumn(4).setPreferredWidth(130);
+            tbeConsulta.getColumnModel().getColumn(4).setMinWidth(130);
+            tbeConsulta.getColumnModel().getColumn(4).setMaxWidth(130);
             
             tbeConsulta.getTableHeader().setReorderingAllowed(false);
             
