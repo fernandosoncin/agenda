@@ -699,7 +699,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(tfdNome.getText().isEmpty() || tfdEndereco.getText().isEmpty() || tfdCidadeEstado.getText().isEmpty() || tfdTelResidencial.getText().isEmpty()||
-            tfdCelular1.getText().isEmpty() ||tfdEmail.getText().isEmpty() || cbxSetor.getSelectedIndex()!=0){
+            tfdCelular1.getText().isEmpty() ||tfdEmail.getText().isEmpty() || cbxSetor.getSelectedIndex()==0){
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else if(tfdId.getText().isEmpty()){

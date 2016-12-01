@@ -26,7 +26,7 @@ public class PrincipalView extends javax.swing.JFrame {
         
            
            
-        if(usuario.isAdmin() == false){
+        if(usuarioAtivo.isAdmin() == false){
              mnuArquivos.setEnabled(false);
              //mnuConsulta.setEnabled(false);
              mnuRelatorio.setEnabled(false);
