@@ -29,7 +29,7 @@ public class PrincipalView extends javax.swing.JFrame {
         if(usuario.isAdmin() == false){
              mnuArquivos.setEnabled(false);
              //mnuConsulta.setEnabled(false);
-             jMenu1.setEnabled(false);
+             mnuRelatorio.setEnabled(false);
              mnuUsuarios.setEnabled(false);
              ConsultaConvidadoView consulta = new ConsultaConvidadoView();
              pnlPrincipal.removeAll();
@@ -70,7 +70,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mmiFuncionario = new javax.swing.JMenuItem();
         mniDepartamento = new javax.swing.JMenuItem();
         mnuConsulta = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        mnuRelatorio = new javax.swing.JMenu();
         mnuUsuarios = new javax.swing.JMenu();
         mniGerenciarUsuarios = new javax.swing.JMenuItem();
         mniMinhaConta = new javax.swing.JMenuItem();
@@ -155,17 +155,17 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar2.add(mnuConsulta);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/Relatório48x48.png"))); // NOI18N
-        jMenu1.setText("Relatorio");
-        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter()
+        mnuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/Relatório48x48.png"))); // NOI18N
+        mnuRelatorio.setText("Relatorio");
+        mnuRelatorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mnuRelatorio.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jMenu1MouseClicked(evt);
+                mnuRelatorioMouseClicked(evt);
             }
         });
-        jMenuBar2.add(jMenu1);
+        jMenuBar2.add(mnuRelatorio);
 
         mnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/usuário.png"))); // NOI18N
         mnuUsuarios.setText("Usuários");
@@ -250,17 +250,25 @@ public class PrincipalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mmiFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmiFuncionarioActionPerformed
-    FuncionarioView contato = new FuncionarioView();
-    pnlPrincipal.removeAll();
-    pnlPrincipal.add(contato);
-    pnlPrincipal.updateUI();
+        
+        if(usuarioAtivo.isAdmin() == true)
+        {
+            FuncionarioView contato = new FuncionarioView();
+            pnlPrincipal.removeAll();
+            pnlPrincipal.add(contato);
+            pnlPrincipal.updateUI();
+        }
     }//GEN-LAST:event_mmiFuncionarioActionPerformed
 
     private void mniDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDepartamentoActionPerformed
-    SetorView departamento = new SetorView();
-    pnlPrincipal.removeAll();
-    pnlPrincipal.add(departamento);
-    pnlPrincipal.updateUI();
+        
+        if(usuarioAtivo.isAdmin() == true)
+        {
+            SetorView departamento = new SetorView();
+            pnlPrincipal.removeAll();
+            pnlPrincipal.add(departamento);
+            pnlPrincipal.updateUI();
+        }
     }//GEN-LAST:event_mniDepartamentoActionPerformed
 
     private void mnuConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuConsultaMouseClicked
@@ -296,10 +304,15 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuUsuariosMouseClicked
 
     private void mniGerenciarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGerenciarUsuariosActionPerformed
-    UsuarioView usuario = new UsuarioView();
-    pnlPrincipal.removeAll();
-    pnlPrincipal.add(usuario);
-    pnlPrincipal.updateUI();
+        
+        if(usuarioAtivo.isAdmin() == true)
+        {
+            UsuarioView usuario = new UsuarioView();
+            pnlPrincipal.removeAll();
+            pnlPrincipal.add(usuario);
+            pnlPrincipal.updateUI();
+        }
+        
     }//GEN-LAST:event_mniGerenciarUsuariosActionPerformed
 
     private void mniGerenciarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mniGerenciarUsuariosMouseClicked
@@ -307,11 +320,15 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniGerenciarUsuariosMouseClicked
 
     private void mniMinhaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMinhaContaActionPerformed
-
-    MinhaContaView minhaconta = new MinhaContaView(usuarioAtivo);
-    pnlPrincipal.removeAll();
-    pnlPrincipal.add(minhaconta);
-    pnlPrincipal.updateUI();
+        
+        if(usuarioAtivo.isAdmin() == true)
+        {
+            MinhaContaView minhaconta = new MinhaContaView(usuarioAtivo);
+            pnlPrincipal.removeAll();
+            pnlPrincipal.add(minhaconta);
+            pnlPrincipal.updateUI();
+        }
+        
     }//GEN-LAST:event_mniMinhaContaActionPerformed
 
     private void mnuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSobreActionPerformed
@@ -327,12 +344,16 @@ public class PrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuSobreMouseClicked
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-    RelatorioView relatorio = new RelatorioView();
-    pnlPrincipal.removeAll();
-    pnlPrincipal.add(relatorio);
-    pnlPrincipal.updateUI();
-    }//GEN-LAST:event_jMenu1MouseClicked
+    private void mnuRelatorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuRelatorioMouseClicked
+    
+        if(usuarioAtivo.isAdmin() == true)
+        {
+            RelatorioView relatorio = new RelatorioView();
+            pnlPrincipal.removeAll();
+            pnlPrincipal.add(relatorio);
+            pnlPrincipal.updateUI();
+        }
+    }//GEN-LAST:event_mnuRelatorioMouseClicked
 
 
 
@@ -342,7 +363,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
@@ -361,6 +381,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniMinhaConta;
     private javax.swing.JMenu mnuArquivos;
     private javax.swing.JMenu mnuConsulta;
+    private javax.swing.JMenu mnuRelatorio;
     private javax.swing.JMenu mnuSobre;
     private javax.swing.JMenu mnuUsuarios;
     private javax.swing.JPanel pnlPrincipal;
