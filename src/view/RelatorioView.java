@@ -213,6 +213,11 @@ public class RelatorioView extends javax.swing.JInternalFrame {
 
         radNome.setText("Por Nome");
         radNome.setEnabled(false);
+        radNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNomeActionPerformed(evt);
+            }
+        });
 
         radSetor.setText("Por Setor");
         radSetor.setEnabled(false);
@@ -401,10 +406,10 @@ public class RelatorioView extends javax.swing.JInternalFrame {
     
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         funcionario = new FuncionarioM();
-        
+
         //Desliga o botao GERAR PDF, pois esta fazendo uma nova consulta.
         btnRelatorio.setEnabled(false);
-
+        
         if (radFuncionarios.isSelected()){
             if ((radNome.isSelected() || radSetor.isSelected()) && (radTodos.isSelected() || radDocente.isSelected() || radInativo.isSelected())){
             //Gera a lista de Funcionarios com os seus filtros selecionados.      
@@ -504,7 +509,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
             cabecalhoCidade.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabela.addCell(cabecalhoCidade);
             
-            PdfPCell cabecalhoTelefone = new PdfPCell(new Paragraph("Telefone Res.",f10));
+            PdfPCell cabecalhoTelefone = new PdfPCell(new Paragraph("Telefone",f10));
             cabecalhoTelefone.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabela.addCell(cabecalhoTelefone);
             
@@ -536,12 +541,12 @@ public class RelatorioView extends javax.swing.JInternalFrame {
                 PdfPCell colCidade = new PdfPCell(pCidade);
                 colCidade.setHorizontalAlignment(Element.ALIGN_CENTER);
                 
-                Paragraph pTel = new Paragraph(func.getTelresidencial(), fnormal);
+                Paragraph pTel = new Paragraph("Res:  "+func.getTelresidencial()+"\nCom1: "+func.getTelcomercial1()+"\nCom2: "+func.getTelcomercial2(), fnormal);
                 pTel.setAlignment(Element.ALIGN_CENTER);
                 PdfPCell colTel = new PdfPCell(pTel);
                 colTel.setHorizontalAlignment(Element.ALIGN_CENTER);
                 
-                Paragraph pCel = new Paragraph(func.getCelular1(), fnormal);
+                Paragraph pCel = new Paragraph(func.getCelular1()+"\n"+func.getCelular2()+"\n"+func.getCelular3(), fnormal);
                 pTel.setAlignment(Element.ALIGN_CENTER);
                 PdfPCell colCel = new PdfPCell(pCel);
                 colCel.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -637,6 +642,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_radFuncionariosActionPerformed
 
+    
     private void radSetoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radSetoresActionPerformed
         //Desabilita e limpa os JRadioButtons desnecessarios.
         if (radSetores.isSelected()){
@@ -649,8 +655,14 @@ public class RelatorioView extends javax.swing.JInternalFrame {
             
             buttonGroup2.clearSelection();
             buttonGroup3.clearSelection();
+            
+            btnBusca.setEnabled(true);
         }
     }//GEN-LAST:event_radSetoresActionPerformed
+
+    private void radNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radNomeActionPerformed
 
     
 
