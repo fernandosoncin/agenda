@@ -1,0 +1,3 @@
+usuario = "aplicacoes";
+senha = "!4g1m0e2u";
+url = "jdbc:mysql://10.92.20.7:3306/patrimonio";
