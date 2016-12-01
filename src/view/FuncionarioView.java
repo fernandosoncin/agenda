@@ -91,8 +91,12 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 dados[i][13] = funcionario.getDia();
                 dados[i][14] = funcionario.getHorario();
                 dados[i][15] = funcionario.getObservacao();
-                dados[i][16] = String.valueOf(funcionario.getDocente());
-                dados[i][17] = String.valueOf(funcionario.getInativo());
+                if(funcionario.getDocente() == true){
+                dados[i][16] = String.valueOf("Professor");}
+                else{dados[i][16] = String.valueOf("Funcionário");}
+                if(funcionario.getInativo()== true){
+                dados[i][17] = String.valueOf("Inativo");}
+                else{dados[i][17] = String.valueOf("Ativo");}
                
                 i++;
             }
@@ -143,8 +147,12 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 dados[i][13] = funcionario.getDia();
                 dados[i][14] = funcionario.getHorario();
                 dados[i][15] = funcionario.getObservacao();
-                dados[i][16] = String.valueOf(funcionario.getDocente());
-                dados[i][17] = String.valueOf(funcionario.getInativo());
+                if(funcionario.getDocente() == true){
+                dados[i][16] = String.valueOf("Professor");}
+                else{dados[i][16] = String.valueOf("Funcionário");}
+                if(funcionario.getInativo()== true){
+                dados[i][17] = String.valueOf("Inativo");}
+                else{dados[i][17] = String.valueOf("Ativo");}
                
                 i++;
             }
