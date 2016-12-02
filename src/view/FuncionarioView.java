@@ -15,6 +15,7 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import model.FuncionarioM;
 import model.SetorM;
+import util.LimiteDigitos;
 
 
 public class FuncionarioView extends javax.swing.JInternalFrame {
@@ -42,6 +43,16 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         atualizaBoxSetor();
         atualizaTabelaFuncionario();
         desativarCampos();
+        
+        tfdNome.setDocument(new LimiteDigitos(90));
+        tfdEndereco.setDocument(new LimiteDigitos(64));
+        tfdCidadeEstado.setDocument(new LimiteDigitos(64));
+        tfdEmail.setDocument(new LimiteDigitos(64));
+        tfdDia.setDocument(new LimiteDigitos(45));
+        tfdHorario.setDocument(new LimiteDigitos(90));
+        taaObservacao.setDocument(new LimiteDigitos(150));
+        
+        
     }
 
     //Pega a lista de setores 

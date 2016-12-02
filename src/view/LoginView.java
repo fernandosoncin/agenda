@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.net.URL;
 import javax.swing.JOptionPane;
 import model.UsuarioM;
+import util.LimiteDigitos;
 
 /**
  *
@@ -31,12 +32,13 @@ public class LoginView extends javax.swing.JFrame {
         
         this.tfdUsuario.requestFocus();
         usuarioDAO = new UsuarioDAO();
-        //tfdUsuario.setDocument(new LimiteDigitos(20));
-        //tfdSenha.setDocument(new LimiteDigitos(20));
+       
         
         URL url = this.getClass().getResource("/view/icones/icon.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
+         tfdUsuario.setDocument(new LimiteDigitos(20));
+        tfdSenha.setDocument(new LimiteDigitos(20));
         
     }
 
@@ -74,6 +76,11 @@ public class LoginView extends javax.swing.JFrame {
         });
 
         tfdSenha.setPreferredSize(new java.awt.Dimension(210, 23));
+        tfdSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfdSenhaKeyPressed(evt);
+            }
+        });
 
         tfdUsuario.setPreferredSize(new java.awt.Dimension(59, 23));
         tfdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -95,26 +102,25 @@ public class LoginView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfdSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfdUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tfdSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -122,17 +128,18 @@ public class LoginView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(btnVoltar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        
         usuarioM = null;
         try {
             if (tfdUsuario.getText().isEmpty()) {
@@ -153,12 +160,7 @@ public class LoginView extends javax.swing.JFrame {
                     tfdSenha.setText("");
                     tfdUsuario.requestFocus();
                 }else{
-        JOptionPane.showMessageDialog(null, usuarioM.getId()); 
-        JOptionPane.showMessageDialog(null, usuarioM.getNome());
-         JOptionPane.showMessageDialog(null, usuarioM.getContato());
-          JOptionPane.showMessageDialog(null, usuarioM.getUsuario()); 
-          JOptionPane.showMessageDialog(null, usuarioM.getSenha());
-           JOptionPane.showMessageDialog(null, usuarioM.isAdmin());
+       
                     PrincipalView principal = new PrincipalView(usuarioM);
                     this.dispose();
                     
@@ -173,12 +175,13 @@ public class LoginView extends javax.swing.JFrame {
             ex.printStackTrace();
             
         }
+    
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void tfdUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdUsuarioKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             tfdSenha.requestFocusInWindow();
-        }        // TODO add your handling code here:
+        }        
     }//GEN-LAST:event_tfdUsuarioKeyPressed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -186,6 +189,46 @@ public class LoginView extends javax.swing.JFrame {
         InicialView InicialView = new InicialView();
         
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void tfdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyPressed
+      if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            usuarioM = null;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                if (tfdUsuario.getText().isEmpty()) {
+                   // erro.setText("O nome do usuario deve ser preechido");
+                   // erro.setVisible(true);
+                   JOptionPane.showMessageDialog(null, "O usuário deve ser preenchido", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+                    tfdUsuario.requestFocus();
+                } else if (tfdSenha.getText().isEmpty()) {
+                   // erro.setText("A senha deve ser preechida");
+                   // erro.setVisible(true);
+                   JOptionPane.showMessageDialog(null, "A senha deve ser preenchida", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+                    tfdSenha.requestFocus();
+                } else {
+                    usuarioM = usuarioDAO.valida(tfdUsuario.getText(), tfdSenha.getText());
+                    if(usuarioM == null){
+                        JOptionPane.showMessageDialog(null, "Usuário não encontrado", "Erro", JOptionPane.ERROR_MESSAGE);
+                        tfdUsuario.setText("");
+                        tfdSenha.setText("");
+                        tfdUsuario.requestFocus();
+                    }else{
+                        PrincipalView pv = new PrincipalView(usuarioM);
+                        this.dispose();
+                    }
+                    
+                    
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto", "Erro", JOptionPane.ERROR_MESSAGE);
+                tfdUsuario.setText("");
+                tfdSenha.setText("");
+                tfdUsuario.requestFocus();
+
+            }
+        }
+        }
+    }//GEN-LAST:event_tfdSenhaKeyPressed
 
  
 

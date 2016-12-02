@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.FuncionarioM;
 import model.SetorM;
+import util.LimiteDigitos;
 
 public class PesquisaView extends javax.swing.JInternalFrame {
 
@@ -39,12 +40,14 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         
         atualizaTabelaFuncionario();
         PanelInfo.setVisible(false);
+        
+        txtNome.setDocument(new LimiteDigitos(90));
+        txtRamal.setDocument(new LimiteDigitos(11));
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbeConsulta = new javax.swing.JTable();
@@ -54,7 +57,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         txtRamal = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        cbxSetor = new javax.swing.JComboBox<>();
+        cbxSetor = new javax.swing.JComboBox<String>();
         jPanel1 = new javax.swing.JPanel();
         ckbInativo_Busca = new javax.swing.JCheckBox();
         ckbDocente_Busca = new javax.swing.JCheckBox();
@@ -100,40 +103,32 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(1440, 790));
 
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"", "", ""},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "ID", "Nome", "Ramal"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         tbeConsulta.setFocusable(false);
-        tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbeConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbeConsultaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbeConsulta);
-        if (tbeConsulta.getColumnModel().getColumnCount() > 0)
-        {
+        if (tbeConsulta.getColumnModel().getColumnCount() > 0) {
             tbeConsulta.getColumnModel().getColumn(0).setResizable(false);
             tbeConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
             tbeConsulta.getColumnModel().getColumn(1).setResizable(false);
@@ -144,10 +139,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
             }
         });
@@ -156,11 +149,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Setor");
 
-        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
-        cbxSetor.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
+        cbxSetor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxSetorActionPerformed(evt);
             }
         });
@@ -193,19 +184,15 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         );
 
         btnBusca.setText("Buscar");
-        btnBusca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscaActionPerformed(evt);
             }
         });
 
         btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
             }
         });
@@ -517,9 +504,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,8 +516,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-                        .addGap(153, 153, 153))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                        .addContainerGap(114, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
