@@ -259,7 +259,7 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
                 dados[i][4] = funcionario.getHorario();
                 i++;
             }
-            String tituloColuna[] = {"Nome", "Departamento", "Ramal", "Dia", "Horario"};
+            String tituloColuna[] = {"Nome", "Setor", "Ramal", "Dia", "Horario"};
             DefaultTableModel tabelaConsulta = new DefaultTableModel();
             tabelaConsulta.setDataVector(dados, tituloColuna);
             tbeConsulta.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -321,7 +321,7 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
                 dados[i][4] = funcionario.getHorario();
                 i++;
             }
-            String tituloColuna[] = {"Nome", "Departamento", "Ramal", "Dia", "Horario"};
+            String tituloColuna[] = {"Nome", "Setor", "Ramal", "Dia", "Horario"};
             DefaultTableModel tabelaConsulta = new DefaultTableModel();
             tabelaConsulta.setDataVector(dados, tituloColuna);
             tbeConsulta.setModel(new DefaultTableModel(dados, tituloColuna) {
