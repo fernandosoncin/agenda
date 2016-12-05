@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.istack.internal.logging.Logger;
 import dao.FuncionarioDAO;
 import dao.SetorDAO;
 import java.awt.Frame;
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.FuncionarioM;
 import model.SetorM;
+import java.util.logging.Level;
 import util.LimiteDigitos;
 
 public class PesquisaView extends javax.swing.JInternalFrame {
@@ -37,7 +39,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         this.setorDAO = new SetorDAO();  
         this.listaSetor = new ArrayList<>();
         this.listaFuncionario = new ArrayList<>();
-        
+        atualizaBoxSetor();
         atualizaTabelaFuncionario();
         PanelInfo.setVisible(false);
         
@@ -529,6 +531,22 @@ public class PesquisaView extends javax.swing.JInternalFrame {
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
+    
+        //Pega a lista de setores 
+    public void atualizaBoxSetor(){
+       
+        cbxSetor.removeAllItems();
+        cbxSetor.addItem("Todos");
+        try{
+            listaSetor = setorDAO.listaTodos();
+        }catch(SQLException ex){    
+            Logger.getLogger(PesquisaView.class.getClass()).log(Level.SEVERE,null,ex);
+        }
+         String dados[][] = new String[listaSetor.size()][5];
+        for (SetorM setor : listaSetor) {
+            cbxSetor.addItem(setor.getNome());
+        }
+    } 
     
     public void atualizaTabelaFuncionario(){
         funcionario = new FuncionarioM();
