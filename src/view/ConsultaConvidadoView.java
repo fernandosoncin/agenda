@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.FuncionarioM;
 import model.SetorM;
+import util.LimiteDigitos;
 
 /**
  *
@@ -52,6 +53,8 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
         this.setSize( 893, 560);
                
         atualizaTabelaFuncionario();
+        txtNome.setDocument(new LimiteDigitos(90));
+        txtRamal.setDocument(new LimiteDigitos(11));
     }
 
     /**
@@ -78,7 +81,6 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
 
         jPasswordField1.setText("jPasswordField1");
 
-        setMaximizable(true);
         setTitle("Consulta convidados");
         setToolTipText("");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

@@ -28,6 +28,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
         tfdContato.setDocument(new LimiteDigitos(64));
         tfdUsuario.setDocument(new LimiteDigitos(20));
         tfdSenha.setDocument(new LimiteDigitos(20));
+        tfdConfirmaSenha.setDocument(new LimiteDigitos(20));
         
     }
     
