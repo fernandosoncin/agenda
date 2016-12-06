@@ -9,6 +9,7 @@ import dao.FuncionarioDAO;
 import dao.SetorDAO;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -60,8 +61,7 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPasswordField1 = new javax.swing.JPasswordField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -74,7 +74,7 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
         btnLimpar = new javax.swing.JButton();
         btnBusca = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        cbxSetor = new javax.swing.JComboBox<>();
+        cbxSetor = new javax.swing.JComboBox<String>();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -84,15 +84,13 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Nome", "Departamento", "Ramal", "Dia", "Horário"
             }
         ));
@@ -103,29 +101,37 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Ramal");
 
+        txtRamal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRamalKeyPressed(evt);
+            }
+        });
+
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("Nome");
 
         btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
             }
         });
 
         btnBusca.setText("Buscar");
-        btnBusca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscaActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Setor");
 
-        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
+        cbxSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "NUPSI", "Informática", "Recepção", "Coordenação", "Serviços Gerais", "Administração" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -239,6 +245,64 @@ public class ConsultaConvidadoView extends javax.swing.JInternalFrame {
                 
         atualizaTabelaFuncionario();
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            funcionario = null;
+        funcionario = new FuncionarioM();
+        if(txtNome.getText().length() <= 0)
+            atualizaTabelaFuncionario();
+        else if(txtNome.getText().length() > 0)
+        {     
+            try{
+                listaFuncionario = FuncionarioDAO.buscaConvidado(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString());
+                
+                if(listaFuncionario == null)
+                {
+                    JOptionPane.showMessageDialog( null, "Nenhum contato encontrado!");
+                    atualizaTabelaFuncionario();
+                }
+                else
+                {
+                    atualizaTabelaBusca();
+                }
+                
+            }catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog( null, "Erro: "+ex);
+            }
+        }
+        }
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtRamalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRamalKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            funcionario = null;
+        funcionario = new FuncionarioM();
+        if(txtRamal.getText().length() <= 0)
+            atualizaTabelaFuncionario();
+        else if(txtRamal.getText().length()>0)
+        {     
+            try{
+                listaFuncionario = FuncionarioDAO.buscaConvidado(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString());
+                
+                if(listaFuncionario == null)
+                {
+                    JOptionPane.showMessageDialog( null, "Nenhum contato encontrado!");
+                    atualizaTabelaFuncionario();
+                }
+                else
+                {
+                    atualizaTabelaBusca();
+                }
+                
+            }catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog( null, "Erro: "+ex);
+            }
+        }
+        }
+    }//GEN-LAST:event_txtRamalKeyPressed
 
     
     public void atualizaTabelaFuncionario(){

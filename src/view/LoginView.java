@@ -74,6 +74,11 @@ public class LoginView extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
+        btnEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnEntrarKeyPressed(evt);
+            }
+        });
 
         tfdSenha.setPreferredSize(new java.awt.Dimension(210, 23));
         tfdSenha.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -94,6 +99,11 @@ public class LoginView extends javax.swing.JFrame {
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
+            }
+        });
+        btnVoltar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnVoltarKeyPressed(evt);
             }
         });
 
@@ -139,7 +149,7 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        
+      
         usuarioM = null;
         try {
             if (tfdUsuario.getText().isEmpty()) {
@@ -175,7 +185,7 @@ public class LoginView extends javax.swing.JFrame {
             ex.printStackTrace();
             
         }
-    
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void tfdUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdUsuarioKeyPressed
@@ -229,6 +239,17 @@ public class LoginView extends javax.swing.JFrame {
         }
         }
     }//GEN-LAST:event_tfdSenhaKeyPressed
+
+    private void btnVoltarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVoltarKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        InicialView InicialView = new InicialView();
+        this.dispose();
+        }
+    }//GEN-LAST:event_btnVoltarKeyPressed
+
+    private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
+     
+    }//GEN-LAST:event_btnEntrarKeyPressed
 
  
 

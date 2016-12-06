@@ -5,6 +5,7 @@ import dao.FuncionarioDAO;
 import dao.SetorDAO;
 import java.awt.Frame;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -102,7 +103,8 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setMaximizable(true);
-        setPreferredSize(new java.awt.Dimension(1440, 790));
+        setTitle("Consulta");
+        setPreferredSize(new java.awt.Dimension(1230, 630));
 
         tbeConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,6 +146,17 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
+            }
+        });
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
+            }
+        });
+
+        txtRamal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRamalKeyPressed(evt);
             }
         });
 
@@ -492,7 +505,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addGroup(PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ckbDocente)
                     .addComponent(ckbInativo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PanelObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -508,21 +521,21 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(114, 114, 114))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                        .addContainerGap(114, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -569,7 +582,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
             tabelaConsulta.setDataVector(dados, tituloColuna);
             tbeConsulta.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false//, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                    false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -710,6 +723,55 @@ public class PesquisaView extends javax.swing.JInternalFrame {
         atualizaTabelaFuncionario();     
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            funcionario = null;
+        
+        funcionario = new FuncionarioM();
+        if(txtNome.getText().length() <= 0 )
+            atualizaTabelaFuncionario();
+        else{     
+            try{
+                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                
+                if(listaFuncionario == null){
+                    JOptionPane.showMessageDialog( null, "Nenhum contato encontrado!");
+                    atualizaTabelaFuncionario();
+                }
+                else
+                    atualizaTabelaBusca();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog( null, "Erro: "+ex);
+            }
+        }
+     }
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtRamalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRamalKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            funcionario = null;
+        
+        funcionario = new FuncionarioM();
+        if(txtRamal.getText().length() <= 0)
+            atualizaTabelaFuncionario();
+        else{     
+            try{
+                listaFuncionario = FuncionarioDAO.buscaNome(txtNome.getText(), txtRamal.getText(), cbxSetor.getSelectedItem().toString(), ckbDocente_Busca.isSelected(), ckbInativo_Busca.isSelected());
+                
+                if(listaFuncionario == null){
+                    JOptionPane.showMessageDialog( null, "Nenhum contato encontrado!");
+                    atualizaTabelaFuncionario();
+                }
+                else
+                    atualizaTabelaBusca();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog( null, "Erro: "+ex);
+            }
+        }
+        }
+    }//GEN-LAST:event_txtRamalKeyPressed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelBusca;

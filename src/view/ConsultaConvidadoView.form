@@ -188,8 +188,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRamal">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRamalKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNome">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

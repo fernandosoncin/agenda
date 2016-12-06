@@ -10,6 +10,7 @@ import java.awt.Event;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import model.UsuarioM;
 
@@ -63,6 +64,11 @@ public class InicialView extends javax.swing.JFrame {
                 btnConvidadoActionPerformed(evt);
             }
         });
+        btnConvidado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnConvidadoKeyPressed(evt);
+            }
+        });
 
         btnAdministrador.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnAdministrador.setText("Administrador");
@@ -70,6 +76,11 @@ public class InicialView extends javax.swing.JFrame {
         btnAdministrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdministradorActionPerformed(evt);
+            }
+        });
+        btnAdministrador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAdministradorKeyPressed(evt);
             }
         });
 
@@ -127,6 +138,27 @@ public class InicialView extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         
     }//GEN-LAST:event_formKeyPressed
+
+    private void btnAdministradorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdministradorKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        LoginView LoginView = new LoginView();
+        }
+    }//GEN-LAST:event_btnAdministradorKeyPressed
+
+    private void btnConvidadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnConvidadoKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        UsuarioM usuarioM = null;
+        String convidado = "convidado";
+        try{
+        usuarioM = UsuarioDAO.valida(convidado,convidado);
+        this.dispose();
+        }
+        catch(Exception ex){
+         ex.printStackTrace();
+        }
+        PrincipalView principal = new PrincipalView(usuarioM);
+        }
+    }//GEN-LAST:event_btnConvidadoKeyPressed
 
 
 
