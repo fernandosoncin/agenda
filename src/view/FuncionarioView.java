@@ -83,7 +83,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
  
         }
         
-        String dados[][] = new String[listaFuncionario.size()][18];
+        String dados[][] = new String[listaFuncionario.size()][11];
             int i = 0;
             for (FuncionarioM funcionario : listaFuncionario) {
                 dados[i][0] = String.valueOf(funcionario.getId());
@@ -91,32 +91,25 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 dados[i][2] = funcionario.getEndereco();
                 dados[i][3] = funcionario.getCidadeestado();
                 dados[i][4] = funcionario.getTelresidencial();
-                dados[i][5] = funcionario.getTelcomercial1();
-                dados[i][6] = funcionario.getTelcomercial2();
-                dados[i][7] = funcionario.getCelular1();
-                dados[i][8] = funcionario.getCelular2();
-                dados[i][9] = funcionario.getCelular3();
-                dados[i][10] = funcionario.getEmail();
-                dados[i][11] = funcionario.getSetor().getNome();
-                dados[i][12] = String.valueOf(funcionario.getSetor().getRamal());
-                dados[i][13] = funcionario.getDia();
-                dados[i][14] = funcionario.getHorario();
-                dados[i][15] = funcionario.getObservacao();
+                dados[i][5] = funcionario.getCelular1();
+                dados[i][6] = funcionario.getEmail();
+                dados[i][7] = funcionario.getSetor().getNome();
+                dados[i][8] = String.valueOf(funcionario.getSetor().getRamal());
                 if(funcionario.getDocente() == true){
-                dados[i][16] = String.valueOf("Professor");}
-                else{dados[i][16] = String.valueOf("Funcionário");}
+                dados[i][9] = String.valueOf("Professor");}
+                else{dados[i][9] = String.valueOf("Funcionário");}
                 if(funcionario.getInativo()== true){
-                dados[i][17] = String.valueOf("Inativo");}
-                else{dados[i][17] = String.valueOf("Ativo");}
+                dados[i][10] = String.valueOf("Inativo");}
+                else{dados[i][10] = String.valueOf("Ativo");}
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Tel Comercial","Tel Comercial", "Celular 1", "Celular 2", "Celular 3", "E-mail", "Setor","Ramal", "Dia", "Horario","Observação", "Docente", "Inativo"};
+            String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Celular 1", "E-mail", "Setor","Ramal", "Docente", "Inativo"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tbeFuncionario.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                    false, false, false, false, false, false, false, false, false, false, false, 
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -139,7 +132,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         funcionario = new FuncionarioM();
         
 
-        String dados[][] = new String[listaFuncionario.size()][18];
+        String dados[][] = new String[listaFuncionario.size()][11];
             int i = 0;
             for (FuncionarioM funcionario : listaFuncionario) {
                 dados[i][0] = String.valueOf(funcionario.getId());
@@ -147,32 +140,25 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 dados[i][2] = funcionario.getEndereco();
                 dados[i][3] = funcionario.getCidadeestado();
                 dados[i][4] = funcionario.getTelresidencial();
-                dados[i][5] = funcionario.getTelcomercial1();
-                dados[i][6] = funcionario.getTelcomercial2();
-                dados[i][7] = funcionario.getCelular1();
-                dados[i][8] = funcionario.getCelular2();
-                dados[i][9] = funcionario.getCelular3();
-                dados[i][10] = funcionario.getEmail();
-                dados[i][11] = funcionario.getSetor().getNome();
-                dados[i][12] = String.valueOf(funcionario.getSetor().getRamal());
-                dados[i][13] = funcionario.getDia();
-                dados[i][14] = funcionario.getHorario();
-                dados[i][15] = funcionario.getObservacao();
+                dados[i][5] = funcionario.getCelular1();
+                dados[i][6] = funcionario.getEmail();
+                dados[i][7] = funcionario.getSetor().getNome();
+                dados[i][8] = String.valueOf(funcionario.getSetor().getRamal());
                 if(funcionario.getDocente() == true){
-                dados[i][16] = String.valueOf("Professor");}
-                else{dados[i][16] = String.valueOf("Funcionário");}
+                dados[i][9] = String.valueOf("Professor");}
+                else{dados[i][9] = String.valueOf("Funcionário");}
                 if(funcionario.getInativo()== true){
-                dados[i][17] = String.valueOf("Inativo");}
-                else{dados[i][17] = String.valueOf("Ativo");}
+                dados[i][10] = String.valueOf("Inativo");}
+                else{dados[i][10] = String.valueOf("Ativo");}
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Tel Comercial","Tel Comercial", "Celular 1", "Celular 2", "Celular 3", "E-mail", "Setor","Ramal", "Dia", "Horario","Observação", "Docente", "Inativo"};
+            String tituloColuna[] = {"ID", "Nome", "Endereço","Cidade/Estado", "Tel Residencial", "Celular 1", "E-mail", "Setor","Ramal", "Docente", "Inativo"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tbeFuncionario.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                    false, false, false, false, false, false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -686,23 +672,36 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     
     //Pega valores das colunas e transcreve para os campos de texto
     private void tbeFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbeFuncionarioMouseClicked
-        tbeFuncionario.getTableHeader().setReorderingAllowed(false);
+        funcionario = new FuncionarioM();
+
         tfdId.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),0).toString());
+        String integer = tfdId.getText();
+        int id = Integer.parseInt(integer);
+        funcionario.setId(id);
+        
+        try{
+            funcionario = FuncionarioDAO.busca(id);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+   
+        tbeFuncionario.getTableHeader().setReorderingAllowed(false);
+        tfdId.setText(Integer.toString(funcionario.getId()));
         tfdNome.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),1).toString());
         tfdEndereco.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),2).toString());
         tfdCidadeEstado.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),3).toString());
         tfdTelResidencial.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),4).toString());
-        tfdTelComercial1.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),5).toString());
-        tfdTelComercial2.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),6).toString());
-        tfdCelular1.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),7).toString());
-        tfdCelular2.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),8).toString());
-        tfdCelular3.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),9).toString());
-        tfdEmail.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),10).toString());
-        cbxSetor.setSelectedItem(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),11).toString());
-        tfdRamal.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),12).toString());
-        tfdDia.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),13).toString());
-        tfdHorario.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),14).toString());
-        taaObservacao.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),15).toString());
+        tfdTelComercial1.setText(funcionario.getTelcomercial1());
+        tfdTelComercial2.setText(funcionario.getTelcomercial2());
+        tfdCelular1.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),5).toString());
+        tfdCelular2.setText(funcionario.getCelular2());
+        tfdCelular3.setText(funcionario.getCelular3());
+        tfdEmail.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),6).toString());
+        cbxSetor.setSelectedItem(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),7).toString());
+        tfdRamal.setText(tbeFuncionario.getValueAt(tbeFuncionario.getSelectedRow(),8).toString());
+        tfdDia.setText(funcionario.getDia());
+        tfdHorario.setText(funcionario.getHorario());
+        taaObservacao.setText(funcionario.getObservacao());
         btnAlterar.setEnabled(true);
         btnExcluir.setEnabled(true);
     }//GEN-LAST:event_tbeFuncionarioMouseClicked
@@ -765,7 +764,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             funcionario.setSetor(pegaSetor());
             funcionario.setDocente(cbxDocente.isSelected());
             funcionario.setInativo(cbxInativo.isSelected());
-        
         try{
             FuncionarioDAO.alterar(funcionario);
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
