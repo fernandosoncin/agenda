@@ -230,6 +230,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         cbxFiltro = new javax.swing.JComboBox();
         jLabel15 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -613,6 +614,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Atualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -626,7 +634,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 .addComponent(tfdbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -634,7 +644,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel15)
                 .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(tfdbusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnBuscar))
+                .addComponent(btnBuscar)
+                .addComponent(jButton1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -646,13 +657,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(350, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)
-                        .addGap(6, 6, 6))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,7 +675,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -711,6 +722,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         if(tfdNome.getText().isEmpty() || tfdEndereco.getText().isEmpty() || tfdCidadeEstado.getText().isEmpty() || tfdTelResidencial.getText().isEmpty()||
             tfdCelular1.getText().isEmpty() ||tfdEmail.getText().isEmpty() || cbxSetor.getSelectedIndex()==0){
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
+            tfdNome.requestFocusInWindow();       
         }
         else if(tfdId.getText().isEmpty()){
             //Salva tudo digitado no campo de texto para o objeto e salva no banco de dados
@@ -767,6 +779,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         try{
             FuncionarioDAO.alterar(funcionario);
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            tfdNome.requestFocusInWindow();       
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
         }
@@ -804,6 +817,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
      ativarCampos();
      btnAlterar.setEnabled(false);
      btnExcluir.setEnabled(false);
+     tfdNome.requestFocusInWindow(); 
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -814,8 +828,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        prepararAlterar();
-        ativarCampos();
+    prepararAlterar();
+    ativarCampos();
+    tfdNome.requestFocusInWindow(); 
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     //Quando o setor é selecionado, é transcrito para o campo de texto "Ramal"
@@ -900,6 +915,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private void tfdTelResidencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdTelResidencialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdTelResidencialActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    cbxFiltro.setSelectedItem("");
+    tfdbusca.setText("");
+    atualizaTabelaFuncionario();
+    tfdbusca.requestFocusInWindow(); 
+    }//GEN-LAST:event_jButton1ActionPerformed
    
     //Ao selecionario um setor, é chamada o dao para fazer a busca no banco de dados
     public SetorM pegaSetor(){
@@ -920,7 +942,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         MaskFormatter comFoco = null;  
         try   
         {   
-            comFoco = new MaskFormatter("(##) ####-####"); 
+            comFoco = new MaskFormatter("(##)####-####"); 
             comFoco.setPlaceholderCharacter('_');
         }   
         catch (Exception pe) { }  
@@ -948,12 +970,12 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
        tfdNome.setText("");
        tfdEndereco.setText("");
        tfdCidadeEstado.setText("");
-       tfdTelResidencial.setText("");
-       tfdTelComercial1.setText("");
-       tfdTelComercial2.setText("");
-       tfdCelular1.setText("");
-       tfdCelular2.setText("");
-       tfdCelular3.setText("");
+       tfdTelResidencial.setValue("");
+       tfdTelComercial1.setValue("");
+       tfdTelComercial2.setValue("");
+       tfdCelular1.setValue("");
+       tfdCelular2.setValue("");
+       tfdCelular3.setValue("");
        tfdEmail.setText("");
        cbxSetor.setSelectedItem("");
        tfdDia.setText("");
@@ -1055,6 +1077,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbxFiltro;
     private javax.swing.JCheckBox cbxInativo;
     private javax.swing.JComboBox cbxSetor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

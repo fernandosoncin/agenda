@@ -132,6 +132,7 @@ public class FuncionarioDAO {
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
+        int cont = 0;
         SetorDAO setorDAO = new SetorDAO();
         
         String name = "%"+Nome+"%";
@@ -159,7 +160,13 @@ public class FuncionarioDAO {
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));  
+           cont ++;
         }
+        if(cont == 0){
+            return null;
+        }
+            
+        pst.execute();
         pst.close();                           
         
         return funcionario;
@@ -170,6 +177,7 @@ public class FuncionarioDAO {
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
+        int cont = 0;
         SetorDAO setorDAO = new SetorDAO();
         
         String set = "%"+Setor+"%";
@@ -197,7 +205,13 @@ public class FuncionarioDAO {
                    setorDAO.busca(rs.getInt("id_setor")),
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));  
+           cont ++;
         }
+        if(cont == 0){
+            return null;
+        }
+            
+        pst.execute();
         pst.close();                           
         
         return funcionario;
@@ -207,6 +221,7 @@ public class FuncionarioDAO {
         PreparedStatement pst;
         String sql;
         List<FuncionarioM> funcionario = new ArrayList<FuncionarioM>();
+        int cont = 0;
         SetorDAO setorDAO = new SetorDAO();
         
         String inat = "%"+Inativo+"%";
@@ -235,6 +250,11 @@ public class FuncionarioDAO {
                    rs.getBoolean("docente"),
                    rs.getBoolean("inativo")));  
         }
+        if(cont == 0){
+            return null;
+        }
+            
+        pst.execute();
         pst.close();                           
         
         return funcionario;

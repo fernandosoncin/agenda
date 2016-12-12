@@ -46,8 +46,7 @@ public class PrincipalView extends javax.swing.JFrame {
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -119,23 +118,19 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuArquivos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mnuArquivos.setHideActionText(true);
 
-        mmiFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mmiFuncionario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mmiFuncionario.setText("Funcionários");
-        mmiFuncionario.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mmiFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mmiFuncionarioActionPerformed(evt);
             }
         });
         mnuArquivos.add(mmiFuncionario);
 
-        mniDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mniDepartamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mniDepartamento.setText("Setores");
-        mniDepartamento.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mniDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniDepartamentoActionPerformed(evt);
             }
         });
@@ -146,10 +141,8 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/consulta.png"))); // NOI18N
         mnuConsulta.setText("Consulta");
         mnuConsulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mnuConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuConsultaMouseClicked(evt);
             }
         });
@@ -158,10 +151,8 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/Relatório48x48.png"))); // NOI18N
         mnuRelatorio.setText("Relatorio");
         mnuRelatorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuRelatorio.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mnuRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuRelatorioMouseClicked(evt);
             }
         });
@@ -170,43 +161,35 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/usuário.png"))); // NOI18N
         mnuUsuarios.setText("Usuários");
         mnuUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mnuUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuUsuariosMouseClicked(evt);
             }
         });
-        mnuUsuarios.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mnuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuUsuariosActionPerformed(evt);
             }
         });
 
+        mniGerenciarUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mniGerenciarUsuarios.setText("Gerenciar usários");
-        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mniGerenciarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mniGerenciarUsuariosMouseClicked(evt);
             }
         });
-        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mniGerenciarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniGerenciarUsuariosActionPerformed(evt);
             }
         });
         mnuUsuarios.add(mniGerenciarUsuarios);
 
+        mniMinhaConta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mniMinhaConta.setText("Minha conta");
-        mniMinhaConta.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mniMinhaConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniMinhaContaActionPerformed(evt);
             }
         });
@@ -217,17 +200,13 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/sobre.png"))); // NOI18N
         mnuSobre.setText("Sobre");
         mnuSobre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        mnuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuSobreMouseClicked(evt);
             }
         });
-        mnuSobre.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mnuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuSobreActionPerformed(evt);
             }
         });
