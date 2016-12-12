@@ -511,7 +511,7 @@ public class FuncionarioDAO {
         pst.setInt(14, funcionario.getSetor().getId());
         pst.setBoolean(15, funcionario.getDocente());
         pst.setBoolean(16, funcionario.getInativo());
-        pst.setInt(17,0);
+        pst.setInt(17,funcionario.getId());
         
          pst.execute();
          pst.close();
