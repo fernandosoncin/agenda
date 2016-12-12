@@ -494,7 +494,7 @@ public class FuncionarioDAO {
                  + "inativo  = ? "
                 
                  + "where id = ?";
-         pst = Conexao.getInstance().prepareStatement(sql);
+        pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, funcionario.getNome());
         pst.setString(2, funcionario.getEndereco());
         pst.setString(3, funcionario.getCidadeestado());
