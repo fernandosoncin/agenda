@@ -99,7 +99,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Nome", "Setor","Ramal", "Docente", "Inativo"};
+            String tituloColuna[] = {"ID", "Nome", "Setor","Ramal", "Cargo", "Status"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tbeFuncionario.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -146,7 +146,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Nome", "Setor","Ramal", "Docente", "Inativo"};
+            String tituloColuna[] = {"ID", "Nome", "Setor","Ramal", "Cargo", "Status"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tbeFuncionario.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -232,17 +232,17 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         tbeFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Leonardo Barcelos", "34 3423-4523", "Informática", "2563"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"1", "Leonardo Barcelos", "NUPSI", "1001", "Professor", "Ativo"},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Tel Residêncial", "Setor", "Ramal"
+                "ID", "Nome", "Setor", "Ramal", "Cargo", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -516,13 +516,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfdEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfdCidadeEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)))
+                    .addComponent(jLabel3))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel9)))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfdCelular1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,8 +579,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(cbxDocente)
                         .addGap(11, 11, 11)
-                        .addComponent(cbxInativo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(cbxInativo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -665,7 +664,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
