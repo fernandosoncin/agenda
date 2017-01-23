@@ -232,7 +232,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         tbeFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Leonardo Barcelos", "NUPSI", "1001", "Professor", "Ativo"},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
