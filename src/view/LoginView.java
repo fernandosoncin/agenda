@@ -56,7 +56,7 @@ public class LoginView extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         tfdSenha = new javax.swing.JPasswordField();
         tfdUsuario = new javax.swing.JTextField();
-        btnVoltar = new javax.swing.JButton();
+        btnconvidado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -94,16 +94,16 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+        btnconvidado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnconvidado.setText("Entrar como convidado");
+        btnconvidado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
+                btnconvidadoActionPerformed(evt);
             }
         });
-        btnVoltar.addKeyListener(new java.awt.event.KeyAdapter() {
+        btnconvidado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnVoltarKeyPressed(evt);
+                btnconvidadoKeyPressed(evt);
             }
         });
 
@@ -118,10 +118,8 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnconvidado, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(tfdSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tfdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -138,11 +136,11 @@ public class LoginView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(btnEntrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEntrar)
-                    .addComponent(btnVoltar))
-                .addGap(14, 14, 14))
+                .addComponent(btnconvidado)
+                .addGap(7, 7, 7))
         );
 
         pack();
@@ -194,11 +192,18 @@ public class LoginView extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_tfdUsuarioKeyPressed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        this.dispose();
-        InicialView InicialView = new InicialView();
-        
-    }//GEN-LAST:event_btnVoltarActionPerformed
+    private void btnconvidadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconvidadoActionPerformed
+    UsuarioM usuarioM = new UsuarioM();
+    usuarioM = null;
+    String convidado = "convidado";
+    try{
+        usuarioM = UsuarioDAO.valida(convidado, convidado);
+    }
+    catch(Exception ex){
+        ex.printStackTrace();
+    }
+    PrincipalView principal = new PrincipalView(usuarioM);
+    }//GEN-LAST:event_btnconvidadoActionPerformed
 
     private void tfdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyPressed
       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -240,12 +245,11 @@ public class LoginView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfdSenhaKeyPressed
 
-    private void btnVoltarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVoltarKeyPressed
+    private void btnconvidadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnconvidadoKeyPressed
     if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-        InicialView InicialView = new InicialView();
-        this.dispose();
+    PrincipalView principal = new PrincipalView(usuarioM);
         }
-    }//GEN-LAST:event_btnVoltarKeyPressed
+    }//GEN-LAST:event_btnconvidadoKeyPressed
 
     private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
      
@@ -255,7 +259,7 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton btnconvidado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField tfdSenha;

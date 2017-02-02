@@ -169,18 +169,13 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="tfdId" min="-2" pref="57" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="tfdDia" min="-2" pref="176" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="tfdHorario" max="32767" attributes="0"/>
-                                      </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="cbxSetor" min="-2" pref="272" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Component id="tfdRamal" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Component id="jLabel1" min="-2" pref="70" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
@@ -192,11 +187,6 @@
                                                   <Component id="jLabel11" min="-2" pref="80" max="-2" attributes="0"/>
                                                   <EmptySpace min="202" pref="202" max="-2" attributes="0"/>
                                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabel13" min="-2" pref="70" max="-2" attributes="0"/>
-                                                  <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
-                                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Component id="jLabel14" min="-2" pref="100" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
@@ -230,6 +220,20 @@
                                                       <Component id="tfdTelComercial2" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
                                                       <Component id="jLabel9" min="-2" pref="76" max="-2" attributes="0"/>
                                                       <Component id="tfdCelular3" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel13" min="-2" pref="70" max="-2" attributes="0"/>
+                                                      <Component id="tfdDia" min="-2" pref="190" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="tfdHorario" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -350,9 +354,9 @@
                       <Component id="tfdRamal" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">

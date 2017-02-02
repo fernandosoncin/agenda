@@ -1,7 +1,7 @@
 package controller;
 
 
-import view.InicialView;
+import view.LoginView;
 import view.PrincipalView;
 
 
@@ -13,6 +13,6 @@ public class Agenda {
     }
     
     public void executar(){
-        InicialView inicial = new InicialView();
+        LoginView login = new LoginView();
     }
 }
