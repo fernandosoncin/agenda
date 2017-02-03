@@ -186,7 +186,7 @@ public class LoginView extends javax.swing.JFrame {
             ex.printStackTrace();
             
         }
-        
+        this.dispose();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void tfdUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdUsuarioKeyPressed
@@ -206,6 +206,7 @@ public class LoginView extends javax.swing.JFrame {
         ex.printStackTrace();
     }
     PrincipalView principal = new PrincipalView(usuarioM);
+    this.dispose();
     }//GEN-LAST:event_btnconvidadoActionPerformed
 
     private void tfdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyPressed
