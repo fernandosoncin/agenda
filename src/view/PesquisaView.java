@@ -270,29 +270,29 @@ public class PesquisaView extends javax.swing.JInternalFrame {
 
         PanelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Nome:");
 
-        jLabel3.setText("Ramal");
+        jLabel3.setText("Ramal:");
 
-        jLabel4.setText("Setor");
+        jLabel4.setText("Setor:");
 
-        jLabel5.setText("Telefone Residencial");
+        jLabel5.setText("Telefone Residencial:");
 
-        jLabel6.setText("Telefone Comercial 1");
+        jLabel6.setText("Telefone Comercial 1:");
 
-        jLabel7.setText("Telefone Comercial 2");
+        jLabel7.setText("Telefone Comercial 2:");
 
-        jLabel8.setText("Celular 1");
+        jLabel8.setText("Celular 1:");
 
-        jLabel9.setText("Celular 2");
+        jLabel9.setText("Celular 2:");
 
-        jLabel10.setText("Celular 3");
+        jLabel10.setText("Celular 3:");
 
-        jLabel13.setText("E-Mail");
+        jLabel13.setText("E-Mail:");
 
-        jLabel14.setText("Cidade/Estado");
+        jLabel14.setText("Cidade/Estado:");
 
-        jLabel15.setText("Endereço");
+        jLabel15.setText("Endereço:");
 
         PanelObs.setBorder(javax.swing.BorderFactory.createTitledBorder("Observações"));
 
@@ -318,9 +318,9 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jLabel18.setText("Dia");
+        jLabel18.setText("Dia:");
 
-        jLabel19.setText("Horário");
+        jLabel19.setText("Horário:");
 
         lblNome.setBackground(new java.awt.Color(255, 255, 255));
         lblNome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -521,7 +521,7 @@ public class PesquisaView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addComponent(PanelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -8,6 +8,7 @@ import java.beans.PropertyVetoException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -40,6 +41,10 @@ public class PrincipalView extends javax.swing.JFrame {
         URL url = this.getClass().getResource("/view/icones/icon.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
+        
+        //icone da barra superior
+        ImageIcon icone = new ImageIcon("C:/AGENDA/agenda/src/view/icones/icon.png");
+        setIconImage(icone.getImage());
     }
 
     
