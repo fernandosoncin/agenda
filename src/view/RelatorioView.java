@@ -174,6 +174,11 @@ public class RelatorioView extends javax.swing.JInternalFrame {
         pnlTipos.setPreferredSize(new java.awt.Dimension(220, 50));
 
         radFuncionarios.setText("Funcionarios");
+        radFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                radFuncionariosMouseClicked(evt);
+            }
+        });
         radFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radFuncionariosActionPerformed(evt);
@@ -638,6 +643,11 @@ public class RelatorioView extends javax.swing.JInternalFrame {
     private void radNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radNomeActionPerformed
+
+    private void radFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radFuncionariosMouseClicked
+     radTodos.setSelected(true);
+     radNome.setSelected(true);
+    }//GEN-LAST:event_radFuncionariosMouseClicked
 
     
 
