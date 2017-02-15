@@ -26,19 +26,18 @@ public class SobreView extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(720, 730));
-        try
-        {
+        setTitle("Sobre");
+        setToolTipText("");
+        setPreferredSize(new java.awt.Dimension(1280, 583));
+        try {
             setSelected(true);
-        } catch (java.beans.PropertyVetoException e1)
-        {
+        } catch (java.beans.PropertyVetoException e1) {
             e1.printStackTrace();
         }
 
@@ -46,8 +45,10 @@ public class SobreView extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, java.awt.BorderLayout.CENTER);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/logosobre.png"))); // NOI18N
-        jLabel7.setPreferredSize(new java.awt.Dimension(720, 700));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icones/sobre_nupsi3.png"))); // NOI18N
+        jLabel7.setPreferredSize(new java.awt.Dimension(1280, 550));
+        jLabel7.setVerifyInputWhenFocusTarget(false);
+        jLabel7.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel7, java.awt.BorderLayout.PAGE_START);
 
         pack();
