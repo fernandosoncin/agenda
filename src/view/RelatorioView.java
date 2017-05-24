@@ -59,6 +59,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
         buttonGroup3.add(radTodos);
         buttonGroup3.add(radDocente);
         buttonGroup3.add(radInativo);
+        buttonGroup3.add(radNaodocente);
     }
 
     public void atualizarTabelaSetor(){
@@ -121,6 +122,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
         radTodos = new javax.swing.JRadioButton();
         radDocente = new javax.swing.JRadioButton();
         radInativo = new javax.swing.JRadioButton();
+        radNaodocente = new javax.swing.JRadioButton();
         btnRelatorio = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
@@ -131,10 +133,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
 
         tbeRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, "", ""},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nome", "Setor", "Ramal"
@@ -208,7 +207,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
                 .addGroup(pnlTiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radFuncionarios)
                     .addComponent(radSetores))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         pnlOrdenacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Ordenação"));
@@ -242,7 +241,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
                 .addGroup(pnlOrdenacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radNome)
                     .addComponent(radSetor))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         pnlFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
@@ -256,6 +255,9 @@ public class RelatorioView extends javax.swing.JInternalFrame {
         radInativo.setText("Inativos");
         radInativo.setEnabled(false);
 
+        radNaodocente.setText("Não Docentes");
+        radNaodocente.setEnabled(false);
+
         javax.swing.GroupLayout pnlFiltroLayout = new javax.swing.GroupLayout(pnlFiltro);
         pnlFiltro.setLayout(pnlFiltroLayout);
         pnlFiltroLayout.setHorizontalGroup(
@@ -265,9 +267,11 @@ public class RelatorioView extends javax.swing.JInternalFrame {
                 .addComponent(radTodos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(radDocente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radNaodocente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(radInativo)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         pnlFiltroLayout.setVerticalGroup(
             pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +279,8 @@ public class RelatorioView extends javax.swing.JInternalFrame {
                 .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radTodos)
                     .addComponent(radDocente)
-                    .addComponent(radInativo))
+                    .addComponent(radInativo)
+                    .addComponent(radNaodocente))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -293,31 +298,34 @@ public class RelatorioView extends javax.swing.JInternalFrame {
             PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(PanelBuscaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTipos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PanelBuscaLayout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
-                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173))
+                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelBuscaLayout.createSequentialGroup()
+                        .addComponent(pnlTipos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 74, Short.MAX_VALUE))
+                    .addGroup(PanelBuscaLayout.createSequentialGroup()
+                        .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         PanelBuscaLayout.setVerticalGroup(
             PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBuscaLayout.createSequentialGroup()
-                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOrdenacao, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                    .addComponent(pnlTipos, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
-                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlTipos, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBuscaLayout.createSequentialGroup()
+                        .addGroup(PanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addComponent(pnlOrdenacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -329,7 +337,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PanelBusca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +399,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
         btnRelatorio.setEnabled(false);
         
         if (radFuncionarios.isSelected()){
-            if ((radNome.isSelected() || radSetor.isSelected()) && (radTodos.isSelected() || radDocente.isSelected() || radInativo.isSelected())){
+            if ((radNome.isSelected() || radSetor.isSelected()) && (radTodos.isSelected() || radDocente.isSelected() || radInativo.isSelected() || radNaodocente.isSelected())){
             //Gera a lista de Funcionarios com os seus filtros selecionados.      
             String tipos = "Funcionarios";
             String order = "";
@@ -408,6 +416,8 @@ public class RelatorioView extends javax.swing.JInternalFrame {
                 filtro = "Docentes";
             else if (radInativo.isSelected())
                 filtro = "Inativos";
+            else if (radNaodocente.isSelected())
+                filtro = "Naodocente";
             
                 try {
                     listaFuncionario = FuncionarioDAO.relatorioFuncionario(tipos, order, filtro);
@@ -616,7 +626,8 @@ public class RelatorioView extends javax.swing.JInternalFrame {
             radTodos.setEnabled(true);
             radDocente.setEnabled(true);
             radInativo.setEnabled(true);
-            
+            radNaodocente.setEnabled(true);
+
             buttonGroup2.clearSelection();
             buttonGroup3.clearSelection();
         }
@@ -632,6 +643,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
             radTodos.setEnabled(false);
             radDocente.setEnabled(false);
             radInativo.setEnabled(false);
+            radNaodocente.setEnabled(false);
             
             buttonGroup2.clearSelection();
             buttonGroup3.clearSelection();
@@ -666,6 +678,7 @@ public class RelatorioView extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radDocente;
     private javax.swing.JRadioButton radFuncionarios;
     private javax.swing.JRadioButton radInativo;
+    private javax.swing.JRadioButton radNaodocente;
     private javax.swing.JRadioButton radNome;
     private javax.swing.JRadioButton radSetor;
     private javax.swing.JRadioButton radSetores;

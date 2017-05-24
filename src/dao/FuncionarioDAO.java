@@ -373,14 +373,18 @@ public class FuncionarioDAO {
 	PreparedStatement ps;
 	ResultSet rs;
     
-        //verifica o FILTRO TODOS/DOCENTE/INATIVO
+        //verifica o FILTRO TODOS/DOCENTE/INATIVO/NAODOCENTES
         boolean docente = false;
         boolean inativo = false;
+        boolean naodocente = false;
 
-        if (filtro.equals("Docentes"))
+        if (filtro.equals("Docentes")){
             docente = true;
-        else if (filtro.equals("Inativos"))
+        }else if (filtro.equals("Inativos")){
             inativo = true;
+        }else if (filtro.equals("Naodocente")){
+            naodocente = true;
+        }
         
         boolean whereAdd = false;
         StringBuffer sb = new StringBuffer("select * from funcionario f inner join setor s on f.id_setor = s.id");
@@ -401,6 +405,14 @@ public class FuncionarioDAO {
                 sb.append("f.inativo = ");
                 sb.append(inativo);
             }
+            if (naodocente == true){
+                if (whereAdd == false)
+                    sb.append (" WHERE ");
+                
+                sb.append("f.docente = ");
+                sb.append(naodocente);
+            }
+            
             //verificação em qual dos dois tipos os funcionarios vão ser ordenados
             if (tipos.equals("Funcionarios") && order == "Nome"){
                 sb.append(" order by f.nome ");
